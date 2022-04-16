@@ -1,4 +1,4 @@
-extends Entity
+extends Enemy
 
 onready var bullet = preload("res://Entities/Enemies/Sniper/SniperBullet.tscn")
 onready var player_detector = $PlayerDetector

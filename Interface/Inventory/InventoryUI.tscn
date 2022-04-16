@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Interface/Inventory/ItemsGrid.gd" type="Script" id=2]
+
+[node name="InventoryUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InventoryBG" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.862745, 0.658824, 0.396078, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemsGrid" type="GridContainer" parent="InventoryBG"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 5
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
