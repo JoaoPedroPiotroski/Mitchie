@@ -11,7 +11,9 @@ var layers = {
 	Layer2 = 1,
 	Player = 2,
 	Enemy = 3,
-	Interact = 4
+	Interact = 4,
+	Hitbox = 5,
+	Hurtbox = 6
 }
 
 func set_player_layer(new_layer):

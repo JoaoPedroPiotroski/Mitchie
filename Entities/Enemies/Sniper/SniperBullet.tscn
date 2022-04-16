@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Entities/Enemies/Hitbox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Entities/Enemies/Sniper/SniperBullet.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[node name="SniperBullet" type="KinematicBody2D"]
+modulate = Color( 1, 0, 0, 1 )
+script = ExtResource( 3 )
+
+[node name="Hitbox" parent="." instance=ExtResource( 1 )]
+collision_layer = 8
+collision_mask = 4
+damage = 2
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 2 )
+
+[editable path="Hitbox"]

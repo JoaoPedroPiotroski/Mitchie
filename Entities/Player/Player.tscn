@@ -1,46 +1,100 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Entities/Player/Player.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Entities/Player/Char.png" type="Texture" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 16 )
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 8.0
+height = 58.0
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 16, 16 )
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprite:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprite:scale:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "walk"
+loop = true
+step = 0.05
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, -3.84251, 0.25, 9.68302, 10, -0.25, -8.96851, 0.25, -9.52668, 0, -0.25, 9.68302, 0.252081, -10.1318, -10, -0.247919, 10.4733, 0.256531, 10.2353, 0, -0.243468, -9.95223, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
+}
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 4
 collision_mask = 8
 script = ExtResource( 1 )
+health = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+position = Vector2( -1, -6 )
+shape = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 0, -64 )
 current = true
 zoom = Vector2( 1.1, 1.1 )
 smoothing_enabled = true
+smoothing_speed = 7.5
 
 [node name="LayerDetector1" type="Area2D" parent="."]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LayerDetector1"]
-shape = SubResource( 2 )
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="LayerDetector1"]
+position = Vector2( -1, -6 )
+shape = SubResource( 3 )
 
 [node name="LayerDetector2" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LayerDetector2"]
-shape = SubResource( 2 )
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="LayerDetector2"]
+position = Vector2( -1, -6 )
+shape = SubResource( 3 )
 
 [node name="CameraZoomTween" type="Tween" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "walk"
+anims/RESET = SubResource( 4 )
+anims/walk = SubResource( 5 )
 
 [connection signal="layer_changed" from="." to="." method="_on_Player_layer_changed"]
 [connection signal="body_entered" from="LayerDetector1" to="." method="_on_LayerDetector1_body_entered"]
