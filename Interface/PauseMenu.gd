@@ -1,6 +1,7 @@
 extends Control
 
-
+onready var item_detailer = $ItemDetail/Panel
+onready var drag_item = preload("res://Interface/Inventory/DragItem.tscn")
 
 func _input(event):
 	if event.is_action_pressed("pause"):
@@ -8,4 +9,9 @@ func _input(event):
 	visible = get_tree().paused
 
 func show_item_detail(item):
-	print(item)
+	item_detailer.get_node("Icon").texture = item.icon
+	item_detailer.get_node("Title").text = item.name
+	item_detailer.get_node("Desc").text = item.description
+	item_detailer.get_parent().popup()
+	var drag = drag_item.instance()
+	

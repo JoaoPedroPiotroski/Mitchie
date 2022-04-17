@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "DragItem",
+"language": "GDScript",
+"path": "res://Interface/Inventory/DragItem.gd"
+}, {
 "base": "Entity",
 "class": "Enemy",
 "language": "GDScript",
@@ -35,6 +40,7 @@ _global_script_classes=[ {
 "path": "res://Entities/Player/Player.gd"
 } ]
 _global_script_class_icons={
+"DragItem": "",
 "Enemy": "",
 "Entity": "",
 "GitAPI": "",
@@ -51,6 +57,7 @@ config/icon="res://icon.png"
 
 Global="*res://Singletons/Global.tscn"
 Inventory="*res://Singletons/Inventory.tscn"
+Menu="*res://Singletons/Menu.tscn"
 
 [display]
 
@@ -144,6 +151,7 @@ pause={
 2d_physics/layer_5="Interact"
 2d_physics/layer_6="Hitbox"
 2d_physics/layer_7="Hurtbox"
+2d_physics/layer_8="ItemDrag"
 2d_physics/layer_33=""
 
 [physics]

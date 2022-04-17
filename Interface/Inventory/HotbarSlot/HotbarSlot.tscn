@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Interface/Inventory/HotbarSlot/HotbarSlot.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32, 32 )
 
 [node name="HotbarSlot" type="Panel"]
 anchor_right = 1.0
@@ -20,3 +23,13 @@ expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ItemReceiver" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemReceiver"]
+position = Vector2( 32, 32 )
+shape = SubResource( 1 )
+
+[connection signal="area_entered" from="ItemReceiver" to="." method="_on_ItemReceiver_area_entered"]

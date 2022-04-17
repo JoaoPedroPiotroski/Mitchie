@@ -10,3 +10,8 @@ func start(in_item : Item):
 func _ready():
 	if !is_instance_valid(item): 
 		$TextureButton.texture_normal = empty_slot_tex
+
+
+func _on_ItemReceiver_area_entered(area):
+	if area is DragItem:
+		item = area.item
