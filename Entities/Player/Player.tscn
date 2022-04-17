@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Entities/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Entities/Player/Char.png" type="Texture" id=2]
+[ext_resource path="res://Entities/Player/MainCamera.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape2D" id=3]
 radius = 8.0
@@ -68,12 +69,6 @@ shape = SubResource( 3 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-zoom = Vector2( 1.1, 1.1 )
-smoothing_enabled = true
-smoothing_speed = 7.5
-
 [node name="LayerDetector1" type="Area2D" parent="."]
 collision_layer = 0
 
@@ -95,6 +90,9 @@ shape = SubResource( 3 )
 autoplay = "walk"
 anims/RESET = SubResource( 4 )
 anims/walk = SubResource( 5 )
+
+[node name="MainCamera" parent="." instance=ExtResource( 3 )]
+current = true
 
 [connection signal="layer_changed" from="." to="." method="_on_Player_layer_changed"]
 [connection signal="body_entered" from="LayerDetector1" to="." method="_on_LayerDetector1_body_entered"]

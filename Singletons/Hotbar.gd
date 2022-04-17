@@ -11,8 +11,6 @@ func add_to_hotbar(item : Item, position : int = -1):
 		hotbar.erase(item)
 	if position != -1:
 		hotbar.insert(position, item)
-	else:
-		hotbar.append(item)
 
 func remove_from_hotbar(item : Item):
 	if hotbar.has(item):

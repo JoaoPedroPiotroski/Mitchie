@@ -87,14 +87,14 @@ func _on_Player_layer_changed():
 	# Mudanças de zoom baseadas no layer
 	if layer == 1:
 		var tween = get_node("CameraZoomTween")
-		tween.interpolate_property($Camera2D, "zoom",
-				$Camera2D.zoom, Vector2(1, 1), 0.5,
+		tween.interpolate_property($MainCamera, "zoom",
+				$MainCamera.zoom, Vector2(1, 1), 0.5,
 				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		tween.start()
 	else:
 		var tween = get_node("CameraZoomTween")
-		tween.interpolate_property($Camera2D, "zoom",
-				$Camera2D.zoom, Vector2(1.1, 1.1), 0.5,
+		tween.interpolate_property($MainCamera, "zoom",
+				$MainCamera.zoom, Vector2(1.1, 1.1), 0.5,
 				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		tween.start()
 
