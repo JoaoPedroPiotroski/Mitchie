@@ -10,6 +10,7 @@ func start(in_item : Item):
 	$TextureButton.texture_normal = in_item.icon
 	item = in_item
 	
+
 func _ready(): 
 	connect("clicked", Menu.get_node("PauseMenu"), "show_item_detail", [item])
 

@@ -13,5 +13,3 @@ func show_item_detail(item):
 	item_detailer.get_node("Title").text = item.name
 	item_detailer.get_node("Desc").text = item.description
 	item_detailer.get_parent().popup()
-	var drag = drag_item.instance()
-	

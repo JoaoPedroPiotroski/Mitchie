@@ -6,6 +6,7 @@
 extents = Vector2( 30, 30 )
 
 [node name="DragItem" type="Area2D"]
+pause_mode = 2
 collision_layer = 128
 collision_mask = 0
 script = ExtResource( 1 )
@@ -14,3 +15,9 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Icon" type="Sprite" parent="."]
+
+[node name="Expire" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="Expire" to="." method="_on_Expire_timeout"]
