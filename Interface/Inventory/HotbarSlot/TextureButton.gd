@@ -3,7 +3,8 @@ extends TextureButton
 
 func get_drag_data(position):
 	var data = {
-		"item" : get_parent().item
+		"item" : get_parent().item,
+		"origin" : get_parent().pos
 	}
 	var drag_texture = TextureRect.new()
 	drag_texture.expand = true
@@ -14,9 +15,12 @@ func get_drag_data(position):
 	
 
 func can_drop_data(position, data):
-	return true
+	if data.has('item'):
+		return true
 	return false
 
 func drop_data(position, data):
-	get_parent().item = data['item']
-	get_parent().update_texture()
+	if data.has('origin'):
+		Inventory.get_node("Hotbar").add_to_hotbar(data['item'], get_parent().pos, data['origin'])
+		return
+	Inventory.get_node("Hotbar").add_to_hotbar(data['item'], get_parent().pos)

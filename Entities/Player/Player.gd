@@ -33,7 +33,7 @@ func take_input():
 		jump_timer = 0.2
 
 func _die():
-	var leave = get_tree().reload_current_scene()
+	var _leave = get_tree().reload_current_scene()
 
 func _physics_process(delta):
 	take_input()

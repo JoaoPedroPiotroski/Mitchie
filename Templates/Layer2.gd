@@ -2,7 +2,7 @@ extends Node2D
 
 
 func _ready():
-	var plc_con = Global.connect("player_layer_changed", self, "update_player_layer")
+	var _plc_con = Global.connect("player_layer_changed", self, "update_player_layer")
 
 func update_player_layer():
 	# Deixa translúcido quando o jogador está em outra layer

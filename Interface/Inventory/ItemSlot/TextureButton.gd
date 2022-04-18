@@ -6,7 +6,6 @@ func get_drag_data(position):
 		'item' : get_parent().item
 	}
 	var drag_texture = TextureRect.new()
-	print("atgtqwg")
 	drag_texture.expand = true
 	drag_texture.texture = texture_normal
 	drag_texture.rect_size = Vector2(64, 64)

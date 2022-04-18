@@ -18,7 +18,6 @@ func _ready():
 	var i = load("res://Items/FireBullet/FireBullet.tscn")
 	var b = i.instance()
 	add_item(b)
-	hotbar.add_to_hotbar(b, 0)
 
 signal item_added(item)
 signal item_removed(item)

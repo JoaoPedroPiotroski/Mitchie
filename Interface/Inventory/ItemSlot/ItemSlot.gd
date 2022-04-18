@@ -4,7 +4,6 @@ var item : Item
 
 signal clicked(item)
 
-onready var popup_detail = $Detail
 
 func start(in_item : Item):
 	$TextureButton.texture_normal = in_item.icon
