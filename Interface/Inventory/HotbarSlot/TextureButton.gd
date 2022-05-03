@@ -2,6 +2,8 @@ extends TextureButton
 
 
 func get_drag_data(position):
+	if !get_parent().draggable:
+		return
 	var data = {
 		"item" : get_parent().item,
 		"origin" : get_parent().pos
@@ -20,7 +22,12 @@ func can_drop_data(position, data):
 	return false
 
 func drop_data(position, data):
+	print(get_parent().selected)
 	if data.has('origin'):
 		Inventory.get_node("Hotbar").add_to_hotbar(data['item'], get_parent().pos, data['origin'])
 		return
 	Inventory.get_node("Hotbar").add_to_hotbar(data['item'], get_parent().pos)
+	if get_parent().selected:
+		modulate = Color(1, 1, 1, 1)
+	else:
+		modulate = Color(1, 1, 1, 0.5)

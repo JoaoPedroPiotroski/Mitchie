@@ -3,8 +3,11 @@ extends Control
 onready var item_detailer = $ItemDetail/Panel
 onready var drag_item = preload("res://Interface/Inventory/DragItem.tscn")
 
+signal game_pause_changed
+
 func _input(event):
 	if event.is_action_pressed("pause"):
+		emit_signal("game_pause_changed")
 		get_tree().paused = !get_tree().paused
 	visible = get_tree().paused
 

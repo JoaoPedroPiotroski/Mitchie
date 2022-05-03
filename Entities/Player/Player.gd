@@ -9,6 +9,8 @@ var jump_timer : float = -1
 var jump_cooldown: float = -1
 var layer_switch_timer : float = -1
 
+var layer_1_bodies = [] 
+var layer_2_bodies = []
 var colliding_with_layer_1 = false
 var colliding_with_layer_2 = false
 
@@ -18,9 +20,17 @@ export(float) var friction: float = 30
 export(float) var gravity: float = 2000
 export(float) var jump_force : float = 650
 
+onready var animation_player = $AnimationPlayer
+onready var main_sprite = $MainSprite
+
 func _ready():
 	# tem que fazer isso pra não bugar
 	set_layer(layer)
+
+func change_animation(anim):
+	if animation_player.current_animation != anim:
+		print('tocando')
+		animation_player.play(anim)
 
 func take_input():
 	input_direction = -int(Input.is_action_pressed("move_left")) + int(Input.is_action_pressed("move_right"))
@@ -37,6 +47,9 @@ func _die():
 
 func _physics_process(delta):
 	take_input()
+	
+	main_sprite.flip_h  = velocity.x < 0
+	
 	velocity = move_and_slide(velocity, UP)
 	
 	# Velocidade en movimento padrão
@@ -48,9 +61,18 @@ func _physics_process(delta):
 	
 	if input_direction == 0 :
 		if is_on_floor():
+			change_animation('Idle')
 			velocity.x = lerp(velocity.x, 0, friction * delta)
 		else:
 			velocity.x = lerp(velocity.x, 0, friction/4 * delta)
+	else:
+		if is_on_floor():
+			change_animation('Walk')
+	if !is_on_floor():
+		if velocity.y > -100:
+			change_animation("Glide")
+		else:
+			change_animation('Jump')
 	
 	# Gravidade, mais forte qando caindo
 	if velocity.y > 0: 
@@ -65,7 +87,7 @@ func _physics_process(delta):
 		if !colliding_with_layer_2 and layer_switch_timer > 0:
 			switch_layer()
 			layer_switch_timer = -1
-	else:
+	elif layer == Global.layers.Layer2:
 		if !colliding_with_layer_1  and layer_switch_timer > 0:
 			switch_layer()
 			layer_switch_timer = -1
@@ -99,20 +121,27 @@ func _on_Player_layer_changed():
 		tween.start()
 
 func jump(force):
+	
 	velocity.y = -force
 
 
-func _on_LayerDetector1_body_entered(_body):
+func _on_LayerDetector1_body_entered(body):
+	layer_1_bodies.append(body)
 	colliding_with_layer_1 = true
 
 
-func _on_LayerDetector1_body_exited(_body):
-	colliding_with_layer_1 = false
+func _on_LayerDetector1_body_exited(body):
+	layer_1_bodies.erase(body)
+	if layer_1_bodies.size() == 0: 
+		colliding_with_layer_1 = false
 
 
-func _on_LayerDetector2_body_entered(_body):
+func _on_LayerDetector2_body_entered(body):
+	layer_2_bodies.append(body)
 	colliding_with_layer_2 = true
 
 
-func _on_LayerDetector2_body_exited(_body):
-	colliding_with_layer_2 = false
+func _on_LayerDetector2_body_exited(body):
+	layer_2_bodies.erase(body)
+	if layer_2_bodies.size() == 0:
+		colliding_with_layer_2 = false

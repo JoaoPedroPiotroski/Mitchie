@@ -8,18 +8,16 @@
 
 [node name="PauseMenu" type="Control"]
 pause_mode = 2
-anchor_left = 0.0898438
-anchor_top = 0.104167
-anchor_right = 0.910156
-anchor_bottom = 0.895833
-margin_left = 38.0
-margin_top = 1.0
-margin_right = 38.0
-margin_bottom = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 49.0
+margin_top = 17.0
+margin_right = -3.0
+margin_bottom = -12.0
 theme = ExtResource( 3 )
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 
 [node name="Panel" type="Panel" parent="."]
@@ -34,7 +32,7 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -520.0
+margin_left = -457.0
 margin_top = -292.0
 theme = ExtResource( 3 )
 tab_align = 0
@@ -77,9 +75,9 @@ __meta__ = {
 [node name="Hotbar" type="Control" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 24.0
+margin_left = 7.0
 margin_top = -259.0
-margin_right = 88.0
+margin_right = 71.0
 margin_bottom = -3.0
 __meta__ = {
 "_edit_use_anchors_": false

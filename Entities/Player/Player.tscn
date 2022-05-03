@@ -1,59 +1,116 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Entities/Player/Player.gd" type="Script" id=1]
-[ext_resource path="res://Entities/Player/Char.png" type="Texture" id=2]
+[ext_resource path="res://Entities/Player/protagonistaborboleta.png" type="Texture" id=2]
 [ext_resource path="res://Entities/Player/MainCamera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Entities/Player/PlayerShadow.gd" type="Script" id=4]
+[ext_resource path="res://Entities/Player/PlayerStateMachine.gd" type="Script" id=5]
 
 [sub_resource type="CapsuleShape2D" id=3]
-radius = 8.0
-height = 58.0
+radius = 4.75
+height = 24.5
 
-[sub_resource type="Animation" id=4]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("Sprite:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("Sprite:scale:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("Sprite:scale:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 6.16216, 18 )
 
-[sub_resource type="Animation" id=5]
-resource_name = "walk"
+[sub_resource type="Animation" id=12]
+resource_name = "Fall"
+length = 0.4
 loop = true
-step = 0.05
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("Sprite:rotation_degrees")
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, -3.84251, 0.25, 9.68302, 10, -0.25, -8.96851, 0.25, -9.52668, 0, -0.25, 9.68302, 0.252081, -10.1318, -10, -0.247919, 10.4733, 0.256531, 10.2353, 0, -0.243468, -9.95223, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 9, 10 ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "Glide"
+length = 0.6
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 12, 11, 13 ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "Idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "Jump"
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 7, 8 ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 9 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "Walk"
+length = 1.08
+loop = true
+step = 0.27
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.27, 0.54, 0.81 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 2, 3 ]
 }
 
 [node name="Player" type="KinematicBody2D"]
@@ -62,37 +119,61 @@ collision_mask = 0
 script = ExtResource( 1 )
 health = 3
 
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="PlayerShadow" type="Sprite" parent="."]
+self_modulate = Color( 0, 0, 0, 0.345098 )
+position = Vector2( 0, 44 )
+texture = ExtResource( 2 )
+flip_v = true
+hframes = 7
+vframes = 7
+script = ExtResource( 4 )
+
+[node name="MainSprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+hframes = 7
+vframes = 7
+frame = 9
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1, -6 )
+visible = false
+position = Vector2( 1, 5 )
 shape = SubResource( 3 )
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
-
 [node name="LayerDetector1" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="LayerDetector1"]
-position = Vector2( -1, -6 )
-shape = SubResource( 3 )
+visible = false
+position = Vector2( 1, 4 )
+shape = SubResource( 6 )
 
 [node name="LayerDetector2" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="LayerDetector2"]
-position = Vector2( -1, -6 )
-shape = SubResource( 3 )
+visible = false
+position = Vector2( 1, 4 )
+shape = SubResource( 6 )
 
 [node name="CameraZoomTween" type="Tween" parent="."]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "walk"
-anims/RESET = SubResource( 4 )
-anims/walk = SubResource( 5 )
-
 [node name="MainCamera" parent="." instance=ExtResource( 3 )]
 current = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Walk"
+anims/Fall = SubResource( 12 )
+anims/Glide = SubResource( 13 )
+anims/Idle = SubResource( 10 )
+anims/Jump = SubResource( 11 )
+anims/RESET = SubResource( 8 )
+anims/Walk = SubResource( 9 )
 
 [connection signal="layer_changed" from="." to="." method="_on_Player_layer_changed"]
 [connection signal="body_entered" from="LayerDetector1" to="." method="_on_LayerDetector1_body_entered"]

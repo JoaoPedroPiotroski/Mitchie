@@ -25,6 +25,7 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="PlayerDetector" parent="." instance=ExtResource( 3 )]
+visible = false
 
 [node name="CollisionShape2D" parent="PlayerDetector" index="0"]
 shape = SubResource( 2 )

@@ -28,9 +28,11 @@ func add_item(item : Item):
 func remove_item(item : Item):
 	inventory.erase(item)
 
-func _unhandled_input(event):
+func _input(event):
 	if event.is_action_pressed("use"):
-		print("Teste")
+		print(hotbar.hotbar)
+		print(hotbar.selected_item)
+		hotbar.get_selected_item()._use()
 
 func get_inventory():
 	return inventory

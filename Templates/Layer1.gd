@@ -7,7 +7,7 @@ func _ready():
 func update_player_layer():
 	# Deixa translúcido quando o jogador está em outra layer
 	if Global.player_layer != 0:
-		set_modulate(Color(1, 1, 1, 0.5))
+		set_modulate(Color(1, 1, 1, 0.25))
 	else:
 		set_modulate(Color(1, 1, 1, 1))
 		
