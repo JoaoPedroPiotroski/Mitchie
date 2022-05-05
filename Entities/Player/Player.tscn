@@ -1,10 +1,13 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Entities/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Entities/Player/protagonistaborboleta.png" type="Texture" id=2]
 [ext_resource path="res://Entities/Player/MainCamera.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Entities/Player/PlayerShadow.gd" type="Script" id=4]
 [ext_resource path="res://Entities/Player/PlayerStateMachine.gd" type="Script" id=5]
+[ext_resource path="res://Entities/Player/CurrentStats.gd" type="Script" id=6]
+[ext_resource path="res://Entities/Player/BaseStats.gd" type="Script" id=7]
+[ext_resource path="res://Entities/Player/Shadow.png" type="Texture" id=8]
 
 [sub_resource type="CapsuleShape2D" id=3]
 radius = 4.75
@@ -94,6 +97,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 9 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("MainSprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 
 [sub_resource type="Animation" id=9]
 resource_name = "Walk"
@@ -113,14 +128,60 @@ tracks/0/keys = {
 "values": [ 4, 5, 2, 3 ]
 }
 
+[sub_resource type="Animation" id=14]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainSprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 90.0 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_respawn"
+} ]
+}
+
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource( 1 )
-health = 3
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource( 7 )
+
+[node name="Current" type="Node" parent="Stats"]
+script = ExtResource( 6 )
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 5 )
+_initial_states = "Idle
+Walk
+Jump
+Ascent
+Descent
+Land
+Dialog"
+default_state = "Idle"
+_secondary_states = "Idle
+Cast
+Mount"
+default_secondary_state = "Idle"
 
 [node name="PlayerShadow" type="Sprite" parent="."]
 self_modulate = Color( 0, 0, 0, 0.345098 )
@@ -130,6 +191,12 @@ flip_v = true
 hframes = 7
 vframes = 7
 script = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="PlayerShadow"]
+position = Vector2( -1, -27 )
+scale = Vector2( 2.625, 2.625 )
+texture = ExtResource( 8 )
+flip_h = true
 
 [node name="MainSprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -165,6 +232,7 @@ shape = SubResource( 6 )
 
 [node name="MainCamera" parent="." instance=ExtResource( 3 )]
 current = true
+zoom = Vector2( 0.8, 0.8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Walk"
@@ -174,8 +242,8 @@ anims/Idle = SubResource( 10 )
 anims/Jump = SubResource( 11 )
 anims/RESET = SubResource( 8 )
 anims/Walk = SubResource( 9 )
+anims/die = SubResource( 14 )
 
-[connection signal="layer_changed" from="." to="." method="_on_Player_layer_changed"]
 [connection signal="body_entered" from="LayerDetector1" to="." method="_on_LayerDetector1_body_entered"]
 [connection signal="body_exited" from="LayerDetector1" to="." method="_on_LayerDetector1_body_exited"]
 [connection signal="body_entered" from="LayerDetector2" to="." method="_on_LayerDetector2_body_entered"]

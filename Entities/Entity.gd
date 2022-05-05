@@ -53,4 +53,4 @@ func apply_damage(damage):
 	update_health()
 
 func _die():
-	pass
+	queue_free()
