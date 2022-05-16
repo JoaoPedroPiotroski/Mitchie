@@ -8,15 +8,17 @@ const LEFT = Vector2.LEFT
 const RIGHT = Vector2.RIGHT
 
 # Timers
-export(float) var jump_timer = -1 #0.3
-export(float) var ground_timer = -1 #0.2
-export(float) var layer_switch_timer = -1 #1
+var jump_timer = -1 #0.3
+export(float) var ground_timer = -1 #0.1
+var layer_switch_timer = -1 #1
+var fall_timer : float = 0
 
 # Cooldowns
 export(float) var jump_cooldown = ground_timer
 
 var flags = {
-	"on_ground" : false
+	"on_ground" : false,
+	"dead" : false
 }
 
 var selected_item : Item 
@@ -25,9 +27,15 @@ var velocity : Vector2 = Vector2.ZERO
 var input_direction : int = 0
 var layer_1_bodies = [] 
 var layer_2_bodies = []
+var intermediary_bodies = []
 var colliding_with_layer_1 = false
+var colliding_with_intermediary = false
 var colliding_with_layer_2 = false
 var next_animation = "Idle"
+var moving = true
+var animating = true
+var item_hover
+var current_dialog
 
 onready var animation_player = $AnimationPlayer
 onready var main_sprite = $MainSprite
@@ -35,14 +43,17 @@ onready var state_machine = $StateMachine
 onready var current = $Stats/Current
 onready var base = $Stats
 
+func _ready():
+	Inventory.hotbar.connect("selected_item_changed", self, "_selected_item_changed")
+	selected_item = Inventory.hotbar.get_selected_item()
+
 func _physics_process(delta):
-	if abs(velocity.x) < 10:
-		velocity.x = 0
-	print(velocity)
+	Global.player = self
+	Global.mouse_position = get_global_mouse_position()
 	var state = state_machine.get_state()
-	velocity = move_and_slide(velocity, UP)
+	if moving:
+		velocity = move_and_slide(velocity, UP)
 	
-	print(state)
 	# Timers tick
 	layer_switch_timer -= delta
 	ground_timer -= delta
@@ -51,12 +62,10 @@ func _physics_process(delta):
 	
 	# Ground handling
 	if is_on_floor():
-		ground_timer = 0.2
+		ground_timer = 0.1
 	flags["on_ground"] = ground_timer > 0
-		
-	if state == "Idle": 
-		idle_state(delta)
-	elif state == "Walk":
+
+	if state == "Walk":
 		walk_state(delta)
 	elif state == "Jump":
 		jump_state(delta)
@@ -68,7 +77,12 @@ func _physics_process(delta):
 		land_state(delta)
 	elif state == "Dialog":
 		dialog_state(delta)
-	animate()
+	if animating:
+		animate()
+		
+	if layer_switch_timer < 0:
+		current.jump_force = base.jump_force
+	update_layer(delta)
 		
 func take_input():
 	input_direction = -int(Input.is_action_pressed("move_left")) + int(Input.is_action_pressed("move_right"))
@@ -76,15 +90,35 @@ func take_input():
 		anim_direction.x = input_direction
 	if Input.is_action_just_pressed("switch_layer"):
 		layer_switch_timer = 1
+		current.jump_force = base.jump_force * 0.5
 		jump_timer = 0.2
 	if Input.is_action_just_pressed("jump"): 
 		jump_timer = 0.2
-
+	if Input.is_action_just_pressed("use"):
+		selected_item._use(global_position, layer)
+	if weakref(current_dialog).get_ref():
+		if Input.is_action_just_pressed("interact"):
+			state_machine.current_state = "Dialog"
+			moving = false
+			animating = false
+			animation_player.stop(false)
+			add_child(current_dialog)
+			current_dialog.connect("timeline_end", self, "_on_dialog_ended")
+	if weakref(item_hover).get_ref():
+		if Input.is_action_just_pressed("interact"):
+			print(Inventory.inventory)
+			print(item_hover.item)
+			var pass_item = item_hover.item.instance()
+			Inventory.add_item(pass_item)
+			item_hover.collect()
+		
 func animate():
 	main_sprite.flip_h = anim_direction.x < 0
-	if next_animation != animation_player.current_animation:
+	if next_animation != animation_player.current_animation and animation_player.current_animation != "die":
 		animation_player.play(next_animation)
-
+	if flags["dead"] and animation_player.current_animation != "die":
+		animation_player.play("die")
+	
 func ground_move(delta):
 	velocity.x += current.acceleration * delta * input_direction
 	velocity.x = clamp(velocity.x, -current.max_speed, current.max_speed)
@@ -94,17 +128,19 @@ func air_move(delta):
 	velocity.x = clamp(velocity.x, -current.max_speed, current.max_speed)
 
 func update_layer(delta):
-	if layer == Global.layers.Layer1: 
-		if !colliding_with_layer_2 and layer_switch_timer > 0:
-			switch_layer()
-			layer_switch_timer = -1
-	elif layer == Global.layers.Layer2:
-		if !colliding_with_layer_1  and layer_switch_timer > 0:
-			switch_layer()
-			layer_switch_timer = -1
-	
+	if !colliding_with_intermediary:
+		if layer == Global.layers.Layer1: 
+			if !colliding_with_layer_2 and layer_switch_timer > 0:
+				switch_layer()
+				layer_switch_timer = -1
+		elif layer == Global.layers.Layer2:
+			if !colliding_with_layer_1  and layer_switch_timer > 0:
+				switch_layer()
+				layer_switch_timer = -1
+		
 func _die():
-	get_tree().reload_current_scene()
+	flags["dead"] = true
+	
 	
 func _respawn():
 	get_tree().reload_current_scene()
@@ -118,46 +154,72 @@ func apply_gravity(force, delta):
 
 func apply_jump_impulse(force):
 	velocity.y = -force
-
-func idle_state(_delta):
-	next_animation = "Idle"
-	take_input()
-	if input_direction != 0:
-		state_machine.current_state = "Walk"
-	if jump_timer > 0 and jump_cooldown < 0:
-		jump_cooldown = 0.2
-		state_machine.current_state = "Jump"
 	
 func walk_state(delta):
-	next_animation = "Walk"
+	if input_direction != 0:
+		next_animation = "Walk"
+	else:
+		next_animation = "Idle"
 	take_input()
 	ground_move(delta)
-	if input_direction != 0:
-		apply_friction(current.friction, delta)
-	else:
+	if input_direction == 0 or is_inverse(input_direction, velocity.x):
 		apply_friction(current.friction * current.stopping_friction_modifier, delta)
+	else:
+		apply_friction(current.friction, delta)
+	
 	apply_gravity(current.gravity, delta)
 	
 	if !flags["on_ground"]:
 		state_machine.current_state = "Descent"
 	if jump_timer > 0 and jump_cooldown < 0:
-		jump_cooldown = 0.2
+		jump_cooldown = 0.3
 		state_machine.current_state = "Jump"
-	if input_direction == 0 and velocity.x == 0:
-		state_machine.current_state = "Idle"
 		
 func jump_state(_delta):
 	take_input()
 	next_animation = "Jump"
+	apply_jump_impulse(current.jump_force)
+	state_machine.current_state = "Ascent"
 
 func ascent_state(delta):
-	pass
+	next_animation = "Ascent"
+	take_input()
+	air_move(delta)
+	if input_direction == 0 or is_inverse(input_direction, velocity.x):
+		apply_friction(current.friction * current.stopping_friction_modifier * current.air_friction_modifier, delta)
+	else:
+		apply_friction(current.friction * current.air_friction_modifier, delta)
+	apply_gravity(current.gravity, delta)
+	# if is on ground or velocity.y > 0 state = descent
+	if flags["on_ground"] or velocity.y > 0:
+		state_machine.current_state = "Descent"
+		
+	if Input.is_action_just_released("jump"):
+		velocity.y *= 0.3
+	
 	
 func descent_state(delta):
-	state_machine.current_state = "Walk"
+	fall_timer += delta 
+	next_animation = "Fall"
+	take_input()
+	air_move(delta)
+	if input_direction == 0 or is_inverse(input_direction, velocity.x):
+		apply_friction(current.friction * current.stopping_friction_modifier * current.air_friction_modifier, delta)
+	else:
+		apply_friction(current.friction * current.air_friction_modifier, delta)
+	apply_gravity(current.gravity * current.falling_gravity_modifier, delta)
+	# if is on ground or velocity.y > 0 state = descent
+	if flags["on_ground"]:
+		state_machine.current_state = "Walk"
+		if fall_timer > 0.75:
+			state_machine.current_state = "Land"
+		fall_timer = 0
 
 func land_state(_delta):
-	pass
+	next_animation = "Landing"
+	
+func end_landing():
+	state_machine.current_state = "Walk"
 
 func dialog_state(_delta):
 	pass
@@ -187,3 +249,24 @@ func _on_LayerDetector2_body_exited(body):
 	layer_2_bodies.erase(body)
 	if layer_2_bodies.size() == 0:
 		colliding_with_layer_2 = false
+		
+func _selected_item_changed(item):
+	selected_item = item
+
+
+func _on_IntermediaryDetector_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	intermediary_bodies.append(area)
+	colliding_with_intermediary = true
+
+func _on_IntermediaryDetector_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
+	intermediary_bodies.erase(area)
+	if intermediary_bodies.size() == 0:
+		colliding_with_intermediary = false
+		
+func _on_dialog_ended(_timeline):
+	moving = true
+	animation_player.play()
+	disconnect("timeline_ended", current_dialog, "_on_dialog_ended")
+	state_machine.current_state = "Walk"
+	animating = true
+	current_dialog = null

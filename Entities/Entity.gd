@@ -6,6 +6,7 @@ class_name Entity
 export(int, "Layer1", "Layer2") var layer setget set_layer
 export(int) var health = 1
 export var collides_with_player = false
+export var immortal = false
 
 # emitido toda vez que set_layer() é chamado
 signal layer_changed
@@ -45,7 +46,7 @@ func get_opposite_layer():
 	return 0
 	
 func update_health():
-	if health <= 0: 
+	if health <= 0 and !immortal: 
 		_die()
 	
 func apply_damage(damage):

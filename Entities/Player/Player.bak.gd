@@ -29,7 +29,6 @@ func _ready():
 
 func change_animation(anim):
 	if animation_player.current_animation != anim:
-		print('tocando')
 		animation_player.play(anim)
 
 func take_input():
@@ -70,7 +69,7 @@ func _physics_process(delta):
 			change_animation('Walk')
 	if !is_on_floor():
 		if velocity.y > -100:
-			change_animation("Glide")
+			change_animation("Fall")
 		else:
 			change_animation('Jump')
 	

@@ -1,0 +1,49 @@
+{
+	"events": [
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "default-theme.cfg"
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1652646885.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1652488196.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "awoooo\nwww"
+		},
+		{
+			"character": "character-1652646885.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "oi linda [b]kawaii[/b] "
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 0.2
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.1",
+		"file": "timeline-1652488192.json",
+		"name": "teste"
+	}
+}

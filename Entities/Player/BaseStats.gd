@@ -4,10 +4,12 @@ export(int) var max_health = 3
 export(int) var max_mana = 10
 export(int) var health = 3 
 export(int) var mana = 10 
+export(float) var jump_force : float = 650
 export(float) var max_speed = 250 
 export(float) var acceleration = 1000 
 export(float) var terminal_velocity = 600 
 export(float) var gravity = 2000
+export(float) var falling_gravity_modifier = 1.5
 export(float) var friction = 4
 export(float) var air_acceleration_modifier = 0.8
 export(float) var air_friction_modifier = 0.5
@@ -35,7 +37,9 @@ func update_current_stats():
 	current.air_acceleration_modifier = air_acceleration_modifier
 	current.air_friction_modifier = air_friction_modifier
 	current.stopping_friction_modifier = stopping_friction_modifier
-
+	current.jump_force = jump_force
+	current.falling_gravity_modifier = falling_gravity_modifier
+	
 func set_additional_health(amount):
 	additional_health = amount
 	

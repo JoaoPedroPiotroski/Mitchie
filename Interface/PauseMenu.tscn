@@ -28,25 +28,23 @@ __meta__ = {
 }
 
 [node name="TabContainer" type="TabContainer" parent="."]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -457.0
-margin_top = -292.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -228.0
+margin_right = 357.0
+margin_bottom = 400.0
 theme = ExtResource( 3 )
-tab_align = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Inventory" parent="TabContainer" instance=ExtResource( 2 )]
+[node name="Inventário" parent="TabContainer" instance=ExtResource( 2 )]
 margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="Config" type="Control" parent="TabContainer"]
+[node name="Configuração" type="Control" parent="TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -55,7 +53,7 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="Control2" type="Control" parent="TabContainer"]
+[node name="Teste" type="Control" parent="TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -67,7 +65,7 @@ margin_bottom = -4.0
 [node name="TitleText" type="Label" parent="."]
 margin_right = 150.0
 margin_bottom = 40.0
-text = "Game Paused"
+text = "Jogo pausado"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -75,19 +73,10 @@ __meta__ = {
 [node name="Hotbar" type="Control" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 7.0
-margin_top = -259.0
-margin_right = 71.0
-margin_bottom = -3.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HotbarBG" type="TextureRect" parent="Hotbar"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 5 )
-stretch_mode = 2
+margin_left = 6.0
+margin_top = -267.0
+margin_right = 38.0
+margin_bottom = -139.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -149,4 +138,4 @@ autowrap = true
 
 [connection signal="visibility_changed" from="Hotbar/MenuHotbar" to="Hotbar/MenuHotbar" method="_on_MenuHotbar_visibility_changed"]
 
-[editable path="TabContainer/Inventory"]
+[editable path="TabContainer/Inventário"]

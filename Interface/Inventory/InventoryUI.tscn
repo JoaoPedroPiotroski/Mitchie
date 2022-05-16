@@ -36,3 +36,5 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[connection signal="visibility_changed" from="InventoryBG/ItemsGrid" to="InventoryBG/ItemsGrid" method="_on_ItemsGrid_visibility_changed"]

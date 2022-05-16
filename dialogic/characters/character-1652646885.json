@@ -1,0 +1,21 @@
+{
+	"color": "#ffa5b5ff",
+	"description": "",
+	"display_name": "",
+	"display_name_bool": false,
+	"id": "character-1652646885.json",
+	"mirror_portraits": false,
+	"name": "Protagonista",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 250,
+	"offset_y": -125,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://Interface/Portraits/protagonista_grande.png"
+		}
+	],
+	"scale": 100,
+	"theme": ""
+}
