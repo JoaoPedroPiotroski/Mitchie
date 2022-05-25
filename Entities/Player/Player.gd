@@ -21,7 +21,7 @@ var flags = {
 	"dead" : false
 }
 
-var selected_item : Item 
+#var selected_item : Resource
 var anim_direction : Vector2 = RIGHT
 var velocity : Vector2 = Vector2.ZERO
 var input_direction : int = 0
@@ -44,8 +44,7 @@ onready var current = $Stats/Current
 onready var base = $Stats
 
 func _ready():
-	Inventory.hotbar.connect("selected_item_changed", self, "_selected_item_changed")
-	selected_item = Inventory.hotbar.get_selected_item()
+	pass
 
 func _physics_process(delta):
 	Global.player = self
@@ -89,13 +88,15 @@ func take_input():
 	if input_direction != 0:
 		anim_direction.x = input_direction
 	if Input.is_action_just_pressed("switch_layer"):
-		layer_switch_timer = 1
-		current.jump_force = base.jump_force * 0.5
+		layer_switch_timer = 0.3
+		current.jump_force = base.jump_force * 0.64
 		jump_timer = 0.2
 	if Input.is_action_just_pressed("jump"): 
 		jump_timer = 0.2
 	if Input.is_action_just_pressed("use"):
-		selected_item._use(global_position, layer)
+		state_machine.current_state = "Attack"
+#	if Input.is_action_just_pressed("use"):
+#		selected_item._use(global_position, layer)
 	if weakref(current_dialog).get_ref():
 		if Input.is_action_just_pressed("interact"):
 			state_machine.current_state = "Dialog"
@@ -104,13 +105,11 @@ func take_input():
 			animation_player.stop(false)
 			add_child(current_dialog)
 			current_dialog.connect("timeline_end", self, "_on_dialog_ended")
-	if weakref(item_hover).get_ref():
-		if Input.is_action_just_pressed("interact"):
-			print(Inventory.inventory)
-			print(item_hover.item)
-			var pass_item = item_hover.item.instance()
-			Inventory.add_item(pass_item)
-			item_hover.collect()
+#	if weakref(item_hover).get_ref():
+#		if Input.is_action_just_pressed("interact") and item_hover.layer == layer:
+#			var pass_item = item_hover.item.instance()
+#			Inventory.add_item(pass_item)
+#			item_hover.collect()
 		
 func animate():
 	main_sprite.flip_h = anim_direction.x < 0
@@ -191,11 +190,10 @@ func ascent_state(delta):
 		apply_friction(current.friction * current.air_friction_modifier, delta)
 	apply_gravity(current.gravity, delta)
 	# if is on ground or velocity.y > 0 state = descent
-	if flags["on_ground"] or velocity.y > 0:
+	if is_on_floor() or velocity.y > 0:
 		state_machine.current_state = "Descent"
-		
 	if Input.is_action_just_released("jump"):
-		velocity.y *= 0.3
+		velocity.y *= 0.1
 	
 	
 func descent_state(delta):
@@ -249,10 +247,6 @@ func _on_LayerDetector2_body_exited(body):
 	layer_2_bodies.erase(body)
 	if layer_2_bodies.size() == 0:
 		colliding_with_layer_2 = false
-		
-func _selected_item_changed(item):
-	selected_item = item
-
 
 func _on_IntermediaryDetector_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	intermediary_bodies.append(area)
@@ -265,8 +259,7 @@ func _on_IntermediaryDetector_area_shape_exited(area_rid, area, area_shape_index
 		
 func _on_dialog_ended(_timeline):
 	moving = true
-	animation_player.play()
-	disconnect("timeline_ended", current_dialog, "_on_dialog_ended")
+	animation_player.play() 
 	state_machine.current_state = "Walk"
 	animating = true
 	current_dialog = null

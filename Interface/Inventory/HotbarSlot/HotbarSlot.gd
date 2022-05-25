@@ -1,12 +1,12 @@
 extends Panel
 
-var item : Item
+var item : Resource
 var pos : int
 var empty_slot_tex : StreamTexture
 var selected = false
 var draggable = true
 
-func start(in_item : Item, in_pos, in_draggable = true, in_selected = false):
+func start(in_item : Resource, in_pos, in_draggable = true, in_selected = false):
 	$TextureButton.texture_normal = in_item.icon
 	item = in_item
 	pos = in_pos

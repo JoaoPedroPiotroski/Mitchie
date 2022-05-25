@@ -3,7 +3,7 @@ extends Node
 export var max_hotbar_size : int = 4
 
 var selected_item = 0
-onready var empty_item = preload("res://Items/Empty.tscn")
+onready var empty_item = preload("res://Items/Resources/Empty.tres")
 
 signal hotbar_changed
 signal selected_item_changed(item)
@@ -29,11 +29,11 @@ func get_selected_item():
 
 func _ready():
 	for i in range(max_hotbar_size):
-		hotbar.append(empty_item.instance())
+		hotbar.append(empty_item)
 	select_item(0)
 	emit_signal("selected_item_changed", get_selected_item())
 
-func add_to_hotbar(item : Item, position, origin=0):
+func add_to_hotbar(item : Resource, position, origin=0):
 	if hotbar.has(item) and item.name != "Empty": 
 		hotbar.insert(hotbar.find(item), empty_item.instance())
 		hotbar.erase(item)
@@ -53,7 +53,7 @@ func add_to_hotbar(item : Item, position, origin=0):
 	emit_signal("hotbar_changed")
 	emit_signal("selected_item_changed", get_selected_item())
 	
-func remove_from_hotbar(item : Item):
+func remove_from_hotbar(item : Resource):
 	if hotbar.has(item):
 		hotbar.insert(hotbar.find(item), empty_item.instance())
 		hotbar.erase(item)

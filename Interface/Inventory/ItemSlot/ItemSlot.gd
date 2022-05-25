@@ -1,11 +1,11 @@
 extends Panel
 
-var item : Item
+var item : Resource
 
 signal clicked(item)
 
 
-func start(in_item : Item):
+func start(in_item : Resource):
 	$TextureButton.texture_normal = in_item.icon
 	item = in_item
 	

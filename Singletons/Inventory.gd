@@ -4,8 +4,27 @@ var inventory = [
 	
 ]
 
+var existing_items = [
+	
+]
+
 onready var hotbar = $Hotbar
 
+func _ready():
+	var dir = Directory.new()
+	var path = "res://Items/Resources/"
+	if dir.open(path) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+			else:
+				existing_items.append(load(path+file_name))
+			file_name = dir.get_next()
+	else:
+		print("An error occurred when trying to access the path.")
+	
 func switch_item(item1, item2):
 	var pos1 = inventory.find(item1)
 	var pos2 = inventory.find(item2) 
@@ -17,8 +36,8 @@ func switch_item(item1, item2):
 signal item_added(item)
 signal item_removed(item)
 
-func add_item(item : Item):
-	print(item)
+
+func add_item(item : Resource):
 	if !is_item_in_inventory(item):
 		inventory.append(item)
 		return
@@ -39,7 +58,7 @@ func is_item_in_inventory(item):
 			return true
 	return false
 	
-func remove_item(item : Item):
+func remove_item(item : Resource):
 	inventory.erase(item)
 
 func get_inventory():

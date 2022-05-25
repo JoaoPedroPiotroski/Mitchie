@@ -22,7 +22,6 @@ func can_drop_data(position, data):
 	return false
 
 func drop_data(position, data):
-	print(get_parent().selected)
 	if data.has('origin'):
 		Inventory.get_node("Hotbar").add_to_hotbar(data['item'], get_parent().pos, data['origin'])
 		return

@@ -2,7 +2,7 @@ extends Area2D
 
 class_name DragItem
 
-var item : Item
+var item : Resource
 var holding = true
 
 func _ready():

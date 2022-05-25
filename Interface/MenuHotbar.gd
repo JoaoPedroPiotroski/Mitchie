@@ -1,11 +1,12 @@
 extends VBoxContainer
 
 onready var hotbar_slot = preload("res://Interface/Inventory/HotbarSlot/HotbarSlot.tscn")
-onready var empty_item = preload("res://Items/Empty.tscn")
+onready var empty_item = preload("res://Items/Resources/Empty.tres")
 var slots = []
 	
 func _ready():
-	Inventory.get_node("Hotbar").connect('hotbar_changed', self, 'on_hotbar_changed')
+	pass
+	#Inventory.get_node("Hotbar").connect('hotbar_changed', self, 'on_hotbar_changed')
 	
 	
 func on_hotbar_changed():

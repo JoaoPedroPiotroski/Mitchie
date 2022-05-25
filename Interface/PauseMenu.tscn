@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Interface/PauseMenu.gd" type="Script" id=1]
 [ext_resource path="res://Interface/Inventory/InventoryUI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Themes/PauseMenuTheme.tres" type="Theme" id=3]
-[ext_resource path="res://Interface/MenuHotbar.gd" type="Script" id=4]
 [ext_resource path="res://Interface/Inventory/HotbarSlot/EmptySlot.png" type="Texture" id=5]
 
 [node name="PauseMenu" type="Control"]
@@ -70,26 +69,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Hotbar" type="Control" parent="."]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = 6.0
-margin_top = -267.0
-margin_right = 38.0
-margin_bottom = -139.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MenuHotbar" type="VBoxContainer" parent="Hotbar"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_constants/separation = 0
-script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="ItemDetail" type="Popup" parent="."]
 visible = true
 anchor_left = 0.5
@@ -135,7 +114,5 @@ margin_right = 187.0
 margin_bottom = -3.0
 text = "Descrição do item :3333"
 autowrap = true
-
-[connection signal="visibility_changed" from="Hotbar/MenuHotbar" to="Hotbar/MenuHotbar" method="_on_MenuHotbar_visibility_changed"]
 
 [editable path="TabContainer/Inventário"]

@@ -7,7 +7,8 @@ export(String) var default_state = ""
 var states = {
 	
 }
-var current_state : String 
+var current_state : String setget set_state, get_state
+var previous_state
 
 func _ready():
 	var temp = _initial_states.split('\n')
@@ -25,3 +26,7 @@ func get_number_from(state: String):
 	
 func get_state():
 	return current_state
+	
+func set_state(new_state):
+	previous_state = current_state
+	current_state = new_state
