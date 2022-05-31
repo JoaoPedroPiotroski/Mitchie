@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/keypress-018.wav-9db0125596ff3d23e2e6dc8cf601e9ee.sample"
+
+[deps]
+
+source_file="res://Interface/Dialog/SFX/unicae_games_keyboard_soundpack_1/Single Keys/keypress-018.wav"
+dest_files=[ "res://.import/keypress-018.wav-9db0125596ff3d23e2e6dc8cf601e9ee.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

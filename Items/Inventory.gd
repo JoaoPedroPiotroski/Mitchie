@@ -2,15 +2,32 @@ extends Node
 
 var existing_items = []
 
+signal inventory_changed
+
 func _ready():
 	update_existing_items()
+	add_item_by_title('Foice', 1)
 	
-func add_item(i : Resource, amount : int) -> void:
+func add_item_by_title(title : String, amount : int) -> void:
+	emit_signal("inventory_changed")
+	for i in existing_items:
+		if i.title == title:
+			i.amount += amount
+	
+func add_item_by_resource(i : Resource, amount : int) -> void:
+	emit_signal("inventory_changed")
 	i.amount += amount
 	
 func remove_item(i : Resource, amount: int) -> void:
+	emit_signal("inventory_changed")
 	i.amount -= amount
 	i.amount = max(0, i.amount	)
+	
+func has_item(name):
+	for i in existing_items:
+		if i.title == name and i.amount >= 1:
+			return true
+	return false
 	
 func get_inventory() -> Array:  
 	var inv = []

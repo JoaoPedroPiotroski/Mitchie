@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Templates/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Terrain/Tilemaps/Desert.tscn" type="PackedScene" id=2]
@@ -12,6 +12,9 @@
 [ext_resource path="res://Terrain/Objects/House1/SidePillar.png" type="Texture" id=10]
 [ext_resource path="res://icon.png" type="Texture" id=11]
 [ext_resource path="res://Templates/DialogTrigger/DialogTrigger.tscn" type="PackedScene" id=12]
+[ext_resource path="res://teste/testezinho.png" type="Texture" id=13]
+[ext_resource path="res://Terrain/ExtendedTilemap.gd" type="Script" id=14]
+[ext_resource path="res://Terrain/TileEntities/Objects/Spike/Spike.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Objects/Starting_House/Exterior/Starting_House.tscn" type="PackedScene" id=16]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
@@ -189,6 +192,22 @@ extents = Vector2( 71.5, 59.5 )
 
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 43, 21 )
+
+[sub_resource type="TileSet" id=11]
+0/name = "icon.png 0"
+0/texture = ExtResource( 11 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 16, 40, 30 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
 
 [node name="Prototipo" type="Node2D"]
 
@@ -375,6 +394,11 @@ shape = SubResource( 10 )
 [node name="Starting_House" parent="Level/Terreno/Layer1Objects" index="2" instance=ExtResource( 16 )]
 position = Vector2( -264, 164 )
 
+[node name="Testezinho" type="Sprite" parent="Level/Terreno/Layer1Objects" index="3"]
+position = Vector2( -495, 229 )
+scale = Vector2( 1.2, 1.2 )
+texture = ExtResource( 13 )
+
 [node name="Layer2Tiles" parent="Level/Terreno" index="2"]
 position = Vector2( 0, -13 )
 
@@ -547,11 +571,15 @@ collision_mask = 0
 position = Vector2( 0.5, 19.5 )
 shape = SubResource( 8 )
 
+[node name="Spike" parent="Level/Terreno/Layer2Objects" index="1" instance=ExtResource( 15 )]
+position = Vector2( 141, 190 )
+scale = Vector2( 10, 10 )
+
 [node name="Player" parent="Level" index="1"]
 position = Vector2( 172, 58 )
 
 [node name="Sniper" parent="Level/Enemies" index="0" instance=ExtResource( 4 )]
-position = Vector2( -473, 65 )
+position = Vector2( -503, 157 )
 collision_mask = 2
 layer = 1
 
@@ -572,6 +600,13 @@ text = "Fonte customizada bonita? quem diria???"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ExtendedTilemap" type="TileMap" parent="."]
+tile_set = SubResource( 11 )
+format = 1
+tile_data = PoolIntArray( 65520, 0, 0, 65524, 0, 0 )
+script = ExtResource( 14 )
+title = "Teste"
 
 [editable path="Level"]
 [editable path="Level/Terreno/Layer1Objects/Sprite/DialogTrigger"]

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/TalkingSynth.wav-9812b9698d7e8709fe3a5b1dde5d2c61.sample"
+
+[deps]
+
+source_file="res://Interface/Dialog/SFX/TalkingSynth.wav"
+dest_files=[ "res://.import/TalkingSynth.wav-9812b9698d7e8709fe3a5b1dde5d2c61.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

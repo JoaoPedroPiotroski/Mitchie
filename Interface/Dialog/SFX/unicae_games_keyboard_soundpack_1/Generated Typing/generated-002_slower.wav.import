@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/generated-002_slower.wav-e8f09ca1d36762173488a9edce016422.sample"
+
+[deps]
+
+source_file="res://Interface/Dialog/SFX/unicae_games_keyboard_soundpack_1/Generated Typing/generated-002_slower.wav"
+dest_files=[ "res://.import/generated-002_slower.wav-e8f09ca1d36762173488a9edce016422.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -9,9 +9,11 @@ const RIGHT = Vector2.RIGHT
 
 # Timers
 var jump_timer = -1 #0.3
-export(float) var ground_timer = -1 #0.1
+var ground_timer = -1 #0.1
 var layer_switch_timer = -1 #1
 var fall_timer : float = 0
+var l_click_hold_timer = 0
+var r_click_hold_timer = 0
 
 # Cooldowns
 export(float) var jump_cooldown = ground_timer
@@ -22,6 +24,7 @@ var flags = {
 }
 
 #var selected_item : Resource
+
 var anim_direction : Vector2 = RIGHT
 var velocity : Vector2 = Vector2.ZERO
 var input_direction : int = 0
@@ -36,6 +39,7 @@ var moving = true
 var animating = true
 var item_hover
 var current_dialog
+var has_scythe = false
 
 onready var animation_player = $AnimationPlayer
 onready var main_sprite = $MainSprite
@@ -44,7 +48,8 @@ onready var current = $Stats/Current
 onready var base = $Stats
 
 func _ready():
-	pass
+	Inventory.connect('inventory_changed', self, 'update_inventory')
+	update_inventory()
 
 func _physics_process(delta):
 	Global.player = self
@@ -52,7 +57,6 @@ func _physics_process(delta):
 	var state = state_machine.get_state()
 	if moving:
 		velocity = move_and_slide(velocity, UP)
-	
 	# Timers tick
 	layer_switch_timer -= delta
 	ground_timer -= delta
@@ -76,6 +80,14 @@ func _physics_process(delta):
 		land_state(delta)
 	elif state == "Dialog":
 		dialog_state(delta)
+	elif state == "Attack":
+		attack_state(delta)
+	elif state == "Attack2":
+		attack2_state(delta)
+	elif state == "Pull":
+		pull_state(delta)
+	elif state == "Pull2":
+		pull2_state(delta)
 	if animating:
 		animate()
 		
@@ -83,7 +95,7 @@ func _physics_process(delta):
 		current.jump_force = base.jump_force
 	update_layer(delta)
 		
-func take_input():
+func take_input(delta):
 	input_direction = -int(Input.is_action_pressed("move_left")) + int(Input.is_action_pressed("move_right"))
 	if input_direction != 0:
 		anim_direction.x = input_direction
@@ -93,10 +105,23 @@ func take_input():
 		jump_timer = 0.2
 	if Input.is_action_just_pressed("jump"): 
 		jump_timer = 0.2
-	if Input.is_action_just_pressed("use"):
-		state_machine.current_state = "Attack"
-#	if Input.is_action_just_pressed("use"):
-#		selected_item._use(global_position, layer)
+	if Input.is_action_pressed("attack"):
+		l_click_hold_timer += delta
+	if Input.is_action_pressed("pull"):
+		r_click_hold_timer += delta
+	if Input.is_action_just_released("attack"):
+		if l_click_hold_timer > 0.2:
+			state_machine.current_state = "Attack2"
+		else:
+			state_machine.current_state = "Attack"
+		l_click_hold_timer = 0
+	if Input.is_action_just_released("pull"):
+		if r_click_hold_timer > 0.2:
+			state_machine.current_state = "Pull"
+		else:
+			state_machine.current_state = "Pull"
+		r_click_hold_timer = 0
+		
 	if weakref(current_dialog).get_ref():
 		if Input.is_action_just_pressed("interact"):
 			state_machine.current_state = "Dialog"
@@ -113,10 +138,18 @@ func take_input():
 		
 func animate():
 	main_sprite.flip_h = anim_direction.x < 0
+	if state_machine.current_state in [
+		"Attack", "Attack2", "Pull", "Pull2"
+	]:
+		anim_direction.x = $Directions.get_input_direction().x if $Directions.get_input_direction().x != 0 else 1
 	if next_animation != animation_player.current_animation and animation_player.current_animation != "die":
 		animation_player.play(next_animation)
 	if flags["dead"] and animation_player.current_animation != "die":
 		animation_player.play("die")
+	if layer == 0:
+		$MainSprite.modulate = Color(1, 1, 1, 1)
+	else:
+		$MainSprite.modulate = Color(0.9,0.8, 0.9, 1)
 	
 func ground_move(delta):
 	velocity.x += current.acceleration * delta * input_direction
@@ -159,7 +192,7 @@ func walk_state(delta):
 		next_animation = "Walk"
 	else:
 		next_animation = "Idle"
-	take_input()
+	take_input(delta)
 	ground_move(delta)
 	if input_direction == 0 or is_inverse(input_direction, velocity.x):
 		apply_friction(current.friction * current.stopping_friction_modifier, delta)
@@ -174,15 +207,15 @@ func walk_state(delta):
 		jump_cooldown = 0.3
 		state_machine.current_state = "Jump"
 		
-func jump_state(_delta):
-	take_input()
+func jump_state(delta):
+	take_input(delta)
 	next_animation = "Jump"
 	apply_jump_impulse(current.jump_force)
 	state_machine.current_state = "Ascent"
 
 func ascent_state(delta):
 	next_animation = "Ascent"
-	take_input()
+	take_input(delta)
 	air_move(delta)
 	if input_direction == 0 or is_inverse(input_direction, velocity.x):
 		apply_friction(current.friction * current.stopping_friction_modifier * current.air_friction_modifier, delta)
@@ -199,7 +232,7 @@ func ascent_state(delta):
 func descent_state(delta):
 	fall_timer += delta 
 	next_animation = "Fall"
-	take_input()
+	take_input(delta)
 	air_move(delta)
 	if input_direction == 0 or is_inverse(input_direction, velocity.x):
 		apply_friction(current.friction * current.stopping_friction_modifier * current.air_friction_modifier, delta)
@@ -221,6 +254,35 @@ func end_landing():
 
 func dialog_state(_delta):
 	pass
+	
+func attack_state(delta):
+	apply_friction(current.friction, delta)
+	apply_gravity(current.gravity, delta)
+	next_animation = "attack1"
+func end_attack():
+	moving = true
+	state_machine.current_state = "Walk"
+
+func attack2_state(_delta):
+	var scy = load("res://Entities/Player/ScytheBomb.tscn")
+	var obj = scy.instance()
+	obj.start(layer, $Directions.get_input_direction(), 300, global_position)
+	get_parent().add_child(obj)
+	state_machine.current_state = "Walk"
+
+func pull_state(_delta):
+	next_animation = "pull1"
+	moving = false
+func pull1_end():
+	moving = true
+	state_machine.current_state = "Walk"
+
+func pull2_state(_delta):
+	pass
+	
+func update_inventory():
+	if Inventory.has_item('Foice'):
+		has_scythe = true
 	
 func is_inverse(n1, n2):
 	if (n1 > 0 and n2<0) or (n1 < 0 and n2>0):

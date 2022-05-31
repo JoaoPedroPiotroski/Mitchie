@@ -5,7 +5,7 @@
 			"set_theme": "default-theme.cfg"
 		},
 		{
-			"animation": "[Default]",
+			"animation": "instant_in.gd",
 			"animation_length": 0,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
@@ -15,8 +15,8 @@
 			"portrait": "Default",
 			"portrait_definition": "",
 			"position": {
-				"0": true,
-				"1": false,
+				"0": false,
+				"1": true,
 				"2": false,
 				"3": false,
 				"4": false
@@ -28,7 +28,12 @@
 			"character": "character-1652488196.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "awoooo\nwww"
+			"text": "awoooo\nwww\n[nw=0]"
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": false,
+			"wait_seconds": 2
 		},
 		{
 			"character": "character-1652646885.json",

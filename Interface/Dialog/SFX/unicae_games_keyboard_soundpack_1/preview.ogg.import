@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/preview.ogg-fb8d9a51ce5a2d4b50d0d3b6020fd8e7.oggstr"
+
+[deps]
+
+source_file="res://Interface/Dialog/SFX/unicae_games_keyboard_soundpack_1/preview.ogg"
+dest_files=[ "res://.import/preview.ogg-fb8d9a51ce5a2d4b50d0d3b6020fd8e7.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

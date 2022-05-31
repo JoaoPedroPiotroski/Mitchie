@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/human_vel-009.wav-fc921627d87d0cda1a99226bbf0f38f0.sample"
+
+[deps]
+
+source_file="res://Interface/Dialog/SFX/unicae_games_keyboard_soundpack_1/Human Typing/human_vel-009.wav"
+dest_files=[ "res://.import/human_vel-009.wav-fc921627d87d0cda1a99226bbf0f38f0.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

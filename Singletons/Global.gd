@@ -26,3 +26,4 @@ func set_player_layer(new_layer):
 func random_from_array(arr : Array):
 	arr.shuffle()
 	return arr[0]
+	

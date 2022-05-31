@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Entities/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Entities/Player/protagonistaborboleta.png" type="Texture" id=2]
@@ -11,6 +11,12 @@
 [ext_resource path="res://Entities/Player/MainCamera.gd" type="Script" id=9]
 [ext_resource path="res://Entities/Player/InteractablesDetector.gd" type="Script" id=10]
 [ext_resource path="res://quadradopreto.png" type="Texture" id=11]
+[ext_resource path="res://Entities/Player/Vignette.gd" type="Script" id=12]
+[ext_resource path="res://Entities/Player/AttackHitbox.gd" type="Script" id=13]
+[ext_resource path="res://Entities/Player/ArmPivot.gd" type="Script" id=14]
+[ext_resource path="res://Entities/Player/PullHitbox.gd" type="Script" id=15]
+[ext_resource path="res://Entities/Player/Directions.gd" type="Script" id=16]
+[ext_resource path="res://Entities/Player/DirIndicator.gd" type="Script" id=17]
 
 [sub_resource type="CapsuleShape2D" id=3]
 radius = 4.75
@@ -47,6 +53,19 @@ shader = SubResource( 18 )
 shader_param/vignette_intensity = 500.0
 shader_param/vignette_opacity = 0.157
 shader_param/vignette_rgb = Color( 0, 0, 0, 1 )
+
+[sub_resource type="Shader" id=25]
+code = "shader_type canvas_item;
+
+void fragment(){
+	vec4 color = texture(SCREEN_TEXTURE, SCREEN_UV);
+	float result = (color.r + color.g + color.b) / 3.0;
+	COLOR.rgb = vec3(result);
+	
+}"
+
+[sub_resource type="ShaderMaterial" id=26]
+shader = SubResource( 25 )
 
 [sub_resource type="Animation" id=15]
 resource_name = "Ascent"
@@ -91,6 +110,24 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 9, 10 ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "Finish_Pull"
+length = 0.1
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "pull1_end"
+} ]
 }
 
 [sub_resource type="Animation" id=13]
@@ -226,6 +263,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [ true ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("ArmPivot:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 
 [sub_resource type="Animation" id=9]
 resource_name = "Walk"
@@ -243,6 +292,54 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 4, 5, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "attack1"
+length = 0.15
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 14 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("ArmPivot/Scythe/AttackHitbox")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.025, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "enable"
+}, {
+"args": [  ],
+"method": "disable"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.15 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "end_attack"
+} ]
 }
 
 [sub_resource type="Animation" id=14]
@@ -274,18 +371,84 @@ tracks/1/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=21]
+resource_name = "pull1"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 15 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "pull1_end"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("ArmPivot/Scythe/PullHitbox")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.05, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "enable"
+}, {
+"args": [  ],
+"method": "disable"
+} ]
+}
+
 [sub_resource type="RectangleShape2D" id=17]
 extents = Vector2( 17, 21 )
+
+[sub_resource type="CapsuleShape2D" id=22]
+radius = 20.0
+height = 24.0
+
+[sub_resource type="CapsuleShape2D" id=23]
+radius = 18.9999
+height = 74.0
+
+[sub_resource type="Curve" id=27]
+_data = [ Vector2( 0.00547446, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.494526, 0.242331 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=28]
+offsets = PoolRealArray( 0, 0.385965, 0.517544, 0.631579, 1 )
+colors = PoolColorArray( 0.513726, 0.513726, 0.513726, 0.521569, 0.870327, 0.870327, 0.870327, 0.872418, 1, 1, 1, 1, 0.885062, 0.885062, 0.885062, 0.886916, 0.513726, 0.513726, 0.513726, 0.521569 )
+
+[sub_resource type="CircleShape2D" id=29]
+radius = 142.088
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource( 1 )
+override_modulate = true
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource( 7 )
 jump_force = 400.0
-gravity = 1000.0
 falling_gravity_modifier = 1.25
 
 [node name="Current" type="Node" parent="Stats"]
@@ -296,6 +459,9 @@ script = ExtResource( 5 )
 _initial_states = "Walk
 Jump
 Attack
+Attack2
+Pull
+Pull2
 Ascent
 Descent
 Land
@@ -329,7 +495,7 @@ vframes = 7
 frame = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+modulate = Color( 0.14902, 1, 0, 1 )
 position = Vector2( 1, 5 )
 shape = SubResource( 3 )
 
@@ -367,22 +533,34 @@ current = true
 zoom = Vector2( 0.8, 0.8 )
 process_mode = 0
 drag_margin_h_enabled = true
-drag_margin_v_enabled = true
 smoothing_enabled = true
 smoothing_speed = 10.0
 drag_margin_top = 0.5
 editor_draw_drag_margin = true
 script = ExtResource( 9 )
 
-[node name="CameraZoomTween" type="Tween" parent="MainCamera"]
+[node name="CameraTween" type="Tween" parent="MainCamera"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="MainCamera"]
 
 [node name="Vignette" type="TextureRect" parent="MainCamera/CanvasLayer"]
+visible = false
 material = SubResource( 19 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 500, 500 )
+texture = ExtResource( 11 )
+expand = true
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="TextureRect" parent="MainCamera/CanvasLayer"]
+visible = false
+material = SubResource( 26 )
+anchor_right = 1.0
+anchor_bottom = 1.0
 texture = ExtResource( 11 )
 expand = true
 __meta__ = {
@@ -395,15 +573,19 @@ __meta__ = {
 autoplay = "Walk"
 anims/Ascent = SubResource( 15 )
 anims/Fall = SubResource( 12 )
+anims/Finish_Pull = SubResource( 24 )
 anims/Glide = SubResource( 13 )
 anims/Idle = SubResource( 10 )
 anims/Jump = SubResource( 11 )
 anims/Landing = SubResource( 16 )
 anims/RESET = SubResource( 8 )
 anims/Walk = SubResource( 9 )
+anims/attack1 = SubResource( 20 )
 anims/die = SubResource( 14 )
+anims/pull1 = SubResource( 21 )
 
 [node name="InteractablesDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 16
 script = ExtResource( 10 )
@@ -411,6 +593,71 @@ script = ExtResource( 10 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractablesDetector"]
 position = Vector2( 2, 4 )
 shape = SubResource( 17 )
+
+[node name="ArmPivot" type="Node2D" parent="."]
+script = ExtResource( 14 )
+
+[node name="Scythe" type="Sprite" parent="ArmPivot"]
+position = Vector2( 13, -3 )
+
+[node name="AttackHitbox" type="Area2D" parent="ArmPivot/Scythe"]
+position = Vector2( -6, 3 )
+collision_layer = 4
+collision_mask = 8
+script = ExtResource( 13 )
+damage = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArmPivot/Scythe/AttackHitbox"]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 22, 6 )
+shape = SubResource( 22 )
+disabled = true
+
+[node name="PullHitbox" type="Area2D" parent="ArmPivot/Scythe"]
+modulate = Color( 1, 0, 0, 1 )
+collision_layer = 4
+collision_mask = 8
+script = ExtResource( 15 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArmPivot/Scythe/PullHitbox"]
+position = Vector2( 51, 8 )
+rotation = 1.5708
+shape = SubResource( 23 )
+disabled = true
+
+[node name="Tween" type="Tween" parent="ArmPivot/Scythe/PullHitbox"]
+
+[node name="DirIndicator" type="Line2D" parent="ArmPivot"]
+visible = false
+points = PoolVector2Array( 9, 11, 13, 3, 13, -3, 10, -12 )
+width_curve = SubResource( 27 )
+default_color = Color( 1, 1, 1, 1 )
+gradient = SubResource( 28 )
+script = ExtResource( 17 )
+
+[node name="Directions" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 16 )
+
+[node name="Position2D" type="Position2D" parent="Directions"]
+position = Vector2( 30, 0 )
+
+[node name="Position2D2" type="Position2D" parent="Directions"]
+position = Vector2( -30, 0 )
+
+[node name="Position2D3" type="Position2D" parent="Directions"]
+position = Vector2( 0, 30 )
+
+[node name="Position2D4" type="Position2D" parent="Directions"]
+position = Vector2( 0, -30 )
+
+[node name="EnemyDetector" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetector"]
+shape = SubResource( 29 )
 
 [connection signal="body_entered" from="LayerDetector1" to="." method="_on_LayerDetector1_body_entered"]
 [connection signal="body_exited" from="LayerDetector1" to="." method="_on_LayerDetector1_body_exited"]
@@ -422,3 +669,9 @@ shape = SubResource( 17 )
 [connection signal="area_exited" from="InteractablesDetector" to="InteractablesDetector" method="_on_InteractablesDetector_area_exited"]
 [connection signal="body_entered" from="InteractablesDetector" to="InteractablesDetector" method="_on_InteractablesDetector_body_entered"]
 [connection signal="body_exited" from="InteractablesDetector" to="InteractablesDetector" method="_on_InteractablesDetector_body_exited"]
+[connection signal="body_entered" from="ArmPivot/Scythe/AttackHitbox" to="ArmPivot/Scythe/AttackHitbox" method="_on_AttackHitbox_body_entered"]
+[connection signal="body_entered" from="ArmPivot/Scythe/PullHitbox" to="ArmPivot/Scythe/PullHitbox" method="_on_Hitbox_body_entered"]
+[connection signal="body_entered" from="ArmPivot/Scythe/PullHitbox" to="ArmPivot/Scythe/PullHitbox" method="_on_PullHitbox_body_entered"]
+[connection signal="body_exited" from="ArmPivot/Scythe/PullHitbox" to="ArmPivot/Scythe/PullHitbox" method="_on_PullHitbox_body_exited"]
+[connection signal="body_entered" from="EnemyDetector" to="ArmPivot/DirIndicator" method="_on_EnemyDetector_body_entered"]
+[connection signal="body_exited" from="EnemyDetector" to="ArmPivot/DirIndicator" method="_on_EnemyDetector_body_exited"]

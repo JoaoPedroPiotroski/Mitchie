@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/TalkingSynth.mp3-acc3356e373c574c7af995fce95d33fb.mp3str"
+
+[deps]
+
+source_file="res://Interface/Dialog/SFX/TalkingSynth.mp3"
+dest_files=[ "res://.import/TalkingSynth.mp3-acc3356e373c574c7af995fce95d33fb.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

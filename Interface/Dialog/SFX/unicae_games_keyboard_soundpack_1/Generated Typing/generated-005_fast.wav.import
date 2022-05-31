@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/generated-005_fast.wav-6b027ded2f41cdeea84c10ddb41ffec9.sample"
+
+[deps]
+
+source_file="res://Interface/Dialog/SFX/unicae_games_keyboard_soundpack_1/Generated Typing/generated-005_fast.wav"
+dest_files=[ "res://.import/generated-005_fast.wav-6b027ded2f41cdeea84c10ddb41ffec9.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
