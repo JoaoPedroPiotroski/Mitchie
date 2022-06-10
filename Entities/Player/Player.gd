@@ -20,7 +20,8 @@ export(float) var jump_cooldown = ground_timer
 
 var flags = {
 	"on_ground" : false,
-	"dead" : false
+	"dead" : false,
+	"stopped" : false
 }
 
 #var selected_item : Resource
@@ -67,6 +68,11 @@ func _physics_process(delta):
 	if is_on_floor():
 		ground_timer = 0.1
 	flags["on_ground"] = ground_timer > 0
+	
+	if velocity.x < 0.1 and velocity.x > -0.1:
+		flags['stopped'] = true
+	else:
+		flags['stopped'] = false
 
 	if state == "Walk":
 		walk_state(delta)
@@ -283,6 +289,9 @@ func pull2_state(_delta):
 func update_inventory():
 	if Inventory.has_item('Foice'):
 		has_scythe = true
+
+func _knockback(force, dir):
+	velocity = force * dir
 	
 func is_inverse(n1, n2):
 	if (n1 > 0 and n2<0) or (n1 < 0 and n2>0):

@@ -12,6 +12,8 @@ var left_timer = 0.3
 
 func _physics_process(delta):
 	drag_margin_h_enabled = !abs(player.velocity.x) > 200
+	left_timer = 3
+	right_timer = 3
 	if Input.is_action_pressed("move_up"):
 		up_timer -= delta
 	else:
@@ -23,9 +25,9 @@ func _physics_process(delta):
 	if down_timer > 0 and up_timer > 0:
 		offset_v = 0
 	else:
-		if down_timer < 0:
+		if down_timer < 0  and player.velocity == Vector2.ZERO:
 			offset_v = 1
-		if up_timer < 0:
+		if up_timer < 0  and player.velocity == Vector2.ZERO:
 			offset_v = -2
 	if Input.is_action_pressed("move_right"):
 		right_timer -= delta

@@ -15,3 +15,4 @@ var air_friction_modifier
 var stopping_friction_modifier 
 var jump_force
 
+

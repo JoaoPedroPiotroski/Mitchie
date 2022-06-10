@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://Entities/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Entities/Player/protagonistaborboleta.png" type="Texture" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://Entities/Player/PullHitbox.gd" type="Script" id=15]
 [ext_resource path="res://Entities/Player/Directions.gd" type="Script" id=16]
 [ext_resource path="res://Entities/Player/DirIndicator.gd" type="Script" id=17]
+[ext_resource path="res://Entities/Player/ScytheTerrainDetector.gd" type="Script" id=18]
 
 [sub_resource type="CapsuleShape2D" id=3]
 radius = 4.75
@@ -275,6 +276,42 @@ tracks/3/keys = {
 "update": 0,
 "values": [ 0.0 ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("ArmPivot/Scythe/TerrainDetector:enabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("ArmPivot/Scythe/TerrainDetector:exclude_parent")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("ArmPivot/Scythe/TerrainDetector/CollisionPolygon2D:disabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=9]
 resource_name = "Walk"
@@ -340,6 +377,18 @@ tracks/2/keys = {
 "args": [  ],
 "method": "end_attack"
 } ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ArmPivot/Scythe/TerrainDetector/CollisionPolygon2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.025, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
 }
 
 [sub_resource type="Animation" id=14]
@@ -430,6 +479,9 @@ height = 24.0
 radius = 18.9999
 height = 74.0
 
+[sub_resource type="RayShape2D" id=30]
+length = 25.0
+
 [sub_resource type="Curve" id=27]
 _data = [ Vector2( 0.00547446, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.494526, 0.242331 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
@@ -444,11 +496,11 @@ radius = 142.088
 collision_layer = 4
 collision_mask = 0
 script = ExtResource( 1 )
+override_scale = true
 override_modulate = true
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource( 7 )
-jump_force = 400.0
 falling_gravity_modifier = 1.25
 
 [node name="Current" type="Node" parent="Stats"]
@@ -533,8 +585,7 @@ current = true
 zoom = Vector2( 0.8, 0.8 )
 process_mode = 0
 drag_margin_h_enabled = true
-smoothing_enabled = true
-smoothing_speed = 10.0
+smoothing_speed = 100.0
 drag_margin_top = 0.5
 editor_draw_drag_margin = true
 script = ExtResource( 9 )
@@ -627,6 +678,17 @@ disabled = true
 
 [node name="Tween" type="Tween" parent="ArmPivot/Scythe/PullHitbox"]
 
+[node name="TerrainDetector" type="Area2D" parent="ArmPivot/Scythe"]
+position = Vector2( -3, 9 )
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 18 )
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="ArmPivot/Scythe/TerrainDetector"]
+rotation = -1.5708
+shape = SubResource( 30 )
+disabled = true
+
 [node name="DirIndicator" type="Line2D" parent="ArmPivot"]
 visible = false
 points = PoolVector2Array( 9, 11, 13, 3, 13, -3, 10, -12 )
@@ -670,8 +732,9 @@ shape = SubResource( 29 )
 [connection signal="body_entered" from="InteractablesDetector" to="InteractablesDetector" method="_on_InteractablesDetector_body_entered"]
 [connection signal="body_exited" from="InteractablesDetector" to="InteractablesDetector" method="_on_InteractablesDetector_body_exited"]
 [connection signal="body_entered" from="ArmPivot/Scythe/AttackHitbox" to="ArmPivot/Scythe/AttackHitbox" method="_on_AttackHitbox_body_entered"]
-[connection signal="body_entered" from="ArmPivot/Scythe/PullHitbox" to="ArmPivot/Scythe/PullHitbox" method="_on_Hitbox_body_entered"]
 [connection signal="body_entered" from="ArmPivot/Scythe/PullHitbox" to="ArmPivot/Scythe/PullHitbox" method="_on_PullHitbox_body_entered"]
+[connection signal="body_entered" from="ArmPivot/Scythe/PullHitbox" to="ArmPivot/Scythe/PullHitbox" method="_on_Hitbox_body_entered"]
 [connection signal="body_exited" from="ArmPivot/Scythe/PullHitbox" to="ArmPivot/Scythe/PullHitbox" method="_on_PullHitbox_body_exited"]
+[connection signal="body_entered" from="ArmPivot/Scythe/TerrainDetector" to="ArmPivot/Scythe/TerrainDetector" method="_on_TerrainDetector_body_entered"]
 [connection signal="body_entered" from="EnemyDetector" to="ArmPivot/DirIndicator" method="_on_EnemyDetector_body_entered"]
 [connection signal="body_exited" from="EnemyDetector" to="ArmPivot/DirIndicator" method="_on_EnemyDetector_body_exited"]

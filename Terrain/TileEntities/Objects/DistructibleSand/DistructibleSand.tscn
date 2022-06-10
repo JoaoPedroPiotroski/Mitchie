@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Terrain/TileEntities/Objects/DistructibleSand/DistructibleSand.gd" type="Script" id=1]
+[ext_resource path="res://Terrain/SpriteSheets/Desertineo.png" type="Texture" id=2]
+[ext_resource path="res://Entities/Enemies/Hitbox.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[node name="DistructibleSand" type="StaticBody2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource( 1 )
+collides_with_player = true
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+centered = false
+hframes = 16
+vframes = 16
+frame = 67
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color( 0, 0.133333, 1, 1 )
+position = Vector2( 8, 8 )
+shape = SubResource( 1 )
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+modulate = Color( 0, 0.133333, 1, 1 )
+position = Vector2( 8, 8 )
+shape = SubResource( 1 )
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
+[connection signal="body_entered" from="Hitbox" to="Hitbox" method="_on_Hitbox_body_entered"]
