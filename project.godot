@@ -159,13 +159,14 @@ _global_script_class_icons={
 [application]
 
 config/name="Mitchie"
-run/main_scene="res://Prototipo.tscn"
+run/main_scene="res://Interface/Main_Menu/Main_Menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Global="*res://Singletons/Global.tscn"
 Inventory="*res://Items/Inventory.gd"
+SceneManager="*res://Singletons/Scene_Manager.gd"
 Menu="*res://Singletons/Menu.tscn"
 TilesManager="*res://Terrain/TilesManager.gd"
 

@@ -68,7 +68,6 @@ func _physics_process(delta):
 	if is_on_floor():
 		ground_timer = 0.1
 	flags["on_ground"] = ground_timer > 0
-	
 	if velocity.x < 0.1 and velocity.x > -0.1:
 		flags['stopped'] = true
 	else:
