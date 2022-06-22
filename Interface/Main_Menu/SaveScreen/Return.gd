@@ -1,8 +1,8 @@
 extends TextureButton
 
-export(String, FILE) var volta
+export(String) var volta
 
 
 
 func _on_Return_pressed():
-	SceneManager.change_level(load(volta))
+	SceneManager.change_level(volta)

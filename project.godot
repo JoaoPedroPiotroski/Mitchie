@@ -104,6 +104,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ItemsOld/Drop/ItemDrop.gd"
 }, {
+"base": "Resource",
+"class": "LevelData",
+"language": "GDScript",
+"path": "res://Levels/LevelData.gd"
+}, {
 "base": "Entity",
 "class": "Player",
 "language": "GDScript",
@@ -149,6 +154,7 @@ _global_script_class_icons={
 "HistoryRow": "",
 "InteractableTerrain": "",
 "ItemDrop": "",
+"LevelData": "",
 "Player": "",
 "PseudoEntity": "",
 "StateMachine": "",
@@ -169,6 +175,7 @@ Inventory="*res://Items/Inventory.gd"
 SceneManager="*res://Singletons/Scene_Manager.gd"
 Menu="*res://Singletons/Menu.tscn"
 TilesManager="*res://Terrain/TilesManager.gd"
+Save="*res://Singletons/Save.gd"
 
 [debug]
 

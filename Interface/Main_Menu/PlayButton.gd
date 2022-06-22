@@ -1,6 +1,8 @@
 extends TextureButton
 
-export(PackedScene) var save_scene
+export(String) var save_scene
+func _ready():
+	grab_focus()
 
 func _on_PlayButton_pressed():
 	SceneManager.change_level(save_scene)
