@@ -58,7 +58,7 @@ func _physics_process(delta):
 		camera_tween.interpolate_property(self, "zoom", zoom, Vector2(0.8, 0.8), 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		vignette_tween.interpolate_property(vignette.get_material(), 
 			   "shader_param/vignette_intensity", 
-			   vignette.material.get_shader_param("shader_param/vignette_intensity"), 0.4, 0.25, 
+			   vignette.material.get_shader_param("shader_param/vignette_intensity"), 0.2, 0.25, 
 			   Tween.TRANS_CUBIC, Tween.EASE_OUT)
 		vignette_tween.start()
 		camera_tween.start()

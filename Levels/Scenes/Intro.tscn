@@ -46,6 +46,7 @@ tracks/0/keys = {
 [node name="Intro" type="Node2D"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Intro"
 anims/Intro = SubResource( 1 )
 anims/RESET = SubResource( 2 )
 
@@ -69,10 +70,10 @@ margin_right = 300.0
 rect_min_size = Vector2( 600, 120 )
 rect_pivot_offset = Vector2( 286, 393 )
 bbcode_enabled = true
-bbcode_text = "O saqueador, que só conhecia os magos por lendas e contos, fugiu."
-visible_characters = 58
+bbcode_text = "Um mago vindo do oeste lançou uma magica de proteção sobre ela."
+visible_characters = 56
 percent_visible = 0.902
-text = "O saqueador, que só conhecia os magos por lendas e contos, fugiu."
+text = "Um mago vindo do oeste lançou uma magica de proteção sobre ela."
 fit_content_height = true
 __meta__ = {
 "_edit_use_anchors_": false

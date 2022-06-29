@@ -169,10 +169,12 @@ func update_layer(delta):
 		if layer == Global.layers.Layer1: 
 			if !colliding_with_layer_2 and layer_switch_timer > 0:
 				switch_layer()
+				Global.player_layer = layer
 				layer_switch_timer = -1
 		elif layer == Global.layers.Layer2:
 			if !colliding_with_layer_1  and layer_switch_timer > 0:
 				switch_layer()
+				Global.player_layer = layer
 				layer_switch_timer = -1
 		
 func _die():

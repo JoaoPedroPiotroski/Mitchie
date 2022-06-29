@@ -22,6 +22,7 @@ var layers = {
 func set_player_layer(new_layer):
 	player_layer = new_layer
 	emit_signal("player_layer_changed")
+	print('uwu')
 	
 func random_from_array(arr : Array):
 	arr.shuffle()
