@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Levels/LevelData.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+title = "RuinsR2"
+type = ""
+background_color = Color( 1, 1, 1, 1 )
+flags = [  ]
+scene_path = "res://Levels/Scenes/RuinsR2.tscn"
+cam_limit_L = -1000000
+cam_limit_T = -1000000
+cam_limit_B = 1000000
+cam_limit_R = 1000000

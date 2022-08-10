@@ -1,20 +1,35 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://quadradopreto.png" type="Texture" id=1]
 [ext_resource path="res://Interface/Main_Menu/SaveScreen/SaveSlot1.gd" type="Script" id=2]
 [ext_resource path="res://Interface/Main_Menu/SaveScreen/Savelist.gd" type="Script" id=3]
 [ext_resource path="res://Interface/Main_Menu/SaveScreen/Return.gd" type="Script" id=4]
+[ext_resource path="res://Interface/Fonts/dogicapixel.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Interface/Main_Menu/SaveScreen/savebuttons.tres" type="ButtonGroup" id=6]
+[ext_resource path="res://Interface/Main_Menu/Button.png" type="Texture" id=7]
+[ext_resource path="res://Interface/Main_Menu/Menu.png" type="Texture" id=8]
+[ext_resource path="res://Interface/Main_Menu/ButtonHover.png" type="Texture" id=9]
+
+[sub_resource type="Gradient" id=3]
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 3 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 69
+extra_spacing_bottom = 5
+font_data = ExtResource( 5 )
 
 [sub_resource type="Gradient" id=1]
 
-[sub_resource type="GradientTexture" id=2]
+[sub_resource type="GradientTexture" id=5]
 gradient = SubResource( 1 )
 
 [node name="CanvasLayer" type="CanvasLayer"]
 layer = 3
 
 [node name="Saves" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -157,7 +172,162 @@ margin_right = 40.0
 margin_bottom = 12.0
 text = "Voltar"
 
+[node name="Saves2" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Saves2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 8 )
+expand = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Saves2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -120.0
+margin_top = -20.0
+margin_right = 42.0
+margin_bottom = 145.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveButton" type="TextureButton" parent="Saves2/VBoxContainer"]
+margin_right = 162.0
+margin_bottom = 50.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+texture_normal = ExtResource( 7 )
+texture_hover = ExtResource( 9 )
+stretch_mode = 2
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Saves2/VBoxContainer/SaveButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Save 1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveButton2" type="TextureButton" parent="Saves2/VBoxContainer"]
+margin_top = 54.0
+margin_right = 162.0
+margin_bottom = 104.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+texture_normal = ExtResource( 7 )
+texture_hover = ExtResource( 9 )
+stretch_mode = 2
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+slot = 1
+
+[node name="Label" type="Label" parent="Saves2/VBoxContainer/SaveButton2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Save 2"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveButton3" type="TextureButton" parent="Saves2/VBoxContainer"]
+margin_top = 108.0
+margin_right = 162.0
+margin_bottom = 158.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+texture_normal = ExtResource( 7 )
+texture_hover = ExtResource( 9 )
+stretch_mode = 2
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+slot = 2
+
+[node name="Label" type="Label" parent="Saves2/VBoxContainer/SaveButton3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Save 3"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Saves2"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -150.0
+margin_top = 65.0
+margin_right = 150.0
+margin_bottom = 123.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "Saves"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Return" type="TextureButton" parent="Saves2"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 7.0
+margin_top = 315.0
+margin_right = 87.0
+margin_bottom = 355.0
+group = ExtResource( 6 )
+texture_normal = ExtResource( 1 )
+texture_focused = SubResource( 5 )
+expand = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+volta = "main_menu"
+
+[node name="Label" type="Label" parent="Saves2/Return"]
+margin_right = 40.0
+margin_bottom = 12.0
+text = "Voltar"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="Saves/VBoxContainer/SaveSlot1" to="Saves/VBoxContainer/SaveSlot1" method="_on_SaveSlot1_pressed"]
 [connection signal="pressed" from="Saves/VBoxContainer/SaveSlot2" to="Saves/VBoxContainer/SaveSlot2" method="_on_SaveSlot1_pressed"]
 [connection signal="pressed" from="Saves/VBoxContainer/SaveSlot3" to="Saves/VBoxContainer/SaveSlot3" method="_on_SaveSlot1_pressed"]
 [connection signal="pressed" from="Saves/Return" to="Saves/Return" method="_on_Return_pressed"]
+[connection signal="pressed" from="Saves2/VBoxContainer/SaveButton" to="Saves/VBoxContainer/SaveSlot1" method="_on_SaveSlot1_pressed"]
+[connection signal="pressed" from="Saves2/VBoxContainer/SaveButton2" to="Saves/VBoxContainer/SaveSlot2" method="_on_SaveSlot1_pressed"]
+[connection signal="pressed" from="Saves2/VBoxContainer/SaveButton3" to="Saves/VBoxContainer/SaveSlot3" method="_on_SaveSlot1_pressed"]
+[connection signal="pressed" from="Saves2/Return" to="Saves2/Return" method="_on_Return_pressed"]

@@ -10,6 +10,12 @@ var down_timer = 0.5
 var right_timer = 0.3
 var left_timer = 0.3
 
+func _ready():
+	limit_right = SceneManager.level.cam_limit_R
+	limit_left = SceneManager.level.cam_limit_L
+	limit_bottom = SceneManager.level.cam_limit_B
+	limit_top = SceneManager.level.cam_limit_T
+
 func _physics_process(delta):
 	drag_margin_h_enabled = !abs(player.velocity.x) > 200
 	left_timer = 3
@@ -46,22 +52,22 @@ func _physics_process(delta):
 	else:
 		camera_tween.interpolate_property(self, "offset_h", offset_h, 0, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	
-	if player.layer == 0:
-		camera_tween.interpolate_property(self, "zoom", zoom, Vector2(0.84, 0.84), 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-		vignette_tween.interpolate_property(vignette.get_material(), 
-			   "shader_param/vignette_intensity", 
-			   vignette.material.get_shader_param("shader_param/vignette_intensity"), 0.1, 0.25, 
-			   Tween.TRANS_CUBIC, Tween.EASE_OUT)
-		vignette_tween.start()
-		camera_tween.start()
-	else:
-		camera_tween.interpolate_property(self, "zoom", zoom, Vector2(0.8, 0.8), 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-		vignette_tween.interpolate_property(vignette.get_material(), 
-			   "shader_param/vignette_intensity", 
-			   vignette.material.get_shader_param("shader_param/vignette_intensity"), 0.2, 0.25, 
-			   Tween.TRANS_CUBIC, Tween.EASE_OUT)
-		vignette_tween.start()
-		camera_tween.start()
+#	if player.layer == 0:
+	camera_tween.interpolate_property(self, "zoom", zoom, Vector2(0.84, 0.84), 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	vignette_tween.interpolate_property(vignette.get_material(), 
+		   "shader_param/vignette_intensity", 
+		   vignette.material.get_shader_param("shader_param/vignette_intensity"), 0.1, 0.25, 
+		   Tween.TRANS_CUBIC, Tween.EASE_OUT)
+	vignette_tween.start()
+	camera_tween.start()
+#	else:
+#		camera_tween.interpolate_property(self, "zoom", zoom, Vector2(0.8, 0.8), 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+#		vignette_tween.interpolate_property(vignette.get_material(), 
+#			   "shader_param/vignette_intensity", 
+#			   vignette.material.get_shader_param("shader_param/vignette_intensity"), 0.2, 0.25, 
+#			   Tween.TRANS_CUBIC, Tween.EASE_OUT)
+#		vignette_tween.start()
+#		camera_tween.start()
 	return
 	if !(abs(player.velocity.x) > 200):
 		drag_margin_left = 0

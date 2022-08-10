@@ -9,3 +9,7 @@ type = "Menu"
 background_color = Color( 1, 1, 1, 1 )
 flags = [  ]
 scene_path = "res://Interface/Main_Menu/SaveScreen/Saves.tscn"
+cam_limit_L = -1000000
+cam_limit_T = -1000000
+cam_limit_B = 1000000
+cam_limit_R = 1000000

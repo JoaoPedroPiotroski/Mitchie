@@ -5,7 +5,6 @@ export(PackedScene) var particle
 
 func _ready():
 	$Hitbox.set_meta('player_explosion', true)
-	$Hitbox.layer = layer
 	var p = particle.instance()
 	get_parent().add_child(p)
 	p.global_position = global_position
@@ -13,8 +12,7 @@ func _ready():
 	p.z_index = z_index
 	
 	
-func start(in_layer, pos):
-	layer = in_layer
+func start(pos):
 	global_position = pos
 
 

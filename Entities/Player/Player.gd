@@ -98,16 +98,11 @@ func _physics_process(delta):
 		
 	if layer_switch_timer < 0:
 		current.jump_force = base.jump_force
-	update_layer(delta)
 		
 func take_input(delta):
 	input_direction = -int(Input.is_action_pressed("move_left")) + int(Input.is_action_pressed("move_right"))
 	if input_direction != 0:
 		anim_direction.x = input_direction
-	if Input.is_action_just_pressed("switch_layer"):
-		layer_switch_timer = 0.3
-		current.jump_force = base.jump_force * 0.64
-		jump_timer = 0.2
 	if Input.is_action_just_pressed("jump"): 
 		jump_timer = 0.2
 	if Input.is_action_pressed("attack"):
@@ -151,10 +146,6 @@ func animate():
 		animation_player.play(next_animation)
 	if flags["dead"] and animation_player.current_animation != "die":
 		animation_player.play("die")
-	if layer == 0:
-		$MainSprite.modulate = Color(1, 1, 1, 1)
-	else:
-		$MainSprite.modulate = Color(0.9,0.8, 0.9, 1)
 	
 func ground_move(delta):
 	velocity.x += current.acceleration * delta * input_direction
@@ -164,18 +155,18 @@ func air_move(delta):
 	velocity.x += current.acceleration * current.air_acceleration_modifier * delta * input_direction
 	velocity.x = clamp(velocity.x, -current.max_speed, current.max_speed)
 
-func update_layer(delta):
-	if !colliding_with_intermediary:
-		if layer == Global.layers.Layer1: 
-			if !colliding_with_layer_2 and layer_switch_timer > 0:
-				switch_layer()
-				Global.player_layer = layer
-				layer_switch_timer = -1
-		elif layer == Global.layers.Layer2:
-			if !colliding_with_layer_1  and layer_switch_timer > 0:
-				switch_layer()
-				Global.player_layer = layer
-				layer_switch_timer = -1
+#func update_layer(delta):
+#	if !colliding_with_intermediary:
+#		if layer == Global.layers.Layer1: 
+#			if !colliding_with_layer_2 and layer_switch_timer > 0:
+#				switch_layer()
+#				Global.player_layer = layer
+#				layer_switch_timer = -1
+#		elif layer == Global.layers.Layer2:
+#			if !colliding_with_layer_1  and layer_switch_timer > 0:
+#				switch_layer()
+#				Global.player_layer = layer
+#				layer_switch_timer = -1
 		
 func _die():
 	flags["dead"] = true
@@ -273,7 +264,7 @@ func end_attack():
 func attack2_state(_delta):
 	var scy = load("res://Entities/Player/ScytheBomb.tscn")
 	var obj = scy.instance()
-	obj.start(layer, $Directions.get_input_direction(), 300, global_position)
+	obj.start($Directions.get_input_direction(), 300, global_position)
 	get_parent().add_child(obj)
 	state_machine.current_state = "Walk"
 

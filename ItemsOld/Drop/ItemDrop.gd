@@ -13,9 +13,8 @@ func _ready():
 func _physics_process(delta):
 	move_and_collide(Vector2.DOWN * gravity * delta)
 
-func setup(in_item=item, in_layer=0):
+func setup(in_item=item):
 	item = in_item
-	layer = in_layer
 	
 func collect():
 	queue_free()

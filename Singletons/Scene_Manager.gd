@@ -1,6 +1,9 @@
 extends Node
 	
-var level : Resource
+var level : Resource = load("res://Levels/Resources/MainMenu.tres")
+
+func _ready():
+	var c = get_tree().connect("node_added", self, 'level_loading_procedures')
 
 func change_level(new_level : String):
 	var dir = Directory.new()
@@ -14,8 +17,15 @@ func change_level(new_level : String):
 			else:
 				if load(path+file_name).title == new_level:
 					var l = load(path+file_name)
-					get_tree().change_scene_to(load(l.scene_path))
+					var s = load(l.scene_path)
+					var e = get_tree().change_scene_to(s)
 					level = l
+					VisualServer.set_default_clear_color(level.background_color)
 			file_name = dir.get_next()
 	else:
 		print("An error occurred when trying to access the path.")
+
+func level_loading_procedures(_n):
+	if not ProjectSettings.get_setting("rendering/2d/options/lights"):
+		for light in get_tree().get_nodes_in_group('Lights'):
+			light.enabled = false

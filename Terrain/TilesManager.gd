@@ -1,23 +1,20 @@
 extends Node
-
-var existing_tile_entities = []
-
-func _ready():
-	update_existing_tile_entities()
+class_name TilesManager
 	
-func prepare_me(tmap : ExtendedTilemap):
+static func prepare_me(tmap):
+	var existing_tile_entities = get_existing_tile_entities()
 	for tile_entity in existing_tile_entities:
 		if tile_entity.tilemap == tmap.title:
 			for t in tmap.get_used_cells_by_id(tile_entity.id):
 				var new_entity = tile_entity.scene.instance()
 				var tilepos = tmap.map_to_world(t)
 				new_entity.global_position = tilepos
-				new_entity.layer = tmap.layer
-				add_child(new_entity)
+				tmap.add_child(new_entity)
 				tmap.set_cell(t.x, t.y, -1)
 			
-func update_existing_tile_entities() -> void:
+static func get_existing_tile_entities():
 	var dir = Directory.new()
+	var existing_tile_entities = []
 	var path = "res://Terrain/TileEntities/Resources/"
 	if dir.open(path) == OK:
 		dir.list_dir_begin()
@@ -30,3 +27,4 @@ func update_existing_tile_entities() -> void:
 			file_name = dir.get_next()
 	else:
 		print("An error occurred when trying to access the path.")
+	return existing_tile_entities

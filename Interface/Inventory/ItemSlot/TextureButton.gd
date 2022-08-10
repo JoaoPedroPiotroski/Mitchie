@@ -1,7 +1,7 @@
 extends TextureButton
 
 
-func get_drag_data(position):
+func get_drag_data(_position):
 	var data = {
 		'item' : get_parent().item
 	}

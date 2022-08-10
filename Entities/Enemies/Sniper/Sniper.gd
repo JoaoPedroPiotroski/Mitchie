@@ -7,7 +7,7 @@ var player = null
 
 func spawn_bullet():
 	var b = bullet.instance()
-	b.start(global_position, global_position.angle_to(player.global_position), player.global_position, get_opposite_layer())
+	b.start(global_position, global_position.angle_to(player.global_position), player.global_position)
 	get_parent().add_child(b)
 
 func shoot():

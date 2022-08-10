@@ -1,0 +1,119 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://quadradopreto.png" type="Texture" id=2]
+[ext_resource path="res://Interface/Main_Menu/SaveScreen/savebuttons.tres" type="ButtonGroup" id=3]
+[ext_resource path="res://Interface/Main_Menu/SaveScreen/Return.gd" type="Script" id=4]
+[ext_resource path="res://Interface/Main_Menu/Opções/OptionsMenu.gd" type="Script" id=6]
+
+[sub_resource type="Gradient" id=1]
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 3
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+margin_left = 43.5
+margin_top = 36.0
+margin_right = 43.5
+margin_bottom = 36.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+margin_left = 43.5
+margin_top = 36.0
+margin_right = 137.5
+margin_bottom = 61.0
+alignment = 1
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Lights" type="HBoxContainer" parent="Control/VBoxContainer"]
+margin_right = 154.0
+margin_bottom = 25.0
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/Lights"]
+margin_top = 4.0
+margin_right = 66.0
+margin_bottom = 21.0
+text = "Luzes"
+
+[node name="Lights" type="CheckBox" parent="Control/VBoxContainer/Lights"]
+margin_left = 70.0
+margin_right = 94.0
+margin_bottom = 25.0
+
+[node name="FullScreen" type="HBoxContainer" parent="Control/VBoxContainer"]
+margin_top = 29.0
+margin_right = 154.0
+margin_bottom = 54.0
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/FullScreen"]
+margin_top = 4.0
+margin_right = 126.0
+margin_bottom = 21.0
+text = "Tela Cheia"
+
+[node name="FullScreen" type="CheckBox" parent="Control/VBoxContainer/FullScreen"]
+margin_left = 130.0
+margin_right = 154.0
+margin_bottom = 25.0
+
+[node name="Return" type="TextureButton" parent="Control"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 7.0
+margin_top = 315.0
+margin_right = 87.0
+margin_bottom = 355.0
+group = ExtResource( 3 )
+texture_normal = ExtResource( 2 )
+texture_focused = SubResource( 2 )
+expand = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+volta = "main_menu"
+
+[node name="Label" type="Label" parent="Control/Return"]
+margin_right = 40.0
+margin_bottom = 12.0
+text = "Voltar"
+
+[node name="SaveSettings" type="TextureButton" parent="Control"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 95.0
+margin_top = 316.0
+margin_right = 175.0
+margin_bottom = 356.0
+group = ExtResource( 3 )
+texture_normal = ExtResource( 2 )
+texture_focused = SubResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/SaveSettings"]
+margin_right = 40.0
+margin_bottom = 12.0
+text = "Salvar
+"
+
+[connection signal="pressed" from="Control/VBoxContainer/Lights/Lights" to="Control/VBoxContainer" method="_on_Lights_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/FullScreen/FullScreen" to="Control/VBoxContainer" method="_on_FullScreen_pressed"]
+[connection signal="pressed" from="Control/Return" to="Control/Return" method="_on_Return_pressed"]
+[connection signal="pressed" from="Control/SaveSettings" to="Control/VBoxContainer" method="_on_SaveSettings_pressed"]
