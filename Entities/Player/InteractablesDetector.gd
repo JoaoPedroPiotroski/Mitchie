@@ -6,13 +6,20 @@ func _on_InteractablesDetector_area_entered(area):
 	if area is PseudoEntity:
 		if area is DialogTrigger:
 			player.current_dialog = Dialogic.start(area.timeline)
-	
-
+	if area is Area2D:
+		if area.is_in_group('doors'):
+			player.current_door = area
+			if area.type == 'entrance':
+				SceneManager.entrance = area.destination_entrance
+				SceneManager.change_level(area.destination_level)
 
 func _on_InteractablesDetector_area_exited(area):
 	if area is PseudoEntity:
 		if area is DialogTrigger:
 			player.current_dialog = null
+	if area is Area2D:
+		if area.is_in_group('doors'):
+			player.current_door = null
 		
 
 func _on_InteractablesDetector_body_entered(body):

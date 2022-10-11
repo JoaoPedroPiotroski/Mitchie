@@ -1,9 +1,10 @@
 extends Node
 	
 var level : Resource = load("res://Levels/Resources/MainMenu.tres")
+var entrance = 0
 
 func _ready():
-	var c = get_tree().connect("node_added", self, 'level_loading_procedures')
+	var _c = get_tree().connect("node_added", self, 'level_loading_procedures')
 
 func change_level(new_level : String):
 	var dir = Directory.new()
@@ -18,7 +19,7 @@ func change_level(new_level : String):
 				if load(path+file_name).title == new_level:
 					var l = load(path+file_name)
 					var s = load(l.scene_path)
-					var e = get_tree().change_scene_to(s)
+					var _e = get_tree().change_scene_to(s)
 					level = l
 					VisualServer.set_default_clear_color(level.background_color)
 			file_name = dir.get_next()

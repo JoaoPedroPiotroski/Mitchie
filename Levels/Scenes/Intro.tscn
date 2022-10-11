@@ -70,10 +70,10 @@ margin_right = 300.0
 rect_min_size = Vector2( 600, 120 )
 rect_pivot_offset = Vector2( 286, 393 )
 bbcode_enabled = true
-bbcode_text = "Um mago vindo do oeste lançou uma magica de proteção sobre ela."
-visible_characters = 56
+bbcode_text = "[wave]Era uma vez[/wave] uma garota, que morava em uma pequena vila no grande deserto."
+visible_characters = 65
 percent_visible = 0.902
-text = "Um mago vindo do oeste lançou uma magica de proteção sobre ela."
+text = "Era uma vez uma garota, que morava em uma pequena vila no grande deserto."
 fit_content_height = true
 __meta__ = {
 "_edit_use_anchors_": false

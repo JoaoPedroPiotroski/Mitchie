@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Levels/Ruins/RuinsTS.tres" type="TileSet" id=1]
 [ext_resource path="res://Entities/Player/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Levels/Ruins/RuinsTL.gd" type="Script" id=4]
 [ext_resource path="res://Backgrounds/Ruins/BackgroundRuinsl2.png" type="Texture" id=5]
 [ext_resource path="res://Backgrounds/Ruins/BackgroundRuinsl3.png" type="Texture" id=6]
+[ext_resource path="res://Terrain/TileEntities/Objects/Door/Door.gd" type="Script" id=7]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -71,6 +72,9 @@ shader_param/velocity = Vector2( 0.01, 0 )
 shader_param/fog_color = Color( 0.988235, 0.988235, 0.988235, 0.509804 )
 shader_param/noise = SubResource( 3 )
 
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 16, 21 )
+
 [node name="RuinsR2" type="Node2D"]
 
 [node name="CanvasModulate" type="ColorRect" parent="."]
@@ -121,3 +125,26 @@ motion_mirroring = Vector2( 630, 360 )
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer2/ParallaxBackground/ParallaxLayer2"]
 texture = ExtResource( 5 )
+
+[node name="Door" type="Area2D" parent="."]
+position = Vector2( 81, -53 )
+collision_layer = 16
+collision_mask = 0
+script = ExtResource( 7 )
+destination_level = "RuinsR1"
+destination_entrance = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
+position = Vector2( -1, 0 )
+shape = SubResource( 6 )
+
+[node name="Door2" type="Area2D" parent="."]
+position = Vector2( 176, 75 )
+collision_layer = 16
+collision_mask = 0
+script = ExtResource( 7 )
+entrance = 1
+destination_level = "RuinsR3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door2"]
+shape = SubResource( 6 )

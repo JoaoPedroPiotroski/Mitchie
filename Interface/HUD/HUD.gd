@@ -1,7 +1,8 @@
 extends Control
 
 func _ready():
-	var c = Global.connect("player_updated", self, 'update_vis')
+	var _c = Global.connect("player_updated", self, 'update_vis')
+	yield(get_tree().create_timer(0.1), 'timeout')
 	update_vis()
 	
 func update_vis():

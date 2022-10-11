@@ -64,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialogic/Other/DialogicUtil.gd"
 }, {
+"base": "Area2D",
+"class": "Door",
+"language": "GDScript",
+"path": "res://Terrain/TileEntities/Objects/Door/Door.gd"
+}, {
 "base": "Entity",
 "class": "Enemy",
 "language": "GDScript",
@@ -103,6 +108,11 @@ _global_script_classes=[ {
 "class": "LevelData",
 "language": "GDScript",
 "path": "res://Levels/LevelData.gd"
+}, {
+"base": "Resource",
+"class": "Music",
+"language": "GDScript",
+"path": "res://Music/Music.gd"
 }, {
 "base": "Entity",
 "class": "Player",
@@ -146,6 +156,7 @@ _global_script_class_icons={
 "DialogicParser": "",
 "DialogicResources": "",
 "DialogicUtil": "",
+"Door": "",
 "Enemy": "",
 "Entity": "",
 "ExtendedTilemap": "",
@@ -154,6 +165,7 @@ _global_script_class_icons={
 "InteractableTerrain": "",
 "ItemDrop": "",
 "LevelData": "",
+"Music": "",
 "Player": "",
 "PseudoEntity": "",
 "StateMachine": "",
@@ -167,6 +179,7 @@ _global_script_class_icons={
 config/name="Mitchie"
 run/main_scene="res://Interface/Main_Menu/Main_Menu.tscn"
 config/project_settings_override="user://mitchie_settings.godot"
+boot_splash/use_filter=false
 config/icon="res://icon.png"
 
 [autoload]
@@ -187,7 +200,6 @@ shapes/collision/shape_color=Color( 0.980392, 0.996078, 1, 0.419608 )
 
 window/size/width=640
 window/size/height=360
-window/size/fullscreen=true
 window/stretch/mode="2d"
 window/stretch/aspect="keep_height"
 

@@ -69,9 +69,9 @@ func _physics_process(delta):
 #		vignette_tween.start()
 #		camera_tween.start()
 	return
-	if !(abs(player.velocity.x) > 200):
-		drag_margin_left = 0
-		drag_margin_right = 0
-	else:
-		drag_margin_left = 0.2
-		drag_margin_right = 0.2
+#	if !(abs(player.velocity.x) > 200):
+#		drag_margin_left = 0
+#		drag_margin_right = 0
+#	else:
+#		drag_margin_left = 0.2
+#		drag_margin_right = 0.2

@@ -10,7 +10,7 @@ func start(in_item : Resource):
 	item = in_item
 
 func _ready(): 
-	var c = connect("clicked", Menu.get_node("PauseMenu"), "show_item_detail", [item])
+	var _c = connect("clicked", Menu.get_node("PauseMenu"), "show_item_detail", [item])
 
 
 func _on_TextureButton_pressed():

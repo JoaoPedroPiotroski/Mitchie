@@ -1,0 +1,21 @@
+{
+	"color": "#ffffef00",
+	"description": "",
+	"display_name": "",
+	"display_name_bool": false,
+	"id": "character-1662318817.json",
+	"mirror_portraits": false,
+	"name": "Gadenerr",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": -50,
+	"offset_y": -125,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://Interface/Portraits/gadenerrhighres.png"
+		}
+	],
+	"scale": 7,
+	"theme": ""
+}

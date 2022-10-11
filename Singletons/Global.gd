@@ -24,7 +24,7 @@ var lights = false
 func _input(_event):
 	if Input.is_key_pressed(KEY_U):
 		SceneManager.change_level('main_menu')
-	
+
 func _ready():
 	if OS.has_feature('editor'):
 		ProjectSettings.set_setting("application/config/project_settings_override", "")

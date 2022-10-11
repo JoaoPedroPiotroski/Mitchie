@@ -11,9 +11,6 @@ export var override_knockback = false
 var tween
 var vis
 
-# emitido toda vez que set_layer() é chamado
-signal layer_changed
-
 func _ready():
 	add_to_group("entities")
 	hide()

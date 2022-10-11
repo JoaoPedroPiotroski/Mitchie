@@ -8,12 +8,12 @@
 	"name": "Mitchie",
 	"nickname": "",
 	"nickname_bool": false,
-	"offset_x": 250,
-	"offset_y": -125,
+	"offset_x": 230,
+	"offset_y": 5,
 	"portraits": [
 		{
 			"name": "Default",
-			"path": "res://Interface/Portraits/protagonista_grande.png"
+			"path": "res://ASeprite/MitchieGrande2.png"
 		}
 	],
 	"scale": 100,

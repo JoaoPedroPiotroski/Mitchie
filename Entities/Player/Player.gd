@@ -39,6 +39,7 @@ var next_animation = "Idle"
 var moving = true
 var animating = true
 var item_hover
+var current_door
 var current_dialog
 var has_scythe = false
 
@@ -49,8 +50,12 @@ onready var current = $Stats/Current
 onready var base = $Stats
 
 func _ready():
-	Inventory.connect('inventory_changed', self, 'update_inventory')
+	var _c = Inventory.connect('inventory_changed', self, 'update_inventory')
 	update_inventory()
+	yield(get_tree().create_timer(0.1), "timeout")
+	for d in get_tree().get_nodes_in_group('doors'):
+		if d.entrance == SceneManager.entrance:
+			global_position = d.global_position
 
 func _physics_process(delta):
 	Global.player = self
@@ -121,7 +126,6 @@ func take_input(delta):
 		else:
 			state_machine.current_state = "Pull"
 		r_click_hold_timer = 0
-		
 	if weakref(current_dialog).get_ref():
 		if Input.is_action_just_pressed("interact"):
 			state_machine.current_state = "Dialog"
@@ -130,6 +134,10 @@ func take_input(delta):
 			animation_player.stop(false)
 			add_child(current_dialog)
 			current_dialog.connect("timeline_end", self, "_on_dialog_ended")
+	if Input.is_action_just_pressed("move_up"):
+		if weakref(current_door).get_ref():
+			SceneManager.entrance = current_door.destination_entrance
+			SceneManager.change_level(current_door.destination_level)
 #	if weakref(item_hover).get_ref():
 #		if Input.is_action_just_pressed("interact") and item_hover.layer == layer:
 #			var pass_item = item_hover.item.instance()
@@ -173,7 +181,7 @@ func _die():
 	
 	
 func _respawn():
-	get_tree().reload_current_scene()
+	var _s = get_tree().reload_current_scene()
 	
 func apply_friction(force, delta):
 	velocity.x = lerp(velocity.x, 0, force * delta)
@@ -310,15 +318,6 @@ func _on_LayerDetector2_body_exited(body):
 	layer_2_bodies.erase(body)
 	if layer_2_bodies.size() == 0:
 		colliding_with_layer_2 = false
-
-func _on_IntermediaryDetector_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	intermediary_bodies.append(area)
-	colliding_with_intermediary = true
-
-func _on_IntermediaryDetector_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
-	intermediary_bodies.erase(area)
-	if intermediary_bodies.size() == 0:
-		colliding_with_intermediary = false
 		
 func _on_dialog_ended(_timeline):
 	moving = true

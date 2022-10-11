@@ -11,7 +11,7 @@ func _ready():
 		$Sprite.texture = item.instance().icon
 	
 func _physics_process(delta):
-	move_and_collide(Vector2.DOWN * gravity * delta)
+	var _v = move_and_collide(Vector2.DOWN * gravity * delta)
 
 func setup(in_item=item):
 	item = in_item

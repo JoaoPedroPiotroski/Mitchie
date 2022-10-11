@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Levels/Ruins/RuinsTS.tres" type="TileSet" id=1]
 [ext_resource path="res://Entities/Player/Player.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Terrain/TileEntities/Objects/Ruins/OutDoor.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Backgrounds/Ruins/BackgroundRuinsl2.png" type="Texture" id=7]
 [ext_resource path="res://Backgrounds/Ruins/BackgroundRuinsl3.png" type="Texture" id=8]
+[ext_resource path="res://Terrain/TileEntities/Objects/Door/Door.gd" type="Script" id=9]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -73,6 +74,12 @@ shader_param/velocity = Vector2( 0.01, 0 )
 shader_param/fog_color = Color( 0.988235, 0.988235, 0.988235, 0.509804 )
 shader_param/noise = SubResource( 3 )
 
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 16, 20.75 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 7.5, 24 )
+
 [node name="RuinsR1" type="Node2D"]
 script = ExtResource( 3 )
 
@@ -80,10 +87,10 @@ script = ExtResource( 3 )
 material = SubResource( 4 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -547.0
-margin_top = -411.0
-margin_right = 731.0
-margin_bottom = 306.0
+margin_left = -569.0
+margin_top = -421.0
+margin_right = 709.0
+margin_bottom = 296.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -134,3 +141,27 @@ motion_mirroring = Vector2( 630, 360 )
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer2/ParallaxBackground/ParallaxLayer2"]
 texture = ExtResource( 7 )
+
+[node name="Door" type="Area2D" parent="."]
+position = Vector2( 352, -116 )
+collision_layer = 16
+collision_mask = 0
+script = ExtResource( 9 )
+texture = "res://icon.png"
+entrance = 1
+destination_level = "RuinsR2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
+position = Vector2( 0, -1 )
+shape = SubResource( 5 )
+
+[node name="Door2" type="Area2D" parent="."]
+position = Vector2( -202, 41 )
+script = ExtResource( 9 )
+type = "entrance"
+destination_level = "RuinsEntrance"
+destination_entrance = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door2"]
+position = Vector2( -29, -1 )
+shape = SubResource( 6 )
