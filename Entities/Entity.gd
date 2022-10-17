@@ -8,6 +8,7 @@ export var collides_with_player = false
 export var immortal = false
 export var override_knockback = false
 
+var velocity = Vector2.ZERO
 var tween
 var vis
 
@@ -33,9 +34,7 @@ func _die():
 	queue_free()
 	
 func _knockback(force, dir):
-	tween.remove_all()
 	if override_knockback:
 		return
-	tween.interpolate_property(self, 'global_position', global_position, global_position + (force * dir), .2)
-	tween.start()
+	velocity += force * dir
 	

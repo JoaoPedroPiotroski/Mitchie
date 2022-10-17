@@ -27,7 +27,6 @@ var flags = {
 #var selected_item : Resource
 
 var anim_direction : Vector2 = RIGHT
-var velocity : Vector2 = Vector2.ZERO
 var input_direction : int = 0
 var layer_1_bodies = [] 
 var layer_2_bodies = []

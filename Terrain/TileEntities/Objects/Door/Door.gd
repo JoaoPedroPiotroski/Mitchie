@@ -16,3 +16,12 @@ func _ready():
 	set_collision_mask_bit(0, false)
 	set_collision_layer_bit(0, false)
 	set_collision_layer_bit(4, true)
+	hide_hint()
+
+func show_hint():
+	if has_node('door_hint'):
+		get_node('door_hint').visible = true
+	
+func hide_hint():
+	if has_node('door_hint'):
+		get_node('door_hint').visible = false

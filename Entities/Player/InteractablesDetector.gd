@@ -12,6 +12,7 @@ func _on_InteractablesDetector_area_entered(area):
 			if area.type == 'entrance':
 				SceneManager.entrance = area.destination_entrance
 				SceneManager.change_level(area.destination_level)
+			area.show_hint()
 
 func _on_InteractablesDetector_area_exited(area):
 	if area is PseudoEntity:
@@ -20,7 +21,7 @@ func _on_InteractablesDetector_area_exited(area):
 	if area is Area2D:
 		if area.is_in_group('doors'):
 			player.current_door = null
-		
+			area.hide_hint()
 
 func _on_InteractablesDetector_body_entered(body):
 	if body is Entity:

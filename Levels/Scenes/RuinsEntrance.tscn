@@ -11,7 +11,7 @@
 [ext_resource path="res://Backgrounds/Desert/l2.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 24 )
+extents = Vector2( 8, 133 )
 
 [node name="Ruins" type="Node2D"]
 
@@ -37,6 +37,17 @@ destination_level = "RuinsR1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
 position = Vector2( 30, 0 )
+shape = SubResource( 1 )
+
+[node name="Door2" type="Area2D" parent="."]
+position = Vector2( -135, -23 )
+script = ExtResource( 5 )
+type = "entrance"
+destination_level = "City"
+destination_entrance = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door2"]
+position = Vector2( -34, -109 )
 shape = SubResource( 1 )
 
 [node name="CanvasLayer" type="ParallaxBackground" parent="."]

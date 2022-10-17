@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Entities/Enemies/Gloop/Gloop.gd" type="Script" id=1]
+[ext_resource path="res://Entities/PlayerDetector.gd" type="Script" id=2]
+[ext_resource path="res://quadradopreto.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 14.125, 13.75 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 80.5, 11.5 )
+
+[node name="Gloop" type="KinematicBody2D"]
+collision_layer = 8
+collision_mask = 5
+script = ExtResource( 1 )
+collides_with_player = true
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 8, 8 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color( 1, 0, 0, 1 )
+shape = SubResource( 1 )
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 4
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+position = Vector2( -5.5, -1 )
+shape = SubResource( 2 )
+
+[node name="detectors" type="Node2D" parent="."]
+visible = false
+
+[node name="FloorDetector1" type="RayCast2D" parent="detectors"]
+position = Vector2( -21, 4 )
+enabled = true
+cast_to = Vector2( 0, 15 )
+
+[node name="FloorDetector2" type="RayCast2D" parent="detectors"]
+position = Vector2( 21, 2 )
+enabled = true
+cast_to = Vector2( 0, 15 )
+
+[node name="WallDetector1" type="RayCast2D" parent="detectors"]
+enabled = true
+cast_to = Vector2( 18, 0 )
+
+[node name="WallDetector2" type="RayCast2D" parent="detectors"]
+enabled = true
+cast_to = Vector2( -18, 0 )
+
+[node name="StunTimer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="PlayerDetector" to="PlayerDetector" method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="PlayerDetector" method="_on_PlayerDetector_body_exited"]
+[connection signal="player_changed" from="PlayerDetector" to="." method="_on_PlayerDetector_player_changed"]
+[connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]

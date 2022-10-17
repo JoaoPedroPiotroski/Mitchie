@@ -1,7 +1,6 @@
 extends Entity
 
 var direction : Vector2
-var velocity : Vector2
 var gravity : int = 300
 
 func start(in_direction, force, pos):
