@@ -59,7 +59,7 @@ expand = true
 stretch_mode = 3
 script = ExtResource( 2 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 save_scene = "Saves"
 

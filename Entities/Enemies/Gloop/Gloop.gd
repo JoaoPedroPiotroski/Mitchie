@@ -8,7 +8,7 @@ enum states {
 }
 var player = null
 
-export(float) var gravity = 670
+export(float) var gravity = 670.0
 var wall_timer = .5
 var wall_cd = false
 var floor_timer = .5
