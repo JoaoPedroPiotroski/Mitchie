@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Music/Music.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+has_intro = true
+has_outro = false
+main = "res://Music/Audio/AncientTempleMain.ogg"
+intro = "res://Music/Audio/AncientTempleIntro.ogg"
+outro = ""

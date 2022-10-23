@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Singletons/AudioManager.gd" type="Script" id=1]
+[ext_resource path="res://Singletons/FXPlayer.gd" type="Script" id=2]
 
 [node name="AudioManager" type="Node"]
 script = ExtResource( 1 )
@@ -10,34 +11,46 @@ script = ExtResource( 1 )
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="Music"]
 bus = "Music"
 
-[node name="MusicPlayer2" type="AudioStreamPlayer" parent="Music"]
-bus = "Music"
-
 [node name="FX" type="Node" parent="."]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="FX"]
+[node name="FXPlayer1" type="AudioStreamPlayer" parent="FX"]
 bus = "Effects"
+script = ExtResource( 2 )
 
-[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="FX"]
+[node name="FXPlayer2" type="AudioStreamPlayer" parent="FX"]
 bus = "Effects"
+script = ExtResource( 2 )
 
-[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="FX"]
+[node name="FXPlayer3" type="AudioStreamPlayer" parent="FX"]
 bus = "Effects"
+script = ExtResource( 2 )
 
-[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="FX"]
+[node name="FXPlayer4" type="AudioStreamPlayer" parent="FX"]
 bus = "Effects"
+script = ExtResource( 2 )
 
-[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="FX"]
+[node name="FXPlayer5" type="AudioStreamPlayer" parent="FX"]
 bus = "Effects"
+script = ExtResource( 2 )
 
-[node name="AudioStreamPlayer6" type="AudioStreamPlayer" parent="FX"]
+[node name="FXPlayer6" type="AudioStreamPlayer" parent="FX"]
 bus = "Effects"
+script = ExtResource( 2 )
 
-[node name="AudioStreamPlayer7" type="AudioStreamPlayer" parent="FX"]
+[node name="FXPlayer7" type="AudioStreamPlayer" parent="FX"]
 bus = "Effects"
+script = ExtResource( 2 )
 
-[node name="AudioStreamPlayer8" type="AudioStreamPlayer" parent="FX"]
+[node name="FXPlayer8" type="AudioStreamPlayer" parent="FX"]
 bus = "Effects"
+script = ExtResource( 2 )
 
 [connection signal="finished" from="Music/MusicPlayer" to="." method="_on_MusicPlayer_finished"]
-[connection signal="finished" from="Music/MusicPlayer2" to="." method="_on_MusicPlayer_finished"]
+[connection signal="finished" from="FX/FXPlayer1" to="FX/FXPlayer1" method="_on_FXPlayer1_finished"]
+[connection signal="finished" from="FX/FXPlayer2" to="FX/FXPlayer2" method="_on_FXPlayer1_finished"]
+[connection signal="finished" from="FX/FXPlayer3" to="FX/FXPlayer3" method="_on_FXPlayer1_finished"]
+[connection signal="finished" from="FX/FXPlayer4" to="FX/FXPlayer4" method="_on_FXPlayer1_finished"]
+[connection signal="finished" from="FX/FXPlayer5" to="FX/FXPlayer5" method="_on_FXPlayer1_finished"]
+[connection signal="finished" from="FX/FXPlayer6" to="FX/FXPlayer6" method="_on_FXPlayer1_finished"]
+[connection signal="finished" from="FX/FXPlayer7" to="FX/FXPlayer7" method="_on_FXPlayer1_finished"]
+[connection signal="finished" from="FX/FXPlayer8" to="FX/FXPlayer8" method="_on_FXPlayer1_finished"]

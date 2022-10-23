@@ -22,11 +22,18 @@ func _ready():
 	vis.connect("screen_exited", self, 'hide')
 	add_child(tween)
 	
+func is_moving():
+	if velocity.x < -0.1 or velocity.x > 0.1:
+		return true
+	if velocity.y < -0.1 or velocity.y > 0.1:
+		return true
+	return false
+	
 func update_health():
 	if health <= 0 and !immortal: 
 		_die()
 	
-func apply_damage(damage):
+func apply_damage(damage, dealerpos = null):
 	health -= damage
 	update_health()
 
@@ -36,5 +43,5 @@ func _die():
 func _knockback(force, dir):
 	if override_knockback:
 		return
-	velocity += force * dir
+	velocity = force * dir
 	

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/AncientTempleMain.ogg-f7129a4c9300e14508a31a44f8a729ab.oggstr"
+
+[deps]
+
+source_file="res://Music/Audio/AncientTempleMain.ogg"
+dest_files=[ "res://.import/AncientTempleMain.ogg-f7129a4c9300e14508a31a44f8a729ab.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

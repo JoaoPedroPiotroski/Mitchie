@@ -17,6 +17,8 @@ var r_click_hold_timer = 0
 
 # Cooldowns
 export(float) var jump_cooldown = ground_timer
+export(float) var invulnerability_timer = .6
+var invulnerable = false
 
 var flags = {
 	"on_ground" : false,
@@ -41,6 +43,7 @@ var item_hover
 var current_door
 var current_dialog
 var has_scythe = false
+var anim_direction_locked = false
 
 onready var animation_player = $AnimationPlayer
 onready var main_sprite = $MainSprite
@@ -67,6 +70,8 @@ func _physics_process(delta):
 	ground_timer -= delta
 	jump_timer -= delta
 	jump_cooldown -= delta
+	main_sprite.material.set_shader_param('invincible', invulnerable)
+	main_sprite.material.set_shader_param('time_remaining', $InvulnerabilityTimer.time_left)
 	
 	# Ground handling
 	if is_on_floor():
@@ -144,11 +149,19 @@ func take_input(delta):
 #			item_hover.collect()
 		
 func animate():
-	main_sprite.flip_h = anim_direction.x < 0
+	if not anim_direction_locked:
+		main_sprite.flip_h = anim_direction.x < 0
+		if state_machine.current_state in [
+			"Attack", "Attack2", "Pull", "Pull2"
+		]:
+			anim_direction.x = $Directions.get_input_direction().x if $Directions.get_input_direction().x != 0 else 1
 	if state_machine.current_state in [
-		"Attack", "Attack2", "Pull", "Pull2"
+			"Attack", "Attack2", "Pull", "Pull2"
 	]:
-		anim_direction.x = $Directions.get_input_direction().x if $Directions.get_input_direction().x != 0 else 1
+		anim_direction_locked = true
+	else:
+		anim_direction_locked = false
+	
 	if next_animation != animation_player.current_animation and animation_player.current_animation != "die":
 		animation_player.play(next_animation)
 	if flags["dead"] and animation_player.current_animation != "die":
@@ -191,6 +204,14 @@ func apply_gravity(force, delta):
 
 func apply_jump_impulse(force):
 	velocity.y = -force
+	
+func apply_damage(dmg, _dealer = null):
+	if !invulnerable:
+		current.health -= dmg
+		invulnerable = true
+		$InvulnerabilityTimer.start(invulnerability_timer)
+	if current.health <= 0:
+		_die()
 	
 func walk_state(delta):
 	if input_direction != 0:
@@ -324,3 +345,7 @@ func _on_dialog_ended(_timeline):
 	state_machine.current_state = "Walk"
 	animating = true
 	current_dialog = null
+
+
+func _on_InvulnerabilityTimer_timeout():
+	invulnerable = false

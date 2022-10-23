@@ -4,7 +4,6 @@ var player = null
 
 signal player_changed
 
-
 func _on_PlayerDetector_body_entered(body):
 	if body is Player:
 		player = body

@@ -16,9 +16,6 @@ layer = 3
 [node name="Control" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="Control"]
 margin_left = 43.5
@@ -37,12 +34,9 @@ margin_right = 137.5
 margin_bottom = 61.0
 alignment = 1
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Lights" type="HBoxContainer" parent="Control/VBoxContainer"]
-margin_right = 154.0
+margin_right = 216.0
 margin_bottom = 25.0
 
 [node name="Label" type="Label" parent="Control/VBoxContainer/Lights"]
@@ -58,7 +52,7 @@ margin_bottom = 25.0
 
 [node name="FullScreen" type="HBoxContainer" parent="Control/VBoxContainer"]
 margin_top = 29.0
-margin_right = 154.0
+margin_right = 216.0
 margin_bottom = 54.0
 
 [node name="Label" type="Label" parent="Control/VBoxContainer/FullScreen"]
@@ -71,6 +65,38 @@ text = "Tela Cheia"
 margin_left = 130.0
 margin_right = 154.0
 margin_bottom = 25.0
+
+[node name="Music" type="HBoxContainer" parent="Control/VBoxContainer"]
+margin_top = 58.0
+margin_right = 216.0
+margin_bottom = 75.0
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/Music"]
+margin_right = 84.0
+margin_bottom = 17.0
+text = "Música"
+
+[node name="HSlider" type="HSlider" parent="Control/VBoxContainer/Music"]
+margin_left = 88.0
+margin_right = 216.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 128, 0 )
+
+[node name="FX" type="HBoxContainer" parent="Control/VBoxContainer"]
+margin_top = 79.0
+margin_right = 216.0
+margin_bottom = 96.0
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/FX"]
+margin_right = 28.0
+margin_bottom = 17.0
+text = "FX"
+
+[node name="HSlider" type="HSlider" parent="Control/VBoxContainer/FX"]
+margin_left = 32.0
+margin_right = 160.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 128, 0 )
 
 [node name="Return" type="TextureButton" parent="Control"]
 self_modulate = Color( 0, 0, 0, 1 )
@@ -115,5 +141,7 @@ text = "Salvar
 
 [connection signal="pressed" from="Control/VBoxContainer/Lights/Lights" to="Control/VBoxContainer" method="_on_Lights_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/FullScreen/FullScreen" to="Control/VBoxContainer" method="_on_FullScreen_pressed"]
+[connection signal="drag_ended" from="Control/VBoxContainer/Music/HSlider" to="Control/VBoxContainer" method="_on_music_drag_ended"]
+[connection signal="drag_ended" from="Control/VBoxContainer/FX/HSlider" to="Control/VBoxContainer" method="_on_fx_drag_ended"]
 [connection signal="pressed" from="Control/Return" to="Control/Return" method="_on_Return_pressed"]
 [connection signal="pressed" from="Control/SaveSettings" to="Control/VBoxContainer" method="_on_SaveSettings_pressed"]

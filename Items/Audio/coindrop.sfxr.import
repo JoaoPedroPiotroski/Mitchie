@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamSample"
+path="res://.import/coindrop.sfxr-19262eb6da5d490e9bdb1600bc052119.sample"
+
+[deps]
+
+source_file="res://Items/Audio/coindrop.sfxr"
+dest_files=[ "res://.import/coindrop.sfxr-19262eb6da5d490e9bdb1600bc052119.sample" ]
+
+[params]
+
+loop=false

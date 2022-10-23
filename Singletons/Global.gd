@@ -7,6 +7,8 @@ signal player_updated
 # não tem como pegar os layers pelo nome, então aqui tem
 # um dicionario pra fazer isso de um jeito meio feio
 
+var current_player_health = 0
+var current_player_mana = 0
 var mouse_position = Vector2.ZERO
 var player setget set_player,get_player
 var current_level
@@ -30,6 +32,8 @@ func _ready():
 		ProjectSettings.set_setting("application/config/project_settings_override", "")
 	else:
 		ProjectSettings.set_setting("application/config/project_settings_override", "user://mitchie_settings.godot")
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index('Music'), ProjectSettings.get_setting('audio/music_volume'))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index('Effects'), ProjectSettings.get_setting('audio/fx_volume'))
 
 func set_player_layer(new_layer):
 	player_layer = new_layer

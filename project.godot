@@ -102,7 +102,7 @@ _global_script_classes=[ {
 "base": "Entity",
 "class": "ItemDrop",
 "language": "GDScript",
-"path": "res://ItemsOld/Drop/ItemDrop.gd"
+"path": "res://Levels/ItemsOld/Drop/ItemDrop.gd"
 }, {
 "base": "Resource",
 "class": "LevelData",
@@ -182,6 +182,11 @@ config/project_settings_override="user://mitchie_settings.godot"
 boot_splash/use_filter=false
 config/icon="res://icon.png"
 
+[audio]
+
+music_volume=-19.1721
+fx_volume=-17.0774
+
 [autoload]
 
 Global="*res://Singletons/Global.tscn"
@@ -191,6 +196,7 @@ Menu="*res://Singletons/Menu.tscn"
 Save="*res://Singletons/Save.gd"
 Hud="*res://Singletons/HUD.tscn"
 Options="*res://Singletons/Options.gd"
+AudioManager="*res://Singletons/AudioManager.tscn"
 
 [debug]
 
@@ -210,7 +216,7 @@ version_control_plugin_name="GitAPI"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/spookdot/plugin.cfg" )
 
 [gdnative]
 
@@ -219,6 +225,7 @@ singletons=[  ]
 [global]
 
 font=true
+music_volume=0.0
 
 [gui]
 
@@ -341,7 +348,7 @@ pull={
 2d_physics/layer_5="Interact"
 2d_physics/layer_6="Hitbox"
 2d_physics/layer_7="Hurtbox"
-2d_physics/layer_8="ItemDrag"
+2d_physics/layer_8="Platform"
 2d_physics/layer_9="Intermediary"
 2d_physics/layer_33=""
 

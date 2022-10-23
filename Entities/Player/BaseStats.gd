@@ -1,9 +1,9 @@
 extends Node
 
 export(int) var max_health = 3
-export(int) var max_mana = 10
+export(int) var max_mana = 4
 export(int) var health = 3 
-export(int) var mana = 10 
+export(int) var mana = 4
 export(float) var jump_force : float = 320
 export(float) var max_speed = 200.0
 export(float) var acceleration = 600.0
@@ -25,10 +25,14 @@ func _ready():
 	update_current_stats()
 
 func update_current_stats():
-	current.max_health = max_health + additional_health
-	current.max_mana = max_mana + additional_mana
-	current.health = health
-	current.mana = mana + additional_mana
+	current.max_health = Save.max_health
+	current.max_mana = Save.max_mana
+	if Save.just_loaded:
+		current.health = Save.max_health
+		current.mana = Save.max_mana
+	else:
+		current.health = Global.current_player_health
+		current.mana = Global.current_player_mana
 	current.max_speed = max_speed
 	current.acceleration = acceleration
 	current.terminal_velocity = terminal_velocity

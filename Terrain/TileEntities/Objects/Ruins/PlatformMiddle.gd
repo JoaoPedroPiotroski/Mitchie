@@ -11,9 +11,9 @@ func _physics_process(delta):
 		call_deferred('disable_col')
 
 func disable_col():
-	$CollisionShape2D.disabled = true
+	set_collision_mask_bit(2, false)
 	yield(get_tree().create_timer(.1), "timeout")
 	call_deferred('enable_col')
 
 func enable_col():
-	$CollisionShape2D.disabled = false
+	set_collision_mask_bit(2, true)

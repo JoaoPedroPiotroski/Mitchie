@@ -1,27 +1,176 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Entities/Enemies/Gloop/Gloop.gd" type="Script" id=1]
 [ext_resource path="res://Entities/PlayerDetector.gd" type="Script" id=2]
-[ext_resource path="res://quadradopreto.png" type="Texture" id=3]
+[ext_resource path="res://Entities/Enemies/Gloop/Gloop.png" type="Texture" id=3]
+[ext_resource path="res://Entities/Enemies/Hitbox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Entities/Enemies/Gloop/star.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14.125, 13.75 )
 
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 88, 11.5 )
+
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 80.5, 11.5 )
+extents = Vector2( 140.75, 11.5 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 13, 9.5 )
+
+[sub_resource type="Animation" id=8]
+resource_name = "Chase"
+length = 0.3
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 4, 5 ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Star:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -16, -6 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Star:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -1 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Star:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 360.0 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Stun"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Star:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -16, -6 ), Vector2( 4, -1 ), Vector2( 17, -3 ), Vector2( 15, -3 ), Vector2( 0, -5 ), Vector2( -18, -3 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Star:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, -1 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Star:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Walk"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.191831, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 1 ]
+}
 
 [node name="Gloop" type="KinematicBody2D"]
 collision_layer = 8
-collision_mask = 5
 script = ExtResource( 1 )
-collides_with_player = true
+gold_max = 15
+gold_min = 4
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 8, 8 )
 texture = ExtResource( 3 )
+hframes = 7
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 0, 1 )
 shape = SubResource( 1 )
 
 [node name="PlayerDetector" type="Area2D" parent="."]
@@ -31,8 +180,19 @@ collision_mask = 4
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
-position = Vector2( -5.5, -1 )
+modulate = Color( 0.827451, 1, 0, 1 )
+shape = SubResource( 4 )
+
+[node name="PlayerDetectorExt" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 4
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectorExt"]
+modulate = Color( 0, 0, 0, 1 )
 shape = SubResource( 2 )
+disabled = true
 
 [node name="detectors" type="Node2D" parent="."]
 visible = false
@@ -41,11 +201,13 @@ visible = false
 position = Vector2( -21, 4 )
 enabled = true
 cast_to = Vector2( 0, 15 )
+collision_mask = 129
 
 [node name="FloorDetector2" type="RayCast2D" parent="detectors"]
 position = Vector2( 21, 2 )
 enabled = true
 cast_to = Vector2( 0, 15 )
+collision_mask = 129
 
 [node name="WallDetector1" type="RayCast2D" parent="detectors"]
 enabled = true
@@ -56,8 +218,36 @@ enabled = true
 cast_to = Vector2( -18, 0 )
 
 [node name="StunTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="Hitbox" parent="." instance=ExtResource( 4 )]
+collision_layer = 8
+collision_mask = 4
+damage = 1
+knockback_force = 350.0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( -1, 4.5 )
+shape = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Walk"
+anims/Chase = SubResource( 8 )
+anims/RESET = SubResource( 5 )
+anims/Stun = SubResource( 7 )
+anims/Walk = SubResource( 6 )
+
+[node name="Star" type="Sprite" parent="."]
+visible = false
+position = Vector2( -16, -6 )
+rotation = 6.28319
+z_index = -1
+texture = ExtResource( 5 )
 
 [connection signal="body_entered" from="PlayerDetector" to="PlayerDetector" method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="PlayerDetector" method="_on_PlayerDetector_body_exited"]
 [connection signal="player_changed" from="PlayerDetector" to="." method="_on_PlayerDetector_player_changed"]
+[connection signal="body_entered" from="PlayerDetectorExt" to="PlayerDetectorExt" method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="PlayerDetectorExt" to="PlayerDetectorExt" method="_on_PlayerDetector_body_exited"]
+[connection signal="player_changed" from="PlayerDetectorExt" to="." method="_on_PlayerDetectorExt_player_changed"]
 [connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]

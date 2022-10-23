@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Levels/Ruins/RuinsTS.tres" type="TileSet" id=1]
 [ext_resource path="res://Entities/Player/Player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://Backgrounds/Ruins/BackgroundRuinsl2.png" type="Texture" id=5]
 [ext_resource path="res://Backgrounds/Ruins/BackgroundRuinsl3.png" type="Texture" id=6]
 [ext_resource path="res://Terrain/TileEntities/Objects/Door/Door.gd" type="Script" id=7]
+[ext_resource path="res://Objects/door_hint.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Levels/Ruins/RuinsR2.gd" type="Script" id=9]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -76,6 +78,8 @@ shader_param/noise = SubResource( 3 )
 extents = Vector2( 16, 21 )
 
 [node name="RuinsR2" type="Node2D"]
+script = ExtResource( 9 )
+songfile = "res://Music/Audio/AncientTemple.wav"
 
 [node name="CanvasModulate" type="ColorRect" parent="."]
 material = SubResource( 5 )
@@ -138,6 +142,9 @@ destination_entrance = 1
 position = Vector2( -1, 0 )
 shape = SubResource( 6 )
 
+[node name="door_hint" parent="Door" instance=ExtResource( 8 )]
+position = Vector2( -1, -30 )
+
 [node name="Door2" type="Area2D" parent="."]
 position = Vector2( 176, 75 )
 collision_layer = 16
@@ -148,3 +155,6 @@ destination_level = "RuinsR3"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door2"]
 shape = SubResource( 6 )
+
+[node name="door_hint" parent="Door2" instance=ExtResource( 8 )]
+position = Vector2( 0, -30 )

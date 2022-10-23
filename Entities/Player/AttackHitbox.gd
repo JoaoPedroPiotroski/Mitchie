@@ -11,5 +11,8 @@ export(bool) var multilayer = false
 
 func _on_AttackHitbox_body_entered(body):
 	if body is Entity:
-		body.apply_damage(damage)
-		body._knockback(2000, global_position.direction_to(body.global_position))
+		var in_dir = get_parent().get_parent().get_parent().get_node("Directions").get_input_direction()
+		body.apply_damage(damage, global_position)
+		body._knockback(150, Vector2(in_dir.x, in_dir.y - .5))
+	get_parent().get_parent().get_parent()._knockback(50, get_parent().get_parent().get_parent().get_node("Directions").get_input_direction() * -1)
+	

@@ -8,6 +8,11 @@ func _ready():
 	update_existing_items()
 	add_item_by_title('Foice', 1)
 	
+func get_item(title : String):
+	for i in existing_items:
+		if i.title == title:
+			return i
+	
 func add_item_by_title(title : String, amount : int) -> void:
 	emit_signal("inventory_changed")
 	for i in existing_items:

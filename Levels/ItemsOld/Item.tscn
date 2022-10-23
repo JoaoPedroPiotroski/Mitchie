@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Levels/ItemsOld/Item.gd" type="Script" id=1]
+[ext_resource path="res://Interface/Inventory/HotbarSlot/EmptySlot.png" type="Texture" id=2]
+
+[node name="Item" type="Node"]
+script = ExtResource( 1 )
+icon = ExtResource( 2 )

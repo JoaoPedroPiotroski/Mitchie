@@ -28,6 +28,16 @@
 			"event_id": "dialogic_001",
 			"portrait": "",
 			"text": "MITCHIE!!"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"Home"
+				],
+				"method_name": "change_level",
+				"target_node_path": "SceneManager"
+			},
+			"event_id": "dialogic_042"
 		}
 	],
 	"metadata": {
