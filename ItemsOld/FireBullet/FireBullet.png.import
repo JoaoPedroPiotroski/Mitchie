@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/FireBullet.png-40e4296ecb12ffd3a7f90af9ac541cef.stex"
+path="res://.import/FireBullet.png-0d85721680cbab523a4e0b7c8ea8e61e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Levels/ItemsOld/FireBullet/FireBullet.png"
-dest_files=[ "res://.import/FireBullet.png-40e4296ecb12ffd3a7f90af9ac541cef.stex" ]
+source_file="res://ItemsOld/FireBullet/FireBullet.png"
+dest_files=[ "res://.import/FireBullet.png-0d85721680cbab523a4e0b7c8ea8e61e.stex" ]
 
 [params]
 

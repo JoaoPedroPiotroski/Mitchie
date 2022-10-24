@@ -210,6 +210,7 @@ func apply_damage(dmg, _dealer = null):
 		current.health -= dmg
 		invulnerable = true
 		$InvulnerabilityTimer.start(invulnerability_timer)
+		AudioManager.play_fx("res://Entities/Player/hurt.sfxr")
 	if current.health <= 0:
 		_die()
 	
@@ -311,7 +312,8 @@ func update_inventory():
 		has_scythe = true
 
 func _knockback(force, dir):
-	velocity = force * dir
+	if not invulnerable:
+		velocity = force * dir
 	
 func is_inverse(n1, n2):
 	if (n1 > 0 and n2<0) or (n1 < 0 and n2>0):

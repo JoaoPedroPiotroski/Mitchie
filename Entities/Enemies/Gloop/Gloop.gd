@@ -21,6 +21,8 @@ var player_detect1 = false
 var player_detect2 = false
 var turn_timer = 0
 
+var dead = false
+
 func wall_detector():
 	if $detectors/WallDetector1.is_colliding() and !wall_cd:
 		wall_cd = true
@@ -57,13 +59,13 @@ func does_player_hit(dealerpos):
 func apply_damage(damage, dealerpos = null):
 	if weakref(Global.player).get_ref():
 		if does_player_hit(dealerpos):
-			print('tomou dano')
 			health -= damage
 		else:
-			print('stunou')
 			state = states.STUN
 	if health <= 0 and !immortal:
-		_die()
+		$AnimationPlayer.play('die')
+		golden_shower()
+		dead = true
 	
 #	if weakref(player).get_ref():
 #		print('ELE EXISTE')
@@ -77,6 +79,8 @@ func apply_damage(damage, dealerpos = null):
 #		_die()
 
 func _physics_process(delta):
+	if dead:
+		return
 	$Sprite.flip_h = move_direction.x > 0
 	$PlayerDetectorExt/CollisionShape2D.set_deferred('disabled', !(player_detect2 or player_detect1))
 	#FUNÇOES DE TESTE
@@ -91,6 +95,10 @@ func _physics_process(delta):
 	
 	confusion_timer -= delta
 	if confusion_timer < 0:
+		velocity = move_and_slide(velocity)
+	else:
+		velocity.x = 0
+		velocity.y += gravity * delta
 		velocity = move_and_slide(velocity)
 	velocity.y += gravity * delta
 	match(state):
@@ -121,21 +129,12 @@ func _physics_process(delta):
 
 
 func _on_PlayerDetector_player_changed():
-	print(player)
 	if weakref(player).get_ref():
 		player_detect1 = false
 		return
-		yield(get_tree().create_timer(1), 'timeout')
-		confusion_timer = .5
-		player = null
-		if move_direction.x < 0:
-			move_direction = Vector2.LEFT
-		else:
-			move_direction = Vector2.RIGHT
 	else:
 		player_detect1 = true
 		return
-		player = $PlayerDetector.player
 
 
 func _on_StunTimer_timeout():
@@ -147,7 +146,7 @@ func _on_StunTimer_timeout():
 func _on_PlayerDetectorExt_player_changed():
 	if weakref(player).get_ref():
 		player_detect2 = false
-		yield(get_tree().create_timer(1), 'timeout')
+		Global.yield_wait(1)
 		confusion_timer = .5
 		player = null
 		if move_direction.x < 0:

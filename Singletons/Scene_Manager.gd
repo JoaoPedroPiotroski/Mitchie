@@ -3,9 +3,6 @@ extends Node
 var level : Resource = load("res://Levels/Resources/MainMenu.tres")
 var entrance = 0
 
-func _ready():
-	var _c = get_tree().connect("node_added", self, 'level_loading_procedures')
-
 func change_level(new_level : String):
 	var dir = Directory.new()
 	var path = "res://Levels/Resources/"
@@ -27,7 +24,3 @@ func change_level(new_level : String):
 		print("An error occurred when trying to access the path.")
 	Save.level = new_level
 
-func level_loading_procedures(_n):
-	if not ProjectSettings.get_setting("rendering/2d/options/lights"):
-		for light in get_tree().get_nodes_in_group('Lights'):
-			light.enabled = false

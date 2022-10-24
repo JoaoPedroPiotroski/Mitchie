@@ -8,8 +8,8 @@ onready var fx = $FX/HSlider
 func _ready():
 	lights.pressed = ProjectSettings.get_setting("rendering/2d/options/lights")
 	fullscren.pressed = ProjectSettings.get_setting("display/window/size/fullscreen")
-	music.value = ProjectSettings.get_setting('audio/music_volume')
-	fx.value = ProjectSettings.get_setting('audio/fx_volume')
+	music.value = db2linear(ProjectSettings.get_setting('audio/music_volume')) * 100
+	fx.value = db2linear(ProjectSettings.get_setting('audio/fx_volume')) * 100
 
 func _on_Lights_pressed():
 	ProjectSettings.set_setting("rendering/2d/options/lights", lights.pressed)

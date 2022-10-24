@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamSample"
+path="res://.import/scytheattack.sfxr-e04892b20e0fa2d9b625f5175e148d41.sample"
+
+[deps]
+
+source_file="res://Entities/Player/scytheattack.sfxr"
+dest_files=[ "res://.import/scytheattack.sfxr-e04892b20e0fa2d9b625f5175e148d41.sample" ]
+
+[params]
+
+loop=false

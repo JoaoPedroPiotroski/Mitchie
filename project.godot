@@ -102,7 +102,7 @@ _global_script_classes=[ {
 "base": "Entity",
 "class": "ItemDrop",
 "language": "GDScript",
-"path": "res://Levels/ItemsOld/Drop/ItemDrop.gd"
+"path": "res://ItemsOld/Drop/ItemDrop.gd"
 }, {
 "base": "Resource",
 "class": "LevelData",
@@ -184,8 +184,8 @@ config/icon="res://icon.png"
 
 [audio]
 
-music_volume=-19.1721
-fx_volume=-17.0774
+music_volume=-14.8946
+fx_volume=-2.85335
 
 [autoload]
 
@@ -216,7 +216,7 @@ version_control_plugin_name="GitAPI"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/spookdot/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/spookdot/plugin.cfg" )
 
 [gdnative]
 

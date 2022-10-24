@@ -33,7 +33,7 @@ func update_health():
 	if health <= 0 and !immortal: 
 		_die()
 	
-func apply_damage(damage, dealerpos = null):
+func apply_damage(damage, _dealerpos = null):
 	health -= damage
 	update_health()
 

@@ -23,13 +23,13 @@ func _on_InteractablesDetector_area_exited(area):
 			player.current_door = null
 			area.hide_hint()
 
-func _on_InteractablesDetector_body_entered(body):
-	if body is Entity:
-		if body is ItemDrop:
-			player.item_hover = body
-
-
-func _on_InteractablesDetector_body_exited(body):
-	if body is Entity:
-		if body is ItemDrop:
-			player.item_hover = null
+#func _on_InteractablesDetector_body_entered(body):
+#	if body is Entity:
+#		if body is ItemDrop:
+#			player.item_hover = body
+#
+#
+#func _on_InteractablesDetector_body_exited(body):
+#	if body is Entity:
+#		if body is ItemDrop:
+#			player.item_hover = null

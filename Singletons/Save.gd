@@ -11,7 +11,7 @@ var inventory = []
 
 signal game_saved
 
-func _input(event):
+func _input(_event):
 	if Input.is_key_pressed(KEY_0):
 		print('salvei')
 		store_save()
