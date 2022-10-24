@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Entities/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Entities/Player/Mitchie2.png" type="Texture" id=2]
@@ -488,6 +488,23 @@ tracks/2/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=33]
+resource_name = "saving"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 24, 25 ]
+}
+
 [sub_resource type="RectangleShape2D" id=17]
 extents = Vector2( 17, 21 )
 
@@ -535,7 +552,8 @@ Pull2
 Ascent
 Descent
 Land
-Dialog"
+Dialog
+Saving"
 default_state = "Walk"
 _secondary_states = "Idle
 Attack
@@ -547,7 +565,7 @@ material = SubResource( 32 )
 position = Vector2( 0, 1 )
 texture = ExtResource( 2 )
 hframes = 8
-vframes = 3
+vframes = 4
 frame = 9
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -642,6 +660,7 @@ anims/Walk = SubResource( 9 )
 anims/attack1 = SubResource( 20 )
 anims/die = SubResource( 14 )
 anims/pull1 = SubResource( 21 )
+anims/saving = SubResource( 33 )
 
 [node name="InteractablesDetector" type="Area2D" parent="."]
 visible = false

@@ -7,11 +7,14 @@ func _on_InteractablesDetector_area_entered(area):
 		if area is DialogTrigger:
 			player.current_dialog = Dialogic.start(area.timeline)
 	if area is Area2D:
-		if area.is_in_group('doors'):
+		if area.is_in_group('doors') and not area.is_in_group('savepoints'):
 			player.current_door = area
 			if area.type == 'entrance':
 				SceneManager.entrance = area.destination_entrance
 				SceneManager.change_level(area.destination_level)
+			area.show_hint()
+		if area.is_in_group('savepoints'):
+			player.current_savepoint = area
 			area.show_hint()
 
 func _on_InteractablesDetector_area_exited(area):
@@ -21,6 +24,9 @@ func _on_InteractablesDetector_area_exited(area):
 	if area is Area2D:
 		if area.is_in_group('doors'):
 			player.current_door = null
+			area.hide_hint()
+		if area.is_in_group('savepoints'):
+			player.current_savepoint = null
 			area.hide_hint()
 
 #func _on_InteractablesDetector_body_entered(body):

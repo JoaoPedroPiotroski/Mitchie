@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamSample"
+path="res://.import/hurt.sfxr-4e7c0df5b980bcb88f3ca9c917eb791a.sample"
+
+[deps]
+
+source_file="res://Entities/Enemies/Gloop/hurt.sfxr"
+dest_files=[ "res://.import/hurt.sfxr-4e7c0df5b980bcb88f3ca9c917eb791a.sample" ]
+
+[params]
+
+loop=false

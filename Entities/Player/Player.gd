@@ -42,6 +42,7 @@ var animating = true
 var item_hover
 var current_door
 var current_dialog
+var current_savepoint
 var has_scythe = false
 var anim_direction_locked = false
 
@@ -58,6 +59,12 @@ func _ready():
 	for d in get_tree().get_nodes_in_group('doors'):
 		if d.entrance == SceneManager.entrance:
 			global_position = d.global_position
+			if d.is_in_group('savepoints'):
+				state_machine.current_state = 'Saving'
+				global_position = d.global_position
+				global_position.y -= 4
+				global_position.x -= 30
+				$Sprite.flip_h = true
 
 func _physics_process(delta):
 	Global.player = self
@@ -102,6 +109,8 @@ func _physics_process(delta):
 		pull_state(delta)
 	elif state == "Pull2":
 		pull2_state(delta)
+	elif state == "Saving":
+		saving_state(delta)
 	if animating:
 		animate()
 		
@@ -142,6 +151,11 @@ func take_input(delta):
 		if weakref(current_door).get_ref():
 			SceneManager.entrance = current_door.destination_entrance
 			SceneManager.change_level(current_door.destination_level)
+		if weakref(current_savepoint).get_ref() and flags['on_ground']:
+			state_machine.current_state = "Saving" 
+			Save.level = SceneManager.level.title
+			Save.entrance = current_savepoint.entrance
+			Save.store_save()
 #	if weakref(item_hover).get_ref():
 #		if Input.is_action_just_pressed("interact") and item_hover.layer == layer:
 #			var pass_item = item_hover.item.instance()
@@ -190,6 +204,7 @@ func air_move(delta):
 		
 func _die():
 	flags["dead"] = true
+	current.health = current.max_health
 	
 	
 func _respawn():
@@ -272,6 +287,12 @@ func descent_state(delta):
 		if fall_timer > 0.75:
 			state_machine.current_state = "Land"
 		fall_timer = 0
+
+func saving_state(_delta):
+	velocity = Vector2.ZERO
+	next_animation = "saving"
+	if Input.is_action_just_pressed('move_up'):
+		state_machine.current_state = "Walk"
 
 func land_state(_delta):
 	next_animation = "Landing"

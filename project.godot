@@ -143,6 +143,11 @@ _global_script_classes=[ {
 "class": "item",
 "language": "GDScript",
 "path": "res://Items/Item.gd"
+}, {
+"base": "Area2D",
+"class": "savepoint",
+"language": "GDScript",
+"path": "res://Terrain/Objects/Save/Savepoint.gd"
 } ]
 _global_script_class_icons={
 "DTS": "",
@@ -171,7 +176,8 @@ _global_script_class_icons={
 "StateMachine": "",
 "Tile_Entity": "",
 "TilesManager": "",
-"item": ""
+"item": "",
+"savepoint": ""
 }
 
 [application]
@@ -184,8 +190,8 @@ config/icon="res://icon.png"
 
 [audio]
 
-music_volume=-14.8946
-fx_volume=-2.85335
+music_volume=-20.9151
+fx_volume=-10.4576
 
 [autoload]
 
@@ -216,7 +222,7 @@ version_control_plugin_name="GitAPI"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/spookdot/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg" )
 
 [gdnative]
 
@@ -366,4 +372,4 @@ quality/intended_usage/framebuffer_allocation.mobile=0
 quality/filters/anisotropic_filter_level=1
 environment/default_clear_color=Color( 0.505882, 0.490196, 0.584314, 1 )
 environment/default_environment="res://default_env.tres"
-2d/options/lights=false
+2d/options/lights=true

@@ -1,17 +1,24 @@
 extends Node
 
 var existing_items = []
+var coins = 0
 
 signal inventory_changed
 
 func _ready():
 	update_existing_items()
+	#Save.connect('game_loaded', self, 'load_inventory')
 	add_item_by_title('Foice', 1)
+	add_item_by_title('Coin', 0)
 	
 func get_item(title : String):
 	for i in existing_items:
 		if i.title == title:
 			return i
+			
+func load_inventory():
+	coins = Save.coins
+	print(Save.inventory)
 	
 func add_item_by_title(title : String, amount : int) -> void:
 	emit_signal("inventory_changed")

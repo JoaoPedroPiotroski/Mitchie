@@ -156,6 +156,9 @@ blend_mode = 1
 collision_layer = 0
 collision_mask = 129
 script = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": "Na verdade isso é só moedas, ignora :3"
+}
 immortal = true
 drop_sound = "res://Items/Audio/coindrop.sfxr"
 collect_fx = "res://Items/Audio/coinpickup.sfxr"

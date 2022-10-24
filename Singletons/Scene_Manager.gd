@@ -22,5 +22,3 @@ func change_level(new_level : String):
 			file_name = dir.get_next()
 	else:
 		print("An error occurred when trying to access the path.")
-	Save.level = new_level
-

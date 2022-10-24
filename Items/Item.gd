@@ -6,6 +6,7 @@ export(String) var title : String
 export(String) var description : String
 export var icon : StreamTexture
 export var scene : PackedScene
+export var stackable : bool = false
 var amount = 0
 
 enum types {

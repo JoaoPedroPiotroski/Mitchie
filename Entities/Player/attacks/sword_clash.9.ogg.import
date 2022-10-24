@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/sword_clash.9.ogg-13fee3a47f2c904e110452fab5ab6e9d.oggstr"
+
+[deps]
+
+source_file="res://Entities/Player/attacks/sword_clash.9.ogg"
+dest_files=[ "res://.import/sword_clash.9.ogg-13fee3a47f2c904e110452fab5ab6e9d.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

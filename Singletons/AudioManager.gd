@@ -32,7 +32,7 @@ func transition_music_to(new_song : String, transition_type = 'direct'):
 			
 func play_song(song):
 	for player in mplayers:
-		if !player.playing and player.stream != song:
+		if player.stream != song:
 			player.stream = song
 			player.playing = true
 			return

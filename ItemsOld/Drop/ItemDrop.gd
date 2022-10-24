@@ -53,7 +53,7 @@ func setup(in_item=item, initial_velocity = Vector2.ZERO):
 	velocity = initial_velocity
 	
 func collect():
-	Inventory.add_item_by_title(item, 1)
+	Inventory.coins += 1
 	AudioManager.play_fx(collect_fx)
 	queue_free()
 

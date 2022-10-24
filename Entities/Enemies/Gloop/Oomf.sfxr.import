@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamSample"
+path="res://.import/Oomf.sfxr-112ba9c89d4000eb390f9a2e72abc7dc.sample"
+
+[deps]
+
+source_file="res://Entities/Enemies/Gloop/Oomf.sfxr"
+dest_files=[ "res://.import/Oomf.sfxr-112ba9c89d4000eb390f9a2e72abc7dc.sample" ]
+
+[params]
+
+loop=false

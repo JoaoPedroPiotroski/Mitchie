@@ -33,6 +33,8 @@ func update_current_stats():
 	else:
 		current.health = Global.current_player_health
 		current.mana = Global.current_player_mana
+	
+	Save.just_loaded = false
 	current.max_speed = max_speed
 	current.acceleration = acceleration
 	current.terminal_velocity = terminal_velocity

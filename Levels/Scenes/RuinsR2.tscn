@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Levels/Ruins/RuinsTS.tres" type="TileSet" id=1]
 [ext_resource path="res://Entities/Player/Player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Terrain/TileEntities/Objects/Door/Door.gd" type="Script" id=7]
 [ext_resource path="res://Objects/door_hint.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Levels/Ruins/RuinsR2.gd" type="Script" id=9]
+[ext_resource path="res://Terrain/Objects/Save/Savepoint.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -158,3 +159,7 @@ shape = SubResource( 6 )
 
 [node name="door_hint" parent="Door2" instance=ExtResource( 8 )]
 position = Vector2( 0, -30 )
+
+[node name="Savepoint" parent="." instance=ExtResource( 10 )]
+position = Vector2( 63, 82 )
+entrance = 2

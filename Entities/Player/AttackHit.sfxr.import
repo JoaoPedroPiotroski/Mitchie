@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamSample"
+path="res://.import/AttackHit.sfxr-6c0e65410f0ef67952781387cc587040.sample"
+
+[deps]
+
+source_file="res://Entities/Player/AttackHit.sfxr"
+dest_files=[ "res://.import/AttackHit.sfxr-6c0e65410f0ef67952781387cc587040.sample" ]
+
+[params]
+
+loop=false

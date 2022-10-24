@@ -9,3 +9,4 @@ type = 2
 title = "Coin"
 description = ""
 icon = ExtResource( 2 )
+stackable = true

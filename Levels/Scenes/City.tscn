@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Terrain/ExtendedTilemap.gd" type="Script" id=1]
 [ext_resource path="res://Terrain/TileSetResources/Desert.tres" type="TileSet" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Entities/Player/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Terrain/TileEntities/Objects/Door/Door.gd" type="Script" id=5]
 [ext_resource path="res://Objects/door_hint.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Terrain/Objects/Save/Savepoint.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Levels/Desert/City.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 12, 19.5 )
@@ -14,6 +16,7 @@ extents = Vector2( 12, 19.5 )
 extents = Vector2( 10, 181 )
 
 [node name="City" type="Node2D"]
+script = ExtResource( 8 )
 
 [node name="ExtendedTilemap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
@@ -77,3 +80,7 @@ destination_level = "RuinsEntrance"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door2"]
 position = Vector2( 38, -152 )
 shape = SubResource( 1 )
+
+[node name="Savepoint" parent="." instance=ExtResource( 7 )]
+position = Vector2( 95, -78 )
+entrance = 3
