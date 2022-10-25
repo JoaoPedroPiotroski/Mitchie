@@ -168,9 +168,7 @@ func _on_OomfTimer_timeout():
 	if state == states.STUN:
 		$OomfTimer.start(.3)
 		return
-		print('stun')
 	else:
-		print('aqui')
 		if !weakref(player).get_ref():
 			print('normal')
 			$AudioStreamPlayer2D.stream = load("res://Entities/Enemies/Gloop/ooooooom.sfxr")

@@ -1,9 +1,7 @@
 [gd_resource type="DynamicFont" load_steps=2 format=2]
 
-[ext_resource path="res://Interface/Fonts/dogicabold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://addons/dialogic/Example Assets/Fonts/Overlock/Overlock-Black.ttf" type="DynamicFontData" id=1]
 
 [resource]
-size = 20
-outline_size = 2
-outline_color = Color( 0.384314, 0.2, 0.423529, 1 )
+size = 30
 font_data = ExtResource( 1 )

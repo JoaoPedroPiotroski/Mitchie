@@ -31,6 +31,8 @@ func transition_music_to(new_song : String, transition_type = 'direct'):
 			mplayers[0].playing = true
 			
 func play_song(song):
+	if typeof(song) == TYPE_STRING:
+		song = load(song)
 	for player in mplayers:
 		if player.stream != song:
 			player.stream = song

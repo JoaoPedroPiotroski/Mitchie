@@ -15,11 +15,11 @@ func _ready():
 	AudioManager.stop_music()
 	var d = Dialogic.new()
 	d = d.start('intro')
-	d.connect('dialogic_signal', self, '_next_pic')
 	add_child(d)
+	d.connect('dialogic_signal', self, '_next_pic')
 	
 	
 
-func _next_pic():
+func _next_pic(_value):
 	current += 1
 	$Sprite.texture = load(pics[current])

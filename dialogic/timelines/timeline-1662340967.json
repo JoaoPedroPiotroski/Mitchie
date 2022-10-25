@@ -5,19 +5,14 @@
 			"set_theme": "theme-1662341798.cfg"
 		},
 		{
-			"audio_bus": "Master",
-			"background-music": "play",
-			"event_id": "dialogic_031",
-			"event_name": "BackgroundMusic",
-			"fade_length": 1,
-			"file": "res://Music/Audio/introzinha.ogg",
-			"volume": 0
-		},
-		{
-			"character": "",
-			"event_id": "dialogic_001",
-			"portrait": "",
-			"text": "Era uma vez uma garota, que morava em uma pequena vila no grande deserto\nEla vivia uma vida pacífica\nAté que um dia, a vila foi destruída por um bando de[color=red] saqueadores[/color].\n[shake rate=4 level=3]Ruína se espalhou por todo lado.[/shake]\nAo tentar fugir, a garota foi encurralada pelo [color=red]líder dos saqueadores[/color].\nNão lhe restava nenhuma esperança.\nQuando a garota achava que estava tudo perdido, surgiu uma luz na distância...\nUm mago vindo do oeste lançou uma magica de proteção sobre ela.\nO saqueador, que só conhecia os magos por lendas e contos, fugiu.\nO mago decidiu adotar a garota, com a qual vagueou por um longo tempo, buscando uma nova casa.\nA garota aprendeu truques mágicos de seu pai adotivo, mas aquilo com o qual ela verdadeiramente ressoou...\nForam as magias de [color=powderblue] spellblade [/color], as quais ela praticava com a mesma foice que eles usavam para cortar pasto. \nCom seu equipamento... peculiar...\nSeus treinamentos solitários de luta...\nEla chegava a parecer intimidadora para os outros habitantes de sua vila.\nMas talvez...\nNão seja pra tanto.[speed=2]...[speed=3].....[speed=6]..[speed=8].."
+			"call_node": {
+				"arguments": [
+					"res://Music/Audio/introzinha.ogg"
+				],
+				"method_name": "play_song",
+				"target_node_path": "AudioManager"
+			},
+			"event_id": "dialogic_042"
 		},
 		{
 			"character": "",
@@ -26,7 +21,7 @@
 			"text": "Era uma vez uma garota, que vivia uma vida pacífica, em uma pequena vila do grande deserto"
 		},
 		{
-			"emit_signal": "",
+			"emit_signal": "1",
 			"event_id": "dialogic_040"
 		},
 		{
@@ -36,7 +31,7 @@
 			"text": "Até que um dia, a vila foi destruída por um bando de[color=red] saqueadores[/color].\n[shake rate=4 level=3]Ruína se espalhou por todo lado.[/shake]"
 		},
 		{
-			"emit_signal": "",
+			"emit_signal": "1",
 			"event_id": "dialogic_040"
 		},
 		{
@@ -90,6 +85,10 @@
 			"event_id": "dialogic_040"
 		},
 		{
+			"event_id": "dialogic_024",
+			"set_theme": "default-theme.cfg"
+		},
+		{
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
@@ -121,7 +120,7 @@
 		}
 	],
 	"metadata": {
-		"dialogic-version": "1.4.1",
+		"dialogic-version": "1.4.5",
 		"file": "timeline-1662340967.json",
 		"name": "intro"
 	}
