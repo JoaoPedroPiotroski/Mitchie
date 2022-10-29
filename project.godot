@@ -190,8 +190,8 @@ config/icon="res://icon.png"
 
 [audio]
 
-music_volume=-20.9151
-fx_volume=-10.4576
+music_volume=-10.4576
+fx_volume=-12.3958
 
 [autoload]
 
@@ -222,7 +222,7 @@ version_control_plugin_name="GitAPI"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/spookdot/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/gdfxr/plugin.cfg" )
 
 [gdnative]
 
@@ -364,12 +364,10 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
 quality/driver/fallback_to_gles2=true
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
 2d/snapping/use_gpu_pixel_snap=true
-quality/filters/anisotropic_filter_level=1
 environment/default_clear_color=Color( 0.505882, 0.490196, 0.584314, 1 )
 environment/default_environment="res://default_env.tres"
 2d/options/lights=true

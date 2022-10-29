@@ -7,6 +7,8 @@ const DOWN = Vector2.DOWN
 const LEFT = Vector2.LEFT
 const RIGHT = Vector2.RIGHT
 
+var debug_draw_aux = Vector2.ZERO
+
 # Timers
 var jump_timer = -1 #0.3
 var ground_timer = -1 #0.1
@@ -45,6 +47,7 @@ var current_dialog
 var current_savepoint
 var has_scythe = false
 var anim_direction_locked = false
+var world_image
 
 onready var animation_player = $AnimationPlayer
 onready var main_sprite = $MainSprite
@@ -65,7 +68,9 @@ func _ready():
 				global_position.y -= 4
 				global_position.x -= 30
 				$Sprite.flip_h = true
-
+	$WalkOnSand.color = SceneManager.level.dust_color
+	$WalkOnSand.amount = SceneManager.level.dustyness
+	
 func _physics_process(delta):
 	Global.player = self
 	Global.mouse_position = get_global_mouse_position()
@@ -176,6 +181,12 @@ func animate():
 	else:
 		anim_direction_locked = false
 	
+	if state_machine.current_state == "Walk" and input_direction != 0:
+		$WalkOnSand.direction = Vector2(global_position.direction_to(global_position+velocity).x, 0) * -1
+		$WalkOnSand.emitting = true
+	else:
+		$WalkOnSand.emitting = false
+	
 	if next_animation != animation_player.current_animation and animation_player.current_animation != "die":
 		animation_player.play(next_animation)
 	if flags["dead"] and animation_player.current_animation != "die":
@@ -208,7 +219,7 @@ func _die():
 	
 	
 func _respawn():
-	var _s = get_tree().reload_current_scene()
+	Save.load_save()
 	
 func apply_friction(force, delta):
 	velocity.x = lerp(velocity.x, 0, force * delta)
@@ -290,6 +301,7 @@ func descent_state(delta):
 
 func saving_state(_delta):
 	velocity = Vector2.ZERO
+	current.health = current.max_health
 	next_animation = "saving"
 	if Input.is_action_just_pressed('move_up'):
 		state_machine.current_state = "Walk"
@@ -312,10 +324,14 @@ func end_attack():
 	state_machine.current_state = "Walk"
 
 func attack2_state(_delta):
+	if current.mana <= 0:
+		state_machine.current_state = "Walk"
+		return
 	var scy = load("res://Entities/Player/ScytheBomb.tscn")
 	var obj = scy.instance()
 	obj.start($Directions.get_input_direction(), 300, global_position)
 	get_parent().add_child(obj)
+	current.mana -= 1
 	state_machine.current_state = "Walk"
 
 func pull_state(_delta):
@@ -372,3 +388,5 @@ func _on_dialog_ended(_timeline):
 
 func _on_InvulnerabilityTimer_timeout():
 	invulnerable = false
+
+

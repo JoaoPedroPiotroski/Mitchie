@@ -1,6 +1,7 @@
 extends Node2D
 
 export(Array, PackedScene) var droplist
+	
 
 func _ready():
 	var itemdrop = load("res://Items/Drop/ItemDrop.tscn")

@@ -32,6 +32,7 @@ func _ready():
 		ProjectSettings.set_setting("application/config/project_settings_override", "")
 	else:
 		ProjectSettings.set_setting("application/config/project_settings_override", "user://mitchie_settings.godot")
+	ProjectSettings.set_setting("application/config/project_settings_override", "")
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index('Music'), ProjectSettings.get_setting('audio/music_volume'))
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index('Effects'), ProjectSettings.get_setting('audio/fx_volume'))
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://Entities/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Entities/Player/Mitchie2.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Entities/Player/PlayerStateMachine.gd" type="Script" id=5]
 [ext_resource path="res://Entities/Player/CurrentStats.gd" type="Script" id=6]
 [ext_resource path="res://Entities/Player/BaseStats.gd" type="Script" id=7]
+[ext_resource path="res://Entities/SharedSprites/white_blob.png" type="Texture" id=8]
 [ext_resource path="res://Entities/Player/MainCamera.gd" type="Script" id=9]
 [ext_resource path="res://Entities/Player/InteractablesDetector.gd" type="Script" id=10]
 [ext_resource path="res://quadradopreto.png" type="Texture" id=11]
@@ -17,6 +18,20 @@
 [ext_resource path="res://Entities/Player/Directions.gd" type="Script" id=16]
 [ext_resource path="res://Entities/Player/DirIndicator.gd" type="Script" id=17]
 [ext_resource path="res://Entities/Player/ScytheTerrainDetector.gd" type="Script" id=18]
+
+[sub_resource type="Curve" id=34]
+max_value = 60.0
+_data = [ Vector2( 0, 60 ), 0.0, 17.7518, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=35]
+min_value = 0.8
+max_value = 5.0
+_data = [ Vector2( 0.00323624, 0.8 ), 0.0, 0.0, 0, 0, Vector2( 1, 5 ), 4.96995, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=36]
+interpolation_mode = 2
+offsets = PoolRealArray( 0, 0.202797, 0.597902, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.796078, 1, 1, 1, 0.133333, 1, 1, 1, 0 )
 
 [sub_resource type="Shader" id=31]
 code = "shader_type canvas_item;
@@ -310,24 +325,12 @@ tracks/4/keys = {
 "values": [ true ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("ArmPivot/Scythe/TerrainDetector:exclude_parent")
+tracks/5/path = NodePath("ArmPivot/Scythe/TerrainDetector/CollisionPolygon2D:disabled")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("ArmPivot/Scythe/TerrainDetector/CollisionPolygon2D:disabled")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -559,6 +562,22 @@ _secondary_states = "Idle
 Attack
 Mount"
 default_secondary_state = "Idle"
+
+[node name="WalkOnSand" type="CPUParticles2D" parent="."]
+position = Vector2( 0, 21 )
+emitting = false
+lifetime = 4.0
+local_coords = false
+texture = ExtResource( 8 )
+direction = Vector2( -1, 0 )
+spread = 28.33
+gravity = Vector2( 0, -10 )
+initial_velocity = 10.0
+angular_velocity = 80.0
+angular_velocity_curve = SubResource( 34 )
+damping = 2.47
+scale_amount_curve = SubResource( 35 )
+color_ramp = SubResource( 36 )
 
 [node name="MainSprite" type="Sprite" parent="."]
 material = SubResource( 32 )

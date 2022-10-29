@@ -52,6 +52,7 @@ collision_layer = 16
 collision_mask = 0
 script = ExtResource( 11 )
 timeline = "g_m_flores"
+deletabilities = [ "gadenerrtalk1" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DialogTrigger"]
 modulate = Color( 1, 0, 0, 1 )
@@ -63,10 +64,11 @@ position = Vector2( 7, -13 )
 texture = ExtResource( 12 )
 
 [node name="CanvasLayer" type="ParallaxBackground" parent="."]
+scroll_base_offset = Vector2( 0, 100 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer"]
-motion_scale = Vector2( 0, 0.8 )
-motion_mirroring = Vector2( 640, 0 )
+motion_scale = Vector2( 0, 0 )
+motion_mirroring = Vector2( 1280, 0 )
 script = ExtResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer/ParallaxLayer"]
@@ -75,8 +77,8 @@ texture = ExtResource( 7 )
 centered = false
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="CanvasLayer"]
-motion_scale = Vector2( 0.4, 0.95 )
-motion_mirroring = Vector2( 640, 0 )
+motion_scale = Vector2( 0.2, 0.5 )
+motion_mirroring = Vector2( 1280, 0 )
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer/ParallaxLayer2"]
 position = Vector2( 146, -258 )
@@ -84,8 +86,8 @@ texture = ExtResource( 5 )
 centered = false
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="CanvasLayer"]
-motion_scale = Vector2( 0.6, 1 )
-motion_mirroring = Vector2( 640, 0 )
+motion_scale = Vector2( 0.4, 0.8 )
+motion_mirroring = Vector2( 1280, 0 )
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer/ParallaxLayer3"]
 position = Vector2( 146, -263 )
@@ -93,8 +95,8 @@ texture = ExtResource( 8 )
 centered = false
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="CanvasLayer"]
-motion_scale = Vector2( 0.8, 1 )
-motion_mirroring = Vector2( 640, 0 )
+motion_scale = Vector2( 0.5, 0.9 )
+motion_mirroring = Vector2( 1280, 0 )
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer/ParallaxLayer4"]
 position = Vector2( 159, -263 )

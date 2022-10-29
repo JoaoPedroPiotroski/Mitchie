@@ -12,6 +12,7 @@ var player = null
 
 func _ready():
 	set_physics_process(true)
+	collect_fx = load(collect_fx)
 	var tween = get_node("Tween")
 	tween.interpolate_property($Sprite, "modulate:a",
 			0, 1, 1,
@@ -36,8 +37,8 @@ func _physics_process(delta):
 	else:
 		collided_last_frame = false
 	if player != null:
-		velocity += 70 * global_position.direction_to(player.global_position)
-		if global_position.distance_to(player.global_position) < 5: 
+		velocity += 100 * global_position.direction_to(player.global_position)
+		if global_position.distance_to(player.global_position) < 6: 
 			collect()
 	if !is_moving():
 		set_physics_process(false)
@@ -59,7 +60,8 @@ func collect():
 
 
 func _on_PlayerDetector_player_changed():
-	player = $PlayerDetector.player
+	if !weakref(player).get_ref():
+		player = $PlayerDetector.player
 	set_physics_process(true)
 
 

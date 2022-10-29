@@ -1,0 +1,15 @@
+{
+	"events": [
+		{
+			"character": "character-1662318817.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Oi Mitchie!! Já falou com a Rose sobre o que eu pedi??"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1666840261.json",
+		"name": "gadenerr_chitchat"
+	}
+}

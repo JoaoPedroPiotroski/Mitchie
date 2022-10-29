@@ -57,15 +57,19 @@ func does_player_hit(dealerpos):
 		return true
 
 func apply_damage(damage, dealerpos = null):
+	if dead:
+		return
 	if weakref(Global.player).get_ref():
 		if does_player_hit(dealerpos):
 			AudioManager.play_fx("res://Entities/Enemies/Gloop/hurt.sfxr")
 			health -= damage
 		else:
 			state = states.STUN
+			$StunTimer.start(2.5)
 	if health <= 0 and !immortal:
 		$AnimationPlayer.play('die')
 		golden_shower()
+		$Hitbox/CollisionShape2D2.set_deferred('disabled', true)    
 		dead = true
 	
 #	if weakref(player).get_ref():
@@ -127,8 +131,6 @@ func _physics_process(delta):
 			$PlayerDetectorExt/CollisionShape2D.set_deferred('disabled', true)
 			$Star.visible = true
 			$AnimationPlayer.play("Stun")
-			if $StunTimer.is_stopped():
-				$StunTimer.start(2.5)
 			velocity.x = 0
 
 
@@ -170,11 +172,9 @@ func _on_OomfTimer_timeout():
 		return
 	else:
 		if !weakref(player).get_ref():
-			print('normal')
 			$AudioStreamPlayer2D.stream = load("res://Entities/Enemies/Gloop/ooooooom.sfxr")
 			$AudioStreamPlayer2D.play()
 		else:
-			print('chase')
 			$AudioStreamPlayer2D.stream = load("res://Entities/Enemies/Gloop/Oomf.sfxr")
 			$AudioStreamPlayer2D.play()
 	

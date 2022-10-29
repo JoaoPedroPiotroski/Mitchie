@@ -13,3 +13,5 @@ cam_limit_L = -1000000
 cam_limit_T = -1000000
 cam_limit_B = 1000000
 cam_limit_R = 1000000
+dust_color = Color( 0.784314, 0.345098, 0.0431373, 1 )
+dustyness = 16

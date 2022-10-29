@@ -112,10 +112,20 @@
 			"event_id": "dialogic_001",
 			"portrait": "",
 			"text": "Ta bom, Gadenerr, ela [wave rate=8 level=5]nuunca[/wave] vai suspeitar"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"gadenerrtalk1"
+				],
+				"method_name": "add_progress_flag",
+				"target_node_path": "Save"
+			},
+			"event_id": "dialogic_042"
 		}
 	],
 	"metadata": {
-		"dialogic-version": "1.4.1",
+		"dialogic-version": "1.4.5",
 		"file": "timeline-1662327423.json",
 		"name": "g_m_flores"
 	}

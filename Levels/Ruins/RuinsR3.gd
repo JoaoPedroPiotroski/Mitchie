@@ -14,4 +14,4 @@ func _ready():
 		for light in get_tree().get_nodes_in_group('Lights'):
 			light.enabled = false
 	song = load(songfile)
-	AudioManager.play_song(song)
+	AudioManager.play_song(song, .5)
