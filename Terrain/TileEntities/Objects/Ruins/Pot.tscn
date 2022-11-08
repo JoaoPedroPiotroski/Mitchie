@@ -15,7 +15,7 @@ extents = Vector2( 8, 8 )
 resource_name = "break"
 length = 0.3
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:scale")
+tracks/0/path = NodePath("Sprite:material:shader_param/progress")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -24,7 +24,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 2, 2 ) ]
+"values": [ 0.0, 1.0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:offset")
@@ -39,7 +39,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( -8, -8 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:material:shader_param/progress")
+tracks/2/path = NodePath("Sprite:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -48,7 +48,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.0, 1.0 ]
+"values": [ Vector2( 1, 1 ), Vector2( 2, 2 ) ]
 }
 tracks/3/type = "method"
 tracks/3/path = NodePath(".")
@@ -74,7 +74,6 @@ collision_mask = 32
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 8, 8 )
 shape = SubResource( 1 )
 

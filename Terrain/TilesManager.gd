@@ -6,7 +6,8 @@ static func prepare_me(tmap):
 	for tile_entity in existing_tile_entities:
 		if tile_entity.tilemap == tmap.title:
 			for t in tmap.get_used_cells_by_id(tile_entity.id):
-				var new_entity = tile_entity.scene.instance()
+				var loaded_scene = load(tile_entity.scene)
+				var new_entity = loaded_scene.instance()
 				var tilepos = tmap.map_to_world(t)
 				new_entity.global_position = tilepos
 				tmap.add_child(new_entity)
@@ -20,10 +21,12 @@ static func get_existing_tile_entities():
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
+			print(file_name)
 			if dir.current_is_dir():
 				pass
 			else:
-				existing_tile_entities.append(load(path+file_name))
+				if not ResourceLoader.has_cached(path + file_name):
+					existing_tile_entities.append(ResourceLoader.load(path+file_name))
 			file_name = dir.get_next()
 	else:
 		print("An error occurred when trying to access the path.")

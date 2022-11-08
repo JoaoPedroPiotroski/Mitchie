@@ -1,10 +1,9 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=2 format=2]
 
 [ext_resource path="res://Terrain/TileEntities/TileEntity.gd" type="Script" id=1]
-[ext_resource path="res://Terrain/TileEntities/Objects/DistructibleSand/DistructibleSand.tscn" type="PackedScene" id=2]
 
 [resource]
 script = ExtResource( 1 )
 id = 2
 tilemap = "Desert"
-scene = ExtResource( 2 )
+scene = "res://Terrain/TileEntities/Objects/DistructibleSand/DistructibleSand.tscn"
