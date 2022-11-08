@@ -12,6 +12,6 @@ func die():
 	queue_free()
 
 func _on_Hitbox2_area_entered(area):
-	if area.has_meta('player_attack1'):
+	if area.has_meta('player_attack'):
 		AudioManager.play_fx("res://Entities/Player/attacks/sword_clash.9.ogg")
 		$AnimationPlayer.play('break')

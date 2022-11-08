@@ -4,6 +4,7 @@ extends PseudoEntity
 export(PackedScene) var particle
 
 func _ready():
+	$Hitbox.set_meta('player_attack', true)
 	$Hitbox.set_meta('player_explosion', true)
 	var p = particle.instance()
 	get_parent().add_child(p)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Levels/Ruins/RuinsTS.tres" type="TileSet" id=1]
 [ext_resource path="res://Objects/RuinsLockedDor/LockedDoor.tscn" type="PackedScene" id=2]
@@ -8,6 +8,11 @@
 [ext_resource path="res://Levels/Ruins/RuinsTL.gd" type="Script" id=6]
 [ext_resource path="res://Entities/Enemies/Blob_Boss/RuinsBoss.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Terrain/TileEntities/Objects/Ruins/OutDoor.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Terrain/TileEntities/Objects/Door/Door.gd" type="Script" id=9]
+[ext_resource path="res://Entities/Enemies/Blob_Boss/RuinsBoss.gd" type="Script" id=10]
+[ext_resource path="res://Entities/Player/Player.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Entities/PlayerDetector.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Entities/Enemies/Hitbox.tscn" type="PackedScene" id=13]
 
 [sub_resource type="Shader" id=5]
 code = "shader_type canvas_item;
@@ -73,6 +78,15 @@ shader_param/velocity = Vector2( 0.01, 0 )
 shader_param/fog_color = Color( 0.988235, 0.988235, 0.988235, 0.509804 )
 shader_param/noise = SubResource( 6 )
 
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 321, 10 )
+
+[sub_resource type="CircleShape2D" id=10]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id=11]
+radius = 15.0333
+
 [node name="RuinsBoss" type="Node2D"]
 
 [node name="CanvasModulate" type="ColorRect" parent="."]
@@ -137,9 +151,46 @@ script = ExtResource( 6 )
 position = Vector2( 189, -16 )
 
 [node name="RuinsBoss" parent="." instance=ExtResource( 7 )]
-position = Vector2( 76, 14 )
+position = Vector2( 72, 13 )
+script = ExtResource( 10 )
+health = 9
+gold_max = 300
+gold_min = 300
+
+[node name="PlayerDetector" parent="RuinsBoss" instance=ExtResource( 12 )]
+position = Vector2( -5, 2 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RuinsBoss/PlayerDetector"]
+position = Vector2( -5, 6 )
+shape = SubResource( 9 )
+
+[node name="Hitbox" parent="RuinsBoss" instance=ExtResource( 13 )]
+collision_layer = 8
+collision_mask = 4
+damage = 1
+knockback_force = 300.0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RuinsBoss/Hitbox"]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( -6, 3 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RuinsBoss"]
+position = Vector2( -6, 3 )
+shape = SubResource( 11 )
 
 [node name="OutDoor" parent="." instance=ExtResource( 8 )]
 position = Vector2( 256, 240 )
 rotation = -1.5708
 scale = Vector2( 1, 2 )
+
+[node name="Player" parent="." instance=ExtResource( 11 )]
+position = Vector2( -160, -63 )
+
+[node name="Door" type="Area2D" parent="."]
+position = Vector2( -304, -2 )
+script = ExtResource( 9 )
+destination_level = "RuinsR3"
+destination_entrance = 1
+
+[connection signal="player_changed" from="RuinsBoss/PlayerDetector" to="RuinsBoss" method="_on_PlayerDetector_player_changed"]

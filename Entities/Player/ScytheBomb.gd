@@ -8,6 +8,8 @@ func start(in_direction, force, pos):
 	direction = in_direction
 	velocity = direction * force
 	
+	set_meta('player_attack', true)
+
 func _physics_process(delta):
 	rotation_degrees += 360 * delta
 	var col = move_and_collide(velocity * delta)

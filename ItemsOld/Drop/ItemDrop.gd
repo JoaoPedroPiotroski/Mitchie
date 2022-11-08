@@ -18,7 +18,8 @@ func _ready():
 			0, 1, 1,
 			Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	tween.start()
-	$AudioStreamPlayer2D.stream = load(drop_sound)
+	drop_sound = load(drop_sound)
+	$AudioStreamPlayer2D.stream = drop_sound
 	if item == null:
 		queue_free()
 	else:

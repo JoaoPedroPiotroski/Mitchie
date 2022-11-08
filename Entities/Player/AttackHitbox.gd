@@ -12,6 +12,7 @@ onready var player = get_parent().get_parent().get_parent()
 
 func _ready():
 	set_meta('player_attack1', true)
+	set_meta('player_attack', true)
 
 func enable():
 	$CollisionShape2D.disabled = false

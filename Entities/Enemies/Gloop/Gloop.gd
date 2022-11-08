@@ -63,6 +63,8 @@ func apply_damage(damage, dealerpos = null):
 		if does_player_hit(dealerpos):
 			AudioManager.play_fx("res://Entities/Enemies/Gloop/hurt.sfxr")
 			health -= damage
+			state = states.WALK
+			confusion_timer = 0.3
 		else:
 			state = states.STUN
 			$StunTimer.start(2.5)
