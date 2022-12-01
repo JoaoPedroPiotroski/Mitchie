@@ -3,10 +3,15 @@
 [resource]
 code = "shader_type canvas_item;
 
+// Pixel dissolve
 uniform sampler2D noise_tex_normal;
 uniform sampler2D noise_tex;
 uniform float progress : hint_range(0.0, 1.0);
 uniform float strength = 1.0;
+
+// Hit flash
+uniform bool invincible = false;
+uniform float time_remaining = 0.0;
 
 // If your sprite doesn't have enough space and the explosion gets clipped, 
 // you can uncomment this and adjust the scale
@@ -19,6 +24,9 @@ uniform float strength = 1.0;
 //}
 
 void fragment() {
+	
+	// Pixel Dissolver
+	
 	vec2 direction = texture(noise_tex_normal, UV).xy; // We're using normal map as direction
 	direction -= 0.5; // Since our normal map is a texture, it ranges from 0.0 to 1.0...
 	direction *= 2.0; // ...so we're going to make it range from -1.0 to 1.0.
@@ -44,5 +52,15 @@ void fragment() {
 	border = ceil(1.0 - border);
 	tex.a *= border;
 	
+	//COLOR = tex;
+	
+	// Hit Flash
+	
+	//vec4 color = texture(TEXTURE, UV);
+	if (invincible){
+			tex = mix(tex,
+			vec4(1.0, 1.0, 1.0, tex.a),
+			abs((sin(TIME * (100.0 * time_remaining )))));
+	}
 	COLOR = tex;
 }"

@@ -18,7 +18,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Era uma vez uma garota, que vivia uma vida pacífica, em uma pequena vila do grande deserto"
+			"text": "Era uma vez uma garota\nEla vivia uma vida pacífica em uma pequena vila do grande deserto"
 		},
 		{
 			"emit_signal": "1",

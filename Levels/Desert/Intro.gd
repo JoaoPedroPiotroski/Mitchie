@@ -4,6 +4,7 @@ extends Node2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+export(Color) var bg_color
 var pics = [
 	"res://ASeprite/intro1.png", "res://ASeprite/intro2.png", "res://ASeprite/intro3.png", "res://ASeprite/intro4.png", "res://ASeprite/intro5.png", "res://ASeprite/intro6.png",
 	"res://ASeprite/intro65.png", "res://ASeprite/intro7.png"
@@ -17,6 +18,7 @@ func _ready():
 	d = d.start('intro')
 	add_child(d)
 	d.connect('dialogic_signal', self, '_next_pic')
+	VisualServer.set_default_clear_color(bg_color)
 	
 	
 

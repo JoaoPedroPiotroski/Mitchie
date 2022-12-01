@@ -11,7 +11,7 @@ func _ready():
 	update_vis()
 	
 func update_vis():
-	if Global.player != null:
+	if weakref(Global.player).get_ref() and SceneManager.level.type != "Menu":
 		visible = true
 		update_sliders()
 		if !Global.player.get_node('Stats/Current').is_connected("health_update", self, 'update_sliders'):

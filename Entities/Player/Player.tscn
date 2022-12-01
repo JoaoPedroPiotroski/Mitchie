@@ -772,6 +772,7 @@ shape = SubResource( 29 )
 [node name="InvulnerabilityTimer" type="Timer" parent="."]
 one_shot = true
 
+[connection signal="tree_exiting" from="." to="." method="_on_Player_tree_exiting"]
 [connection signal="body_entered" from="LayerDetector1" to="." method="_on_LayerDetector1_body_entered"]
 [connection signal="body_exited" from="LayerDetector1" to="." method="_on_LayerDetector1_body_exited"]
 [connection signal="area_shape_entered" from="IntermediaryDetector" to="." method="_on_IntermediaryDetector_area_shape_entered"]
@@ -783,8 +784,8 @@ one_shot = true
 [connection signal="body_entered" from="InteractablesDetector" to="InteractablesDetector" method="_on_InteractablesDetector_body_entered"]
 [connection signal="body_exited" from="InteractablesDetector" to="InteractablesDetector" method="_on_InteractablesDetector_body_exited"]
 [connection signal="body_entered" from="ArmPivot/Scythe/AttackHitbox" to="ArmPivot/Scythe/AttackHitbox" method="_on_AttackHitbox_body_entered"]
-[connection signal="body_entered" from="ArmPivot/Scythe/PullHitbox" to="ArmPivot/Scythe/PullHitbox" method="_on_Hitbox_body_entered"]
 [connection signal="body_entered" from="ArmPivot/Scythe/PullHitbox" to="ArmPivot/Scythe/PullHitbox" method="_on_PullHitbox_body_entered"]
+[connection signal="body_entered" from="ArmPivot/Scythe/PullHitbox" to="ArmPivot/Scythe/PullHitbox" method="_on_Hitbox_body_entered"]
 [connection signal="body_exited" from="ArmPivot/Scythe/PullHitbox" to="ArmPivot/Scythe/PullHitbox" method="_on_PullHitbox_body_exited"]
 [connection signal="body_entered" from="ArmPivot/Scythe/TerrainDetector" to="ArmPivot/Scythe/TerrainDetector" method="_on_TerrainDetector_body_entered"]
 [connection signal="body_entered" from="EnemyDetector" to="ArmPivot/DirIndicator" method="_on_EnemyDetector_body_entered"]

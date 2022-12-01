@@ -121,7 +121,7 @@ func _physics_process(delta):
 		
 	if layer_switch_timer < 0:
 		current.jump_force = base.jump_force
-		
+	
 func take_input(delta):
 	input_direction = -int(Input.is_action_pressed("move_left")) + int(Input.is_action_pressed("move_right"))
 	if input_direction != 0:
@@ -216,7 +216,6 @@ func air_move(delta):
 func _die():
 	flags["dead"] = true
 	current.health = current.max_health
-	
 	
 func _respawn():
 	Save.load_save()
@@ -390,3 +389,8 @@ func _on_InvulnerabilityTimer_timeout():
 	invulnerable = false
 
 
+
+
+
+func _on_Player_tree_exiting():
+	Global.player = null

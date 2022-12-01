@@ -5,14 +5,40 @@
 			"animation_length": 0,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
-			"character": "",
+			"character": "character-1662327407.json",
 			"event_id": "dialogic_002",
 			"mirror_portrait": false,
-			"portrait": "",
+			"portrait": "Default",
 			"portrait_definition": "",
 			"position": {
 				"0": false,
 				"1": false,
+				"2": false,
+				"3": true,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1662327407.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Mitchie! eu vi aqueles caras que destruíram tua vila aqui no telescópio. \nA gente tem que fazer algo!\nPega tua foice e vai lá dar um jeito!"
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1652646885.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": true,
 				"2": false,
 				"3": false,
 				"4": false
@@ -21,24 +47,16 @@
 			"z_index": 0
 		},
 		{
-			"animation": "[Default]",
-			"animation_length": 0,
-			"change_mirror_portrait": false,
-			"change_z_index": false,
-			"character": "",
-			"event_id": "dialogic_002",
-			"mirror_portrait": false,
+			"character": "character-1652646885.json",
+			"event_id": "dialogic_001",
 			"portrait": "",
-			"portrait_definition": "",
-			"position": {
-				"0": false,
-				"1": false,
-				"2": false,
-				"3": false,
-				"4": false
-			},
-			"type": 0,
-			"z_index": 0
+			"text": "Como que você espera que eu resolva [b]isso\n[/b]???"
+		},
+		{
+			"character": "character-1662327407.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "E eu sei lá.\nVai falar com o pessoal da cidade.\nTalvez eles tenham alguma coisa que te ajude."
 		}
 	],
 	"metadata": {

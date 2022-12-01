@@ -28,6 +28,7 @@ func _input(_event):
 		SceneManager.change_level('main_menu')
 
 func _ready():
+	print(generate_odd_numbers_up_to(20)) # assistam eu fazendo ISSO errado
 	if OS.has_feature('editor'):
 		ProjectSettings.set_setting("application/config/project_settings_override", "")
 	else:
@@ -82,3 +83,19 @@ func yield_call_deferred(var node, var action, var parameter):
 	node.call_deferred(action, parameter)
 	yield(get_tree(), "idle_frame")
 	
+
+func generate_odd_numbers_up_to(target : int):
+	var odd_numbers = []
+	for i in range(target):
+		if i % 2 == 0:
+			odd_numbers.append(i)
+	return odd_numbers
+
+
+
+
+
+
+
+
+
