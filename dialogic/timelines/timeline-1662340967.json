@@ -111,7 +111,17 @@
 		{
 			"call_node": {
 				"arguments": [
-					"Home"
+					"1"
+				],
+				"method_name": "set_entrance",
+				"target_node_path": "SceneManager"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"agmos_house"
 				],
 				"method_name": "change_level",
 				"target_node_path": "SceneManager"

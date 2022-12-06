@@ -35,6 +35,7 @@ func transition_music_to(new_song : String, transition_type = 'direct'):
 			mplayers[0].playing = true
 			
 func play_song(song, speed_mult = 1):
+	#var music_volume = db2linear(ProjectSettings.get_setting('audio/music_volume'))
 	$Tween.stop_all()
 	$Tween.remove_all()
 	if typeof(song) == TYPE_STRING:
@@ -42,39 +43,41 @@ func play_song(song, speed_mult = 1):
 	for player in mplayers:
 		if player.stream != song:
 			player.volume_db = linear2db(0)
-			$AnimationPlayer.play("fade_out", -1, speed_mult)
-#			$Tween.interpolate_property(
-#				player,
-#				'volume_db',
-#				target_vol,
-#				music_volume,
-#				5,
-#				Tween.TRANS_LINEAR,
-#				Tween.EASE_OUT
-#			)
-#			$Tween.start()
-			yield($AnimationPlayer, "animation_finished")
-			$AnimationPlayer.play('fade_in', -1, speed_mult)
+			$Tween.interpolate_method(
+				self,
+				'set_linear_volume',
+				0,
+				1,
+				speed_mult,
+				Tween.TRANS_LINEAR,
+				Tween.EASE_OUT
+			)
+			
 			player.stream = song
 			player.playing = true
-			return
+	$Tween.start()
 
 func stop_music():
-	var music_volume = ProjectSettings.get_setting('audio/music_volume') 
-	var target_vol = linear2db(0.001)
+	var music_volume = 1
+	var target_vol = 0
 	for player in mplayers:
-		$Tween.interpolate_property(
-				player,
-				'volume_db',
+		$Tween.interpolate_method(
+				self,
+				'set_linear_volume',
 				music_volume,
 				target_vol,
-				1,
+				0,
 				Tween.TRANS_LINEAR
 			)
-		$Tween.start()
-		yield($Tween, "tween_all_completed")
+	$Tween.start()
+	yield($Tween, "tween_all_completed")
+	for player in mplayers:
 		player.playing = false
 		player.stream = null
+		
+func set_linear_volume(volume : float):
+	for player in mplayers:
+		player.volume_db = linear2db(volume)
 	
 func on_fx_ended(audio):
 	for f in fx:

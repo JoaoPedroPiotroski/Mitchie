@@ -6,6 +6,8 @@ func _on_InteractablesDetector_area_entered(area):
 	if area is PseudoEntity:
 		if area is DialogTrigger:
 			player.current_dialog = Dialogic.start(area.timeline)
+			if area.autoplay:
+				player.force_dialog = true
 	if area is Area2D:
 		if area.is_in_group('doors') and not area.is_in_group('savepoints'):
 			player.current_door = area

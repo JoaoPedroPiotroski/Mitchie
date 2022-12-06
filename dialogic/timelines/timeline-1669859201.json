@@ -1,0 +1,25 @@
+{
+	"events": [
+		{
+			"character": "character-1662318812.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Oi, quer comprar algo?"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"res://Interface/Shop/Resources/rose_shop.tres"
+				],
+				"method_name": "create_shop",
+				"target_node_path": "Menu"
+			},
+			"event_id": "dialogic_042"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1669859201.json",
+		"name": "r_m_depoisflores"
+	}
+}

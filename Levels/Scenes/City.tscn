@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Terrain/ExtendedTilemap.gd" type="Script" id=1]
 [ext_resource path="res://Terrain/TileSetResources/Desert.tres" type="TileSet" id=2]
@@ -126,6 +126,85 @@ extents = Vector2( 17.5, 21.5 )
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 181 )
 
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+uniform sampler2D noise;
+uniform float cloud_coverage : hint_range(0.0, 2.0);
+uniform float cloud_intensity : hint_range(0.0, 2.0);
+uniform float offset_x = 0;
+uniform float offset_y = 0;
+
+uniform float uv_multiplier = 1;
+uniform int pixelate_amount = 16;
+
+uniform vec4 cloud_color : hint_color;
+uniform vec4 day_bottom_color : hint_color = vec4(0.4, 1.0, 1.0, 1.0);
+uniform vec4 day_top_color : hint_color = vec4(0.0, 0.8, 1.0, 1.0);
+uniform float horizon_band : hint_range(0.0, 1.0);
+uniform float horizon_smoothing : hint_range(-16.0, 16.0);
+
+uniform float speed : hint_range(0.0, 1.0);
+uniform float fluffiness : hint_range(0.0, 2.0);
+
+void fragment(){
+	vec2 pixelated_uv = uv_multiplier * round(SCREEN_UV * float(pixelate_amount)) / float(pixelate_amount);
+	vec4 screen_color = texture(TEXTURE, pixelated_uv);
+	vec4 noise1 = texture(noise, mod(vec2(pixelated_uv.x + TIME * 2.5 * speed / 10.0, pixelated_uv.y) , 0.0 ));
+	vec4 noise2 = texture(noise, mod(vec2(pixelated_uv.x + TIME * (2.5 + fluffiness * 3.0) * speed / 10.0, pixelated_uv.y), 0.0));
+	vec4 noise_color = noise1 + noise2;
+	//vec4 noise_color = texture(noise, vec2(UV.x / 2.0 + offset_x, UV.y + offset_y));
+//	noise_color.rgb = smoothstep(
+//		vec3(1.0 - cloud_coverage),
+//		vec3(1.0 - cloud_intensity),
+//		noise_color.rgb
+//
+//	) * 2.0;
+	//noise_color.rgb = smoothstep(cloud_intensity - 0.3, cloud_intensity + 0.3, noise_color).rgb;
+	//noise_color.rgb = vec3(step(cloud_coverage, noise_color.r));
+	
+	noise_color.rgb = smoothstep(cloud_intensity - 0.3, cloud_intensity + 0.3, noise_color).rgb;
+	
+//	noise_color.rgb += step(
+//		vec3(cloud_intensity),
+//		noise_color.rgb
+//	);
+	vec3 sky_color = mix(day_bottom_color.rgb, day_top_color.rgb, clamp(smoothstep(0.0, 1.0, 1.0-pixelated_uv.y + horizon_band / horizon_smoothing), 0.0, 1.0));
+	
+	COLOR = mix(vec4(sky_color, 1.0), vec4(mix(noise_color.rgb, cloud_color.rgb, 1.0), noise_color.a), noise_color.r);
+}
+
+"
+
+[sub_resource type="OpenSimplexNoise" id=7]
+octaves = 6
+period = 256.0
+persistence = 0.36
+lacunarity = 2.15
+
+[sub_resource type="NoiseTexture" id=8]
+width = 1280
+height = 360
+seamless = true
+noise = SubResource( 7 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
+shader_param/cloud_coverage = 1.013
+shader_param/cloud_intensity = 1.185
+shader_param/offset_x = 0.0
+shader_param/offset_y = 0.0
+shader_param/uv_multiplier = 2.374
+shader_param/pixelate_amount = 163
+shader_param/cloud_color = Color( 1, 0.87451, 0.827451, 1 )
+shader_param/day_bottom_color = Color( 0.352941, 0.45098, 0.588235, 1 )
+shader_param/day_top_color = Color( 0.462745, 0.811765, 0.788235, 1 )
+shader_param/horizon_band = 0.278
+shader_param/horizon_smoothing = 0.524
+shader_param/speed = 0.1
+shader_param/fluffiness = 0.127
+shader_param/noise = SubResource( 8 )
+
 [node name="City" type="Node2D"]
 script = ExtResource( 8 )
 
@@ -156,7 +235,7 @@ region_rect = Rect2( 112, 80, 112, 80 )
 position = Vector2( -11, 12 )
 script = ExtResource( 5 )
 entrance = 2
-destination_level = "RoseShop"
+destination_level = "rose_home"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rose/Door3"]
 position = Vector2( 0, 9.5 )
@@ -176,9 +255,7 @@ region_rect = Rect2( 272, 96, 96, 64 )
 
 [node name="DialogTrigger" type="Area2D" parent="Gadenerr"]
 script = ExtResource( 14 )
-timeline = "gadenerr_chitchat"
-requisites = [ "gadenerrtalk1" ]
-deletabilities = [ "roseflowerreceived" ]
+timeline = "r_m_entregaflores"
 
 [node name="Sprite" type="Sprite" parent="Gadenerr/DialogTrigger"]
 position = Vector2( 37, -13 )
@@ -221,17 +298,18 @@ entrance = 3
 scroll_base_offset = Vector2( 0, -80 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer"]
-motion_scale = Vector2( 0, 0 )
+motion_scale = Vector2( 0.02, 0 )
 motion_mirroring = Vector2( 1280, 0 )
 script = ExtResource( 13 )
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer/ParallaxLayer"]
+material = SubResource( 6 )
 position = Vector2( 144, -264 )
 texture = ExtResource( 9 )
 centered = false
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="CanvasLayer"]
-motion_scale = Vector2( 0.2, 0.5 )
+motion_scale = Vector2( 0.1, 0.5 )
 motion_mirroring = Vector2( 1280, 0 )
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer/ParallaxLayer2"]
@@ -240,7 +318,7 @@ texture = ExtResource( 11 )
 centered = false
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="CanvasLayer"]
-motion_scale = Vector2( 0.4, 0.8 )
+motion_scale = Vector2( 0.2, 0.8 )
 motion_mirroring = Vector2( 1280, 0 )
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer/ParallaxLayer3"]
@@ -249,7 +327,7 @@ texture = ExtResource( 12 )
 centered = false
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="CanvasLayer"]
-motion_scale = Vector2( 0.5, 0.9 )
+motion_scale = Vector2( 0.3, 0.9 )
 motion_mirroring = Vector2( 1280, 0 )
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer/ParallaxLayer4"]

@@ -4,7 +4,7 @@ extends Node2D
 var destroy = false
 var last_key = ""
 var pitch_increase = 0
-var sound = true
+var sound = false
 var blips = true
 
 

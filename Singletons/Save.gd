@@ -70,3 +70,7 @@ func store_save():
 	
 func add_progress_flag(flag : String):
 	progress_flags.append(flag)
+	
+func delete_save():
+	var dir = Directory.new()
+	dir.remove("user://savegame" + str(slot) + '.save')

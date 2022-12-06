@@ -1,6 +1,13 @@
 {
 	"glossary": [
-
+		{
+			"extra": "",
+			"id": "1669950850-632",
+			"name": "Spellblade",
+			"text": "A magia que envolve o encantamento de uma arma branca possuída pelo usuário",
+			"title": "Spellblade",
+			"type": 1
+		}
 	],
 	"variables": [
 

@@ -8,12 +8,12 @@
 	"name": "Rose",
 	"nickname": "",
 	"nickname_bool": false,
-	"offset_x": 0,
-	"offset_y": 0,
+	"offset_x": -94,
+	"offset_y": -90,
 	"portraits": [
 		{
 			"name": "Default",
-			"path": "res://Interface/Portraits/rosehighres.png"
+			"path": "res://ASeprite/roseportrait.png"
 		}
 	],
 	"scale": 100,

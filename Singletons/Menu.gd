@@ -11,3 +11,9 @@ func transition_end():
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
 	emit_signal('transition_ended')
+	
+func create_shop(path):
+	var s = load("res://Interface/Shop/ShopInterface.tscn")
+	var i = s.instance()
+	i.start(load(path))
+	add_child(i)

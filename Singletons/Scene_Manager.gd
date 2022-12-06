@@ -1,14 +1,16 @@
 extends Node
 	
 var level : Resource = load("res://Levels/Resources/MainMenu.tres")
-var entrance = 0
+var entrance = 0 setget set_entrance
 var s
 var loading = false
 func _ready():
 	Menu.connect('transition_ended', self, 'on_transition_ended')
 
+func set_entrance(_entrance):
+	entrance = int(_entrance)
+
 func on_transition_ended():
-	pass
 	if loading:
 		var _e = get_tree().change_scene_to(s)
 		loading = false

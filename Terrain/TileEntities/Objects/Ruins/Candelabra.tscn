@@ -1,8 +1,19 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Terrain/SpriteSheets/Desertineo.png" type="Texture" id=1]
 [ext_resource path="res://Terrain/light.png" type="Texture" id=2]
 [ext_resource path="res://Terrain/TileEntities/Objects/Ruins/Light2D.gd" type="Script" id=3]
+[ext_resource path="res://Terrain/TileEntities/Objects/Ruins/light_sprite_material.tres" type="Material" id=4]
+[ext_resource path="res://Entities/SharedSprites/white_blob.png" type="Texture" id=5]
+
+[sub_resource type="Curve" id=3]
+max_value = 5.0
+_data = [ Vector2( 0, 2.21932 ), 0.0, 2.39749, 0, 0, Vector2( 0.179916, 2.51932 ), 2.23481, 2.23481, 0, 0, Vector2( 1, 4.65341 ), -0.891376, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=4]
+interpolation_mode = 2
+offsets = PoolRealArray( 0, 0.0972222, 1 )
+colors = PoolColorArray( 0.321569, 0.321569, 0.321569, 0.247059, 0.658824, 0.658824, 0.658824, 0.121569, 1, 1, 1, 0 )
 
 [sub_resource type="Curve" id=1]
 min_value = 0.2
@@ -12,15 +23,33 @@ _data = [ Vector2( 0, 1 ), 0.0, -0.648579, 0, 0, Vector2( 1, 0.2 ), 0.0657173, 0
 offsets = PoolRealArray( 0, 0.0983607, 0.368852, 0.827869, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 0.585938, 0, 1, 1, 0, 0, 0.560784, 0.574219, 0.574219, 0.574219, 0.482353, 0, 0, 0, 0 )
 
-[sub_resource type="CanvasItemMaterial" id=3]
-blend_mode = 1
-
 [node name="Candelabra" type="Sprite"]
 position = Vector2( 0, -16 )
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 32, 208, 16, 16 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2( 8, 5 )
+amount = 2
+lifetime = 4.0
+randomness = 0.2
+texture = ExtResource( 5 )
+direction = Vector2( -1, -1 )
+spread = 22.68
+gravity = Vector2( 0, 0 )
+initial_velocity = 10.0
+radial_accel = 18.9
+radial_accel_random = 0.11
+tangential_accel = 20.0
+tangential_accel_random = 0.19
+damping = 5.0
+damping_random = 0.22
+angle = 360.0
+angle_random = 1.0
+scale_amount_curve = SubResource( 3 )
+color_ramp = SubResource( 4 )
 
 [node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
 position = Vector2( 3.51311, 3.66744 )
@@ -71,9 +100,11 @@ color = Color( 1, 0.945098, 0, 1 )
 color_ramp = SubResource( 2 )
 
 [node name="Light2D" type="Sprite" parent="."]
-modulate = Color( 0.333333, 0, 0, 0.278431 )
-material = SubResource( 3 )
+modulate = Color( 0.698039, 0, 0, 0.1 )
+material = ExtResource( 4 )
 position = Vector2( 8.25, 3.5 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 script = ExtResource( 3 )
+energy = 0.1
+tint = Color( 0.698039, 0, 0, 1 )

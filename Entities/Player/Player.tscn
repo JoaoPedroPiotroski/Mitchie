@@ -114,10 +114,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 7, 8 ]
+"values": [ 27 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -145,7 +145,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 9, 10 ]
+"values": [ 26, 27 ]
 }
 
 [sub_resource type="Animation" id=24]
@@ -592,6 +592,7 @@ visible = false
 texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 modulate = Color( 0.14902, 1, 0, 1 )
 position = Vector2( 1, 6 )
 shape = SubResource( 3 )
@@ -784,8 +785,8 @@ one_shot = true
 [connection signal="body_entered" from="InteractablesDetector" to="InteractablesDetector" method="_on_InteractablesDetector_body_entered"]
 [connection signal="body_exited" from="InteractablesDetector" to="InteractablesDetector" method="_on_InteractablesDetector_body_exited"]
 [connection signal="body_entered" from="ArmPivot/Scythe/AttackHitbox" to="ArmPivot/Scythe/AttackHitbox" method="_on_AttackHitbox_body_entered"]
-[connection signal="body_entered" from="ArmPivot/Scythe/PullHitbox" to="ArmPivot/Scythe/PullHitbox" method="_on_PullHitbox_body_entered"]
 [connection signal="body_entered" from="ArmPivot/Scythe/PullHitbox" to="ArmPivot/Scythe/PullHitbox" method="_on_Hitbox_body_entered"]
+[connection signal="body_entered" from="ArmPivot/Scythe/PullHitbox" to="ArmPivot/Scythe/PullHitbox" method="_on_PullHitbox_body_entered"]
 [connection signal="body_exited" from="ArmPivot/Scythe/PullHitbox" to="ArmPivot/Scythe/PullHitbox" method="_on_PullHitbox_body_exited"]
 [connection signal="body_entered" from="ArmPivot/Scythe/TerrainDetector" to="ArmPivot/Scythe/TerrainDetector" method="_on_TerrainDetector_body_entered"]
 [connection signal="body_entered" from="EnemyDetector" to="ArmPivot/DirIndicator" method="_on_EnemyDetector_body_entered"]

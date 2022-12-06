@@ -1,0 +1,128 @@
+{
+	"events": [
+		{
+			"animation": "2-fade_in_up.gd",
+			"animation_length": 1,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1662318817.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": true,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1662318817.json",
+			"event_id": "dialogic_010",
+			"options": [
+
+			],
+			"portrait": "",
+			"question": "[speed=0.2]Entao Mitchie??[speed=2] Ela gostou???[speed=0.5] O que ela achou???[speed=1] Ela gostou???"
+		},
+		{
+			"choice": "Sim",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"character": "character-1662318817.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Que otimo!! Vou arrumar mais umas pra mandar pra ela"
+		},
+		{
+			"choice": "Ela pareceu feliz de receber flores de voce",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"character": "character-1662318817.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Voce contou pra ela???\n..........Acho que nao né?\nEla costuma ser bem esperta\nMas o que importa é que ela gostou nao é?\nVou fazer mais flores pra deixar ela mais feliz ainda!"
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"character": "character-1662318817.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Enfim, tem algo que eu posso te ajudar em compensaçao?"
+		},
+		{
+			"animation": "2-fade_in_up.gd",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1652646885.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": true,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1652646885.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Bom, a Rose falou algo sobre ter algo dos spellblade nas ruínas aqui perto...\nVoce tem alguma ideia de como entrar la?"
+		},
+		{
+			"character": "character-1662318817.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Ah, sim! Eu tenho a chave aqui, pode levar!"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"chave da ruina",
+					"1"
+				],
+				"method_name": "add_item_by_title",
+				"target_node_path": "Inventory"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"character": "character-1652646885.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Voce simplesmente..... tem a chave?"
+		},
+		{
+			"character": "character-1662318817.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Tenho!\nEnfim, vou ir preparar flores pra Rose\nTchaaaaaaaaaaau"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1669937711.json",
+		"name": "g_m_depoisflores"
+	}
+}

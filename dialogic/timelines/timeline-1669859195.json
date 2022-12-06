@@ -1,0 +1,125 @@
+{
+	"events": [
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1662318812.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": true,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1662318812.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "[speed=4]Oi Mitchie.\n[speed=3]O que é isso?\n[speed=16]...[speed=2]Flores?\nPra mim?\n[speed=8]Foi... [speed=3] voce que pegou elas pra mim?[pause=0.5][nw]"
+		},
+		{
+			"animation": "2-fade_in_up.gd",
+			"animation_length": 1,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1652646885.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": true,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1652646885.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "........................................."
+		},
+		{
+			"animation": "5-fade_out_down.gd",
+			"animation_length": 1,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1652646885.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"character": "character-1662318812.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "[speed=5]Ahh, claro que nao...[speed=2] foi a gadenner, nao foi?\n[speed=1.5]Aquela boba :3\nMas..................\nObrigada por trazer elas pra mim \nFala pra ela que eu gostei depois,[speed=4] mas, [speed=1]voce sabe...\nTenta nao deixar ela toda envergonhadinha que nem ela sempre fica, hihi\nAh, e aproveitando que voce veio aqui, me lembrei agora... \nEu ouvi falar de alguma coisa envolvendo os [color=powderblue]spellblades[/color] nas ruínas aqui perto\nEu sei que voce é do tipo que ia querer dar uma olhada nisso, e como eu nao sei o que tem lá...\nToma isso aqui, pode te ajudar\n"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"pocao de vida",
+					"1"
+				],
+				"method_name": "add_item_by_title",
+				"target_node_path": "Inventory"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"character": "character-1662318812.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Agora vai lá, tenho que cuidar da loja"
+		},
+		{
+			"animation": "5-fade_out_down.gd",
+			"animation_length": 1,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1662318812.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1669859195.json",
+		"name": "r_m_entregaflores"
+	}
+}

@@ -4,6 +4,7 @@ class_name DialogTrigger
 export(String) var timeline
 export(Array, String) var requisites
 export(Array, String) var deletabilities
+export(bool) var autoplay = false
 
 func _ready():
 	for r in requisites:

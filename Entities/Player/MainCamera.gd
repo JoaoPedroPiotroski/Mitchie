@@ -16,6 +16,8 @@ func _ready():
 	limit_bottom = SceneManager.level.cam_limit_B
 	limit_top = SceneManager.level.cam_limit_T
 	zoom = SceneManager.level.cam_zoom
+	smoothing_enabled = SceneManager.level.camera_smoothing
+	smoothing_speed = SceneManager.level.camera_smoothness
 
 func _physics_process(delta):
 	drag_margin_h_enabled = !abs(player.velocity.x) > 200

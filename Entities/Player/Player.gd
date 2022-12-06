@@ -22,6 +22,8 @@ export(float) var jump_cooldown = ground_timer
 export(float) var invulnerability_timer = .6
 var invulnerable = false
 
+var force_dialog = false
+
 var flags = {
 	"on_ground" : false,
 	"dead" : false,
@@ -73,7 +75,7 @@ func _ready():
 	
 func _physics_process(delta):
 	Global.player = self
-	Global.mouse_position = get_global_mouse_position()
+	#Global.mouse_position = get_global_mouse_position()
 	var state = state_machine.get_state()
 	if moving:
 		velocity = move_and_slide(velocity, UP)
@@ -145,7 +147,8 @@ func take_input(delta):
 			state_machine.current_state = "Pull"
 		r_click_hold_timer = 0
 	if weakref(current_dialog).get_ref():
-		if Input.is_action_just_pressed("interact"):
+		if Input.is_action_just_pressed("interact") or force_dialog:
+			force_dialog = false
 			state_machine.current_state = "Dialog"
 			moving = false
 			animating = false

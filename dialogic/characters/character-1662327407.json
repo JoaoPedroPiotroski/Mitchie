@@ -1,5 +1,5 @@
 {
-	"color": "#ffffffff",
+	"color": "#ff0847b2",
 	"description": "",
 	"display_name": "",
 	"display_name_bool": false,
@@ -13,7 +13,7 @@
 	"portraits": [
 		{
 			"name": "Default",
-			"path": ""
+			"path": "res://Interface/Portraits/protagonista_grande.png"
 		}
 	],
 	"scale": 100,

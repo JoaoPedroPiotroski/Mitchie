@@ -1,10 +1,20 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Terrain/SpriteSheets/Desertineo.png" type="Texture" id=1]
 [ext_resource path="res://Terrain/light.png" type="Texture" id=2]
 [ext_resource path="res://Terrain/TileEntities/Objects/Ruins/Light2D.gd" type="Script" id=3]
 [ext_resource path="res://Terrain/TileEntities/Objects/Ruins/SmallFlame.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Terrain/TileEntities/Objects/Ruins/light_sprite_material.tres" type="Material" id=5]
+[ext_resource path="res://Entities/SharedSprites/white_blob.png" type="Texture" id=6]
+
+[sub_resource type="Curve" id=3]
+max_value = 5.0
+_data = [ Vector2( 0, 2.21932 ), 0.0, 2.39749, 0, 0, Vector2( 0.179916, 2.51932 ), 2.23481, 2.23481, 0, 0, Vector2( 1, 4.65341 ), -0.891376, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=4]
+interpolation_mode = 2
+offsets = PoolRealArray( 0, 0.0972222, 1 )
+colors = PoolColorArray( 0.321569, 0.321569, 0.321569, 0.247059, 0.658824, 0.658824, 0.658824, 0.121569, 1, 1, 1, 0 )
 
 [sub_resource type="Curve" id=1]
 min_value = 0.2
@@ -20,6 +30,26 @@ texture = ExtResource( 1 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 16, 192, 16, 32 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2( 8, 5 )
+amount = 3
+lifetime = 4.0
+texture = ExtResource( 6 )
+direction = Vector2( -1, -1 )
+spread = 22.68
+gravity = Vector2( 0, 0 )
+initial_velocity = 10.0
+radial_accel = 18.9
+radial_accel_random = 0.11
+tangential_accel = 20.0
+tangential_accel_random = 0.19
+damping = 5.0
+damping_random = 0.22
+angle = 360.0
+angle_random = 1.0
+scale_amount_curve = SubResource( 3 )
+color_ramp = SubResource( 4 )
 
 [node name="SmallFlame" parent="." instance=ExtResource( 4 )]
 
@@ -60,8 +90,9 @@ color = Color( 1, 0.945098, 0, 1 )
 color_ramp = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 0.337255, 0, 0, 0.0784314 )
+modulate = Color( 0.698039, 0, 0, 0.2 )
 material = ExtResource( 5 )
 position = Vector2( 8, 4 )
 texture = ExtResource( 2 )
 script = ExtResource( 3 )
+tint = Color( 0.698039, 0, 0, 1 )

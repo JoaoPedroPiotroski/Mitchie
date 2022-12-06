@@ -1,8 +1,9 @@
 {
 	"events": [
 		{
-			"animation": "[Default]",
-			"animation_length": 0,
+			"animation": "bouncing_in.gd",
+			"animation_length": 2,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1662327407.json",
@@ -24,7 +25,7 @@
 			"character": "character-1662327407.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Mitchie! eu vi aqueles caras que destruíram tua vila aqui no telescópio. \nA gente tem que fazer algo!\nPega tua foice e vai lá dar um jeito!"
+			"text": "[shake]m-Mitchie![/shake]\nEu estava olhando meu velho telescopio aqui.\nVendo o que acontece ao longe, como sempre...\nMas hoje eu vi[speed=10]...[speed=1] aquele bando de saqueadores.\nOs mesmos que destruiram sua vila. \nPelo visto eles andam rondando por ai. [pause=0.25]Deve ser uma questao de tempo para eles chegarem aqui!\nA gente tem que fazer algo!\nPega tua foice e vai la dar um jeito!"
 		},
 		{
 			"animation": "[Default]",
@@ -50,13 +51,23 @@
 			"character": "character-1652646885.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Como que você espera que eu resolva [b]isso\n[/b]???"
+			"text": "Como que voce espera que eu resolva [b]isso[/b]???"
 		},
 		{
 			"character": "character-1662327407.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "E eu sei lá.\nVai falar com o pessoal da cidade.\nTalvez eles tenham alguma coisa que te ajude."
+			"text": "E eu sei la.\nVai falar com o pessoal da cidade.\nTalvez eles tenham alguma coisa que te ajude."
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"agmosintro"
+				],
+				"method_name": "add_progress_flag",
+				"target_node_path": "Save"
+			},
+			"event_id": "dialogic_042"
 		}
 	],
 	"metadata": {
