@@ -3,6 +3,7 @@ class_name item
 
 export(int, "Milestone", "Use", "Consume", "Equip") var type = 0
 export(String) var title : String
+export(String) var display_title : String
 export(String) var description : String
 export var icon : StreamTexture
 export var scene : PackedScene
@@ -17,6 +18,8 @@ enum types {
 }
 
 func _ready():
+	if display_title.empty():
+		display_title = title
 	match(type):
 		types.milestone:
 			print("milestone")

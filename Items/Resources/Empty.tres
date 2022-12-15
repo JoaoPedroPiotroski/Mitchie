@@ -7,5 +7,7 @@
 script = ExtResource( 1 )
 type = 0
 title = "Empty"
+display_title = ""
 description = ""
 icon = ExtResource( 2 )
+stackable = false

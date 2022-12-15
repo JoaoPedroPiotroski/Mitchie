@@ -5,7 +5,7 @@ var entrance = 0 setget set_entrance
 var s
 var loading = false
 func _ready():
-	Menu.connect('transition_ended', self, 'on_transition_ended')
+	var _c = Menu.connect('transition_ended', self, 'on_transition_ended')
 
 func set_entrance(_entrance):
 	entrance = int(_entrance)

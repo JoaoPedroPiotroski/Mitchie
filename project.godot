@@ -202,7 +202,7 @@ config/icon="res://icon.png"
 
 [audio]
 
-music_volume=inf_neg
+music_volume=-7.9588
 fx_volume=-9.897
 
 [autoload]

@@ -7,10 +7,12 @@ var entrance = 0
 var max_health = 3
 var max_mana = 3
 var progress_flags = []
-var inventory = []
+var inventory = {}
 var coins = 0
 
+signal saving_started
 signal game_saved
+signal loading_started
 signal game_loaded
 
 func _input(_event):
@@ -19,6 +21,7 @@ func _input(_event):
 		store_save()
 
 func load_save(): 
+	emit_signal("loading_started")
 	var save_game = File.new()
 	while not save_game.file_exists("user://savegame" + str(slot) + ".save"):
 		level = 'Intro'
@@ -26,7 +29,7 @@ func load_save():
 		max_health = 3
 		max_mana = 3
 		progress_flags = []
-		inventory = []
+		inventory = {}
 		coins = 0
 		store_save()
 		SceneManager.change_level(level) 
@@ -42,6 +45,7 @@ func load_save():
 	inventory = save_data['inventory']
 	coins = save_data['coins']
 	Inventory.coins = coins
+	Inventory.load_inventory()
 	SceneManager.entrance = entrance
 	SceneManager.change_level(level) 
 	just_loaded = true
@@ -49,7 +53,10 @@ func load_save():
 	save_game.close()
 	
 func store_save():
-	inventory = Inventory.get_inventory()
+	var inventorydata = Inventory.get_inventory()
+	print(inventory)
+	for i in inventorydata:
+		inventory[i.title] = i.amount
 	coins = Inventory.coins
 	var save_dict = {
 		'level' : level,

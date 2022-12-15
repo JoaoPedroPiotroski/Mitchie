@@ -27,7 +27,7 @@ func set_max_mana(new_value):
 	emit_signal("mana_update")
 
 func set_health(new_value):
-	health = new_value
+	health = min(new_value, max_health)
 	Global.current_player_health = health
 	emit_signal("health_update")
 

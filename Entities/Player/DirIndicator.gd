@@ -5,7 +5,7 @@ var enemies = []
 
 func _on_EnemyDetector_body_entered(body):
 	enemies.append(body)
-	visible = true
+	visible = false
 
 func _on_EnemyDetector_body_exited(body):
 	enemies.erase(body)

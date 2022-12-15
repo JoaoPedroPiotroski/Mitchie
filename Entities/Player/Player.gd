@@ -136,7 +136,9 @@ func take_input(delta):
 		r_click_hold_timer += delta
 	if Input.is_action_just_released("attack"):
 		if l_click_hold_timer > 0.2:
-			state_machine.current_state = "Attack2"
+			if current.mana >= 1:
+				current.mana -=1
+				state_machine.current_state = "Attack2"
 		else:
 			state_machine.current_state = "Attack"
 		l_click_hold_timer = 0
@@ -325,16 +327,19 @@ func end_attack():
 	moving = true
 	state_machine.current_state = "Walk"
 
-func attack2_state(_delta):
-	if current.mana <= 0:
-		state_machine.current_state = "Walk"
-		return
-	var scy = load("res://Entities/Player/ScytheBomb.tscn")
-	var obj = scy.instance()
-	obj.start($Directions.get_input_direction(), 300, global_position)
-	get_parent().add_child(obj)
-	current.mana -= 1
-	state_machine.current_state = "Walk"
+func attack2_state(delta):
+	apply_friction(current.friction, delta)
+	apply_gravity(current.gravity, delta)
+	next_animation = "attack2"
+#	if current.mana <= 0:
+#		state_machine.current_state = "Walk"
+#		return
+#	var scy = load("res://Entities/Player/ScytheBomb.tscn")
+#	var obj = scy.instance()
+#	obj.start($Directions.get_input_direction(), 300, global_position)
+#	get_parent().add_child(obj)
+#	current.mana -= 1
+#	state_machine.current_state = "Walk"
 
 func pull_state(_delta):
 	next_animation = "pull1"

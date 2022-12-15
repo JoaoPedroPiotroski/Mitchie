@@ -13,7 +13,7 @@ font_data = ExtResource( 3 )
 [node name="shop_item" type="TextureButton"]
 margin_right = 16.0
 margin_bottom = 16.0
-rect_min_size = Vector2( 16, 16 )
+rect_min_size = Vector2( 21, 21 )
 disabled = true
 texture_normal = ExtResource( 1 )
 script = ExtResource( 2 )
@@ -32,6 +32,7 @@ valign = 2
 
 [node name="selected" type="Sprite" parent="."]
 visible = false
+position = Vector2( 1, 1 )
 texture = ExtResource( 4 )
 centered = false
 offset = Vector2( -1, -1 )

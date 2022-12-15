@@ -20,6 +20,8 @@ func get_item(title : String):
 func load_inventory():
 	coins = Save.coins
 	print(Save.inventory)
+	for k in Save.inventory.keys():
+		add_item_by_title(k, Save.inventory[k])
 	
 func add_item_by_title(title : String, amount) -> void:
 	amount = int(amount)
@@ -27,7 +29,7 @@ func add_item_by_title(title : String, amount) -> void:
 	for i in existing_items:
 		if i.title == title:
 			i.amount += amount
-			emit_signal("item_added", i.title, amount)
+			emit_signal("item_added", i, amount)
 	
 func add_item_by_resource(i : Resource, amount : int) -> void:
 	emit_signal("inventory_changed")
@@ -37,7 +39,7 @@ func remove_item(i : Resource, amount: int) -> void:
 	emit_signal("inventory_changed")
 	i.amount -= amount
 	i.amount = max(0, i.amount	)
-	emit_signal("item_added", i.title, amount)
+	emit_signal("item_added", i, amount)
 	
 func has_item(_name):
 	for i in existing_items:

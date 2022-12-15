@@ -147,10 +147,38 @@ uniform float horizon_smoothing : hint_range(-16.0, 16.0);
 uniform float speed : hint_range(0.0, 1.0);
 uniform float fluffiness : hint_range(0.0, 2.0);
 
+vec2 random(vec2 uv) {
+	return vec2(fract(sin(dot(uv.xy,
+		vec2(12.9898,78.233))) * 43758.5453123));
+}
+
+float worley(vec2 uv, float columns, float rows) {
+	
+	vec2 index_uv = floor(vec2(uv.x * columns, uv.y * rows));
+	vec2 fract_uv = fract(vec2(uv.x * columns, uv.y * rows));
+	
+	float minimum_dist = 1.0;  
+	
+	for (int y= -1; y <= 1; y++) {
+		for (int x= -1; x <= 1; x++) {
+			vec2 neighbor = vec2(float(x),float(y));
+			vec2 point = random(index_uv + neighbor);
+			
+			vec2 diff = neighbor + point - fract_uv;
+			float dist = length(diff);
+			minimum_dist = min(minimum_dist, dist);
+		}
+	}
+	
+	return minimum_dist;
+}
+
+
 void fragment(){
 	vec2 pixelated_uv = uv_multiplier * round(SCREEN_UV * float(pixelate_amount)) / float(pixelate_amount);
 	vec4 screen_color = texture(TEXTURE, pixelated_uv);
 	vec4 noise1 = texture(noise, mod(vec2(pixelated_uv.x + TIME * 2.5 * speed / 10.0, pixelated_uv.y) , 0.0 ));
+	
 	vec4 noise2 = texture(noise, mod(vec2(pixelated_uv.x + TIME * (2.5 + fluffiness * 3.0) * speed / 10.0, pixelated_uv.y), 0.0));
 	vec4 noise_color = noise1 + noise2;
 	//vec4 noise_color = texture(noise, vec2(UV.x / 2.0 + offset_x, UV.y + offset_y));
@@ -191,10 +219,10 @@ noise = SubResource( 7 )
 [sub_resource type="ShaderMaterial" id=6]
 shader = SubResource( 5 )
 shader_param/cloud_coverage = 1.013
-shader_param/cloud_intensity = 1.185
+shader_param/cloud_intensity = 1.0
 shader_param/offset_x = 0.0
 shader_param/offset_y = 0.0
-shader_param/uv_multiplier = 2.374
+shader_param/uv_multiplier = 1.0
 shader_param/pixelate_amount = 163
 shader_param/cloud_color = Color( 1, 0.87451, 0.827451, 1 )
 shader_param/day_bottom_color = Color( 0.352941, 0.45098, 0.588235, 1 )
@@ -202,7 +230,7 @@ shader_param/day_top_color = Color( 0.462745, 0.811765, 0.788235, 1 )
 shader_param/horizon_band = 0.278
 shader_param/horizon_smoothing = 0.524
 shader_param/speed = 0.1
-shader_param/fluffiness = 0.127
+shader_param/fluffiness = 0.047
 shader_param/noise = SubResource( 8 )
 
 [node name="City" type="Node2D"]

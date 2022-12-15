@@ -1,6 +1,6 @@
 extends "res://Entities/Enemies/Hitbox.gd"
 
-var pull_speed = 1 setget set_pull_speed
+var pull_speed = .5 setget set_pull_speed
 var player
 var target
 

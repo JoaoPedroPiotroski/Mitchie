@@ -99,13 +99,12 @@ func _physics_process(delta):
 	floor_timer -= delta
 	if floor_timer <= 0:
 		floor_cd = false
-	
+	velocity.y += gravity * delta
 	confusion_timer -= delta
 	if confusion_timer < 0:
 		velocity = move_and_slide(velocity)
 	else:
 		velocity.x = 0
-		velocity.y += gravity * delta
 		velocity = move_and_slide(velocity)
 	velocity.y += gravity * delta
 	match(state):

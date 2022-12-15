@@ -147,7 +147,7 @@ motion_mirroring = Vector2( 630, 360 )
 texture = ExtResource( 7 )
 
 [node name="Door" type="Area2D" parent="."]
-position = Vector2( 352, -116 )
+position = Vector2( 352, -119 )
 collision_layer = 16
 collision_mask = 0
 script = ExtResource( 9 )
@@ -155,11 +155,11 @@ entrance = 1
 destination_level = "RuinsR2"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
-position = Vector2( 0, -1 )
+position = Vector2( 0, 2 )
 shape = SubResource( 5 )
 
 [node name="door_hint" parent="Door" instance=ExtResource( 11 )]
-position = Vector2( 0, -31 )
+position = Vector2( 0, -29 )
 
 [node name="Door2" type="Area2D" parent="."]
 position = Vector2( -202, 41 )
