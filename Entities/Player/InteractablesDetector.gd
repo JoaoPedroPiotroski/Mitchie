@@ -5,6 +5,8 @@ onready var player = get_parent()
 func _on_InteractablesDetector_area_entered(area):
 	if area is PseudoEntity:
 		if area is DialogTrigger:
+			area.update_dialog_trigger()
+			area.show_hint()
 			player.current_dialog = Dialogic.start(area.timeline)
 			if area.autoplay:
 				player.force_dialog = true
@@ -22,6 +24,8 @@ func _on_InteractablesDetector_area_entered(area):
 func _on_InteractablesDetector_area_exited(area):
 	if area is PseudoEntity:
 		if area is DialogTrigger:
+			area.show_hint()
+			area.update_dialog_trigger()
 			player.current_dialog = null
 	if area is Area2D:
 		if area.is_in_group('doors'):

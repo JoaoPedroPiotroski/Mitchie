@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Items/Item.gd" type="Script" id=1]
+[ext_resource path="res://Items/Sprites/gadenerr_flower.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+type = 2
+title = "gadenerr_flower"
+display_title = "Flor da Gadenerr"
+description = "Flor que a Gadenerr pediu para você entregar pra Rose, cheira bem"
+icon = ExtResource( 2 )
+stackable = false

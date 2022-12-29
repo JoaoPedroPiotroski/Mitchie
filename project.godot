@@ -202,8 +202,8 @@ config/icon="res://icon.png"
 
 [audio]
 
-music_volume=-7.9588
-fx_volume=-9.897
+music_volume=-10.4576
+fx_volume=-5.19275
 
 [autoload]
 

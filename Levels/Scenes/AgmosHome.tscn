@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Entities/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Levels/Ruins/RuinsTS.tres" type="TileSet" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Objects/door_hint.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Terrain/TileEntities/Objects/Door/Door.gd" type="Script" id=8]
 [ext_resource path="res://Templates/DialogTrigger/DialogTrigger.gd" type="Script" id=9]
+[ext_resource path="res://ASeprite/AgmosIG.png" type="Texture" id=10]
 
 [sub_resource type="TileSet" id=3]
 0/name = "Desertineo.png 0"
@@ -96,6 +97,9 @@ extents = Vector2( 14, 22 )
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 10, 33 )
 
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 10, 17 )
+
 [node name="AgmosHome" type="Node2D"]
 script = ExtResource( 6 )
 
@@ -136,7 +140,7 @@ script = ExtResource( 3 )
 title = "RuinsTM"
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 34, 9 )
+position = Vector2( 30, 10 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( -2, -6 )
@@ -160,7 +164,7 @@ entrance = 1
 destination_level = "Home"
 
 [node name="DialogTrigger" type="Area2D" parent="."]
-position = Vector2( 72, 0 )
+position = Vector2( 68, 1 )
 script = ExtResource( 9 )
 timeline = "p_m_intro"
 deletabilities = [ "agmosintro" ]
@@ -169,3 +173,20 @@ autoplay = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DialogTrigger"]
 position = Vector2( -37, -2 )
 shape = SubResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 68, 11 )
+texture = ExtResource( 10 )
+flip_h = true
+
+[node name="DialogTrigger2" type="Area2D" parent="."]
+position = Vector2( 76, 8 )
+script = ExtResource( 9 )
+timeline = "agmos_chitchat"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogTrigger2"]
+position = Vector2( -7, 7 )
+shape = SubResource( 6 )
+
+[node name="door_hint" parent="DialogTrigger2" instance=ExtResource( 7 )]
+position = Vector2( -8, -19 )

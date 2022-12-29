@@ -15,3 +15,6 @@ func _on_Lifetime_timeout():
 
 func _on_Hitbox_body_entered(_body):
 	$Hitbox/CollisionShape2D.set_deferred('disabled', true)
+
+func sound():
+	AudioManager.play_fx("res://Entities/Player/attacks/scythe_bomb.wav")

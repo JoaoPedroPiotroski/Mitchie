@@ -21,7 +21,6 @@ static func get_existing_tile_entities():
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
-			print(file_name)
 			if dir.current_is_dir():
 				pass
 			else:

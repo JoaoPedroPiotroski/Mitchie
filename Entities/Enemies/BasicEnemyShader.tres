@@ -9,8 +9,8 @@ period = 0.1
 [sub_resource type="NoiseTexture" id=13]
 resource_local_to_scene = true
 flags = 2
-width = 280
-height = 40
+width = 256
+height = 256
 noise = SubResource( 12 )
 
 [sub_resource type="OpenSimplexNoise" id=14]
@@ -20,8 +20,8 @@ period = 0.1
 [sub_resource type="NoiseTexture" id=16]
 resource_local_to_scene = true
 flags = 2
-width = 280
-height = 40
+width = 256
+height = 256
 as_normalmap = true
 noise = SubResource( 14 )
 
@@ -29,7 +29,7 @@ noise = SubResource( 14 )
 resource_local_to_scene = true
 shader = ExtResource( 1 )
 shader_param/progress = 0.0
-shader_param/strength = 1.0
+shader_param/strength = 2.0
 shader_param/invincible = false
 shader_param/time_remaining = 1.33333
 shader_param/noise_tex_normal = SubResource( 16 )

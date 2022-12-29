@@ -29,6 +29,7 @@ func _physics_process(delta):
 		global_transform = origin
 
 func _draw():
+	return
 	draw_line(Vector2.ZERO, tgt_pos.position, Color.purple, 5)
 	#draw_circle(Vector2.ZERO, 20, Color.red)
 

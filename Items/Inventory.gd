@@ -4,6 +4,7 @@ var existing_items = []
 var coins = 0
 
 signal inventory_changed
+signal item_removed(item_name, amount)
 signal item_added(item_name, amount)
 
 func _ready():
@@ -20,6 +21,8 @@ func get_item(title : String):
 func load_inventory():
 	coins = Save.coins
 	print(Save.inventory)
+	for i in existing_items:
+		i.amount = 0
 	for k in Save.inventory.keys():
 		add_item_by_title(k, Save.inventory[k])
 	
@@ -36,10 +39,20 @@ func add_item_by_resource(i : Resource, amount : int) -> void:
 	i.amount += amount
 	
 func remove_item(i : Resource, amount: int) -> void:
+	amount = int(amount)
 	emit_signal("inventory_changed")
 	i.amount -= amount
 	i.amount = max(0, i.amount	)
-	emit_signal("item_added", i, amount)
+	emit_signal("item_removed", i, amount)
+	
+func remove_item_by_title(t : String, amount) -> void:
+	amount = int(amount)
+	emit_signal("inventory_changed")
+	for i in existing_items:
+		if i.title == t:
+			i.amount -= amount
+			i.amount = max(0, i.amount)
+	emit_signal("item_removed", get_item(t), amount)
 	
 func has_item(_name):
 	for i in existing_items:

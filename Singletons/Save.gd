@@ -10,7 +10,7 @@ var progress_flags = []
 var inventory = {}
 var coins = 0
 
-signal saving_started
+#signal saving_started
 signal game_saved
 signal loading_started
 signal game_loaded
@@ -24,13 +24,15 @@ func load_save():
 	emit_signal("loading_started")
 	var save_game = File.new()
 	while not save_game.file_exists("user://savegame" + str(slot) + ".save"):
+		print('criando save!!!')
 		level = 'Intro'
 		entrance = 0
 		max_health = 3
 		max_mana = 3
 		progress_flags = []
-		inventory = {}
+		inventory = {"Foice":1}
 		coins = 0
+		Inventory.load_inventory()
 		store_save()
 		SceneManager.change_level(level) 
 		just_loaded = true

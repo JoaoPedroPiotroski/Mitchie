@@ -18,6 +18,8 @@ func start(pos, target):
 	player = target
 
 func _physics_process(delta: float) -> void:
+	if not is_instance_valid(player):
+		return
 	if y_rising:
 		visual_offset.y +=delta * 4
 	else:

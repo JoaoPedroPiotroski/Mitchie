@@ -493,6 +493,20 @@ tracks/9/keys = {
 "update": 1,
 "values": [ false, true, false ]
 }
+tracks/10/type = "method"
+tracks/10/path = NodePath("ArmPivot/Scythe/ScytheBombExplosion")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "sound"
+} ]
+}
 
 [sub_resource type="Animation" id=14]
 resource_name = "die"
@@ -646,7 +660,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=39]
 shader = SubResource( 38 )
-shader_param/enabled = true
+shader_param/enabled = false
 shader_param/color = Color( 1, 0, 0, 1 )
 shader_param/scythe_color = Color( 0.796078, 0.94902, 1, 1 )
 
@@ -704,7 +718,7 @@ position = Vector2( 0, 1 )
 texture = ExtResource( 2 )
 hframes = 8
 vframes = 4
-frame = 27
+frame = 21
 
 [node name="Sprite" type="Sprite" parent="."]
 visible = false
@@ -859,6 +873,7 @@ collision_mask = 0
 script = ExtResource( 18 )
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="ArmPivot/Scythe/TerrainDetector"]
+visible = false
 rotation = -1.5708
 shape = SubResource( 30 )
 disabled = true
@@ -872,13 +887,12 @@ collision_mask = 8
 script = ExtResource( 22 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ArmPivot/Scythe/ScytheBombExplosion/Hitbox"]
-visible = false
 shape = SubResource( 1 )
 disabled = true
 
 [node name="scythebombsprite" type="Sprite" parent="ArmPivot/Scythe/ScytheBombExplosion"]
 visible = false
-scale = Vector2( 0.703704, 0.703704 )
+scale = Vector2( 0.296296, 0.296296 )
 texture = ExtResource( 20 )
 
 [node name="DirIndicator" type="Line2D" parent="ArmPivot"]
@@ -917,6 +931,7 @@ shape = SubResource( 29 )
 one_shot = true
 
 [node name="redEffect" type="ColorRect" parent="."]
+visible = false
 material = SubResource( 39 )
 margin_left = -30.0
 margin_top = -26.0

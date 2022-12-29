@@ -3,7 +3,7 @@ extends Panel
 var item : Resource
 
 signal clicked(item)
-
+signal item_selected(item_name)
 
 func start(in_item : Resource):
 	$TextureButton.texture_normal = in_item.icon
@@ -29,6 +29,7 @@ func _on_TextureButton_pressed():
 
 
 func _on_ItemSlot_focus_entered() -> void:
+	emit_signal("item_selected", item.title)
 	self_modulate = Color(0,0,0,0.4)
 
 

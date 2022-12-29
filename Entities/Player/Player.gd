@@ -135,7 +135,7 @@ func take_input(delta):
 	if Input.is_action_pressed("pull"):
 		r_click_hold_timer += delta
 	if Input.is_action_just_released("attack"):
-		if l_click_hold_timer > 0.2:
+		if l_click_hold_timer > 0.2 and Inventory.has_item('encantamento_fogo'):
 			if current.mana >= 1:
 				current.mana -=1
 				state_machine.current_state = "Attack2"

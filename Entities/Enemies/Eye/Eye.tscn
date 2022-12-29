@@ -114,7 +114,7 @@ material = ExtResource( 3 )
 texture = ExtResource( 2 )
 hframes = 2
 vframes = 4
-frame = 7
+frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
@@ -128,7 +128,8 @@ script = ExtResource( 4 )
 debug = true
 
 [node name="Position2D" type="Position2D" parent="PlayerAngleHelper"]
-position = Vector2( 1.19209e-07, -94 )
+position = Vector2( 1.19209e-07, -54 )
+rotation = -0.785398
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerAngleHelper"]
 autoplay = "cycle"

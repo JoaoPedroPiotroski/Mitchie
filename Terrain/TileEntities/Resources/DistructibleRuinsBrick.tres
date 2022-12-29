@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Terrain/TileEntities/TileEntity.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+id = 8
+tilemap = "RuinsTM"
+scene = "res://Terrain/TileEntities/Objects/Ruins/DistructibleRuinsBricks.tscn"

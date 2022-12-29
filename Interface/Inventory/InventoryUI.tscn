@@ -1,14 +1,25 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Interface/Inventory/InventoryGrid.png" type="Texture" id=1]
 [ext_resource path="res://Interface/Inventory/ItemsGrid.gd" type="Script" id=2]
 [ext_resource path="res://Interface/Inventory/InventoryBg.png" type="Texture" id=3]
 [ext_resource path="res://Interface/Fonts/dogicapixel.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Interface/HUD/CoinCount.gd" type="Script" id=5]
+[ext_resource path="res://Interface/Inventory/Scythebombicon.png" type="Texture" id=6]
+[ext_resource path="res://Interface/Inventory/Scythebombicon.gd" type="Script" id=7]
+[ext_resource path="res://Interface/Inventory/detail_square.png" type="Texture" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
 extra_spacing_bottom = 5
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 8
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 8
 font_data = ExtResource( 4 )
 
 [node name="InventoryUI" type="Control"]
@@ -65,5 +76,41 @@ text = "x100"
 valign = 1
 script = ExtResource( 5 )
 
+[node name="Scythebombicon" type="TextureRect" parent="InventoryBG"]
+margin_left = 58.0
+margin_top = 67.0
+margin_right = 75.0
+margin_bottom = 84.0
+texture = ExtResource( 6 )
+script = ExtResource( 7 )
+
+[node name="ItemDetail" type="TextureRect" parent="InventoryBG"]
+margin_left = 112.0
+margin_right = 212.0
+margin_bottom = 100.0
+texture = ExtResource( 8 )
+
+[node name="name" type="Label" parent="InventoryBG/ItemDetail"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 95.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 18 )
+custom_fonts/font = SubResource( 2 )
+text = "Item com nome longo"
+autowrap = true
+
+[node name="desc" type="Label" parent="InventoryBG/ItemDetail"]
+margin_left = 6.0
+margin_top = 24.0
+margin_right = 94.0
+margin_bottom = 94.0
+custom_colors/font_color = Color( 0.823529, 0.823529, 0.823529, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "um item legal"
+autowrap = true
+
 [connection signal="focus_entered" from="InventoryBG/ItemsGrid" to="InventoryBG/ItemsGrid" method="_on_ItemsGrid_focus_entered"]
 [connection signal="visibility_changed" from="InventoryBG/ItemsGrid" to="InventoryBG/ItemsGrid" method="_on_ItemsGrid_visibility_changed"]
+[connection signal="visibility_changed" from="InventoryBG/ItemsGrid" to="InventoryBG/Scythebombicon" method="_on_ItemsGrid_visibility_changed"]
+[connection signal="visibility_changed" from="InventoryBG/Scythebombicon" to="InventoryBG/Scythebombicon" method="_on_Scythebombicon_visibility_changed"]

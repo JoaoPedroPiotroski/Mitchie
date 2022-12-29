@@ -6,6 +6,6 @@
 script = ExtResource( 1 )
 type = 0
 title = "encantamento_fogo"
-display_title = ""
-description = ""
+display_title = "Encantamento: Fogo"
+description = "Segure X para criar uma explosão ao seu redor quando atacar"
 stackable = false

@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/enchantment_get_text_sound2.wav-6b67b601b417a8dd4a9cc630a405a0d0.sample"
+
+[deps]
+
+source_file="res://Interface/Dialog/SFX/enchantment_get_text_sound2.wav"
+dest_files=[ "res://.import/enchantment_get_text_sound2.wav-6b67b601b417a8dd4a9cc630a405a0d0.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

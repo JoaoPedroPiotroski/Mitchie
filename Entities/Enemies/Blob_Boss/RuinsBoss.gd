@@ -26,6 +26,10 @@ var whirl_start : Vector2 = Vector2.ZERO
 var whirl_just_started = true
 var whirl_dir = -1
 
+func has_been_hit(atk_origin):
+	if global_position.direction_to(atk_origin).dot(move_direction) > 0:
+		print('frente')
+
 func _physics_process(delta):
 	player = Global.player
 	if !is_instance_valid(player):
@@ -75,7 +79,7 @@ func _physics_process(delta):
 			pass
 
 func apply_damage(dmg, atk_pos = null):
-	print('apanhei')
+	has_been_hit(atk_pos)
 	match(State):
 		States.SLEEP:
 			State = States.CHASE   
@@ -83,11 +87,11 @@ func apply_damage(dmg, atk_pos = null):
 		States.CHASE:
 			match(ArmorState):
 				ArmorStates.BROKEN:
-					if global_position.direction_to(atk_pos).dot(move_direction) < 0:
+					if global_position.direction_to(atk_pos).dot(move_direction) >  0:
 						health -= dmg
 						ArmorState = ArmorStates.WHOLE
 				ArmorStates.WHOLE:
-					if global_position.direction_to(atk_pos).dot(move_direction) > 0:
+					if global_position.direction_to(atk_pos).dot(move_direction) < 0 and dmg > 1:
 						ArmorState = ArmorStates.BROKEN
 						State = States.STUN
 		States.WALK:
@@ -110,7 +114,7 @@ func apply_damage(dmg, atk_pos = null):
 					if global_position.direction_to(atk_pos).dot(move_direction) < 0:
 						ArmorState = ArmorStates.BROKEN
 	if State == States.STUN:
-		$stuntimer.start(3)
+		$stuntimer.start(1)
 
 func wall_detector():
 	if $detectors/WallDetector1.is_colliding() and move_direction.x > 0:
@@ -131,10 +135,6 @@ func _on_PlayerDetector_player_changed():
 		player_on_ground = true
 	else:
 		player_on_ground = false
-		
-
-
-
 
 func _on_stuntimer_timeout() -> void:
 	State = States.WHIRL

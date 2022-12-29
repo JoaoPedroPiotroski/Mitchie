@@ -15,7 +15,6 @@ radius = 16.0
 radius = 15.0333
 
 [node name="RuinsBoss" type="KinematicBody2D"]
-position = Vector2( 72, 13 )
 script = ExtResource( 5 )
 health = 9
 gold_max = 300
@@ -84,6 +83,7 @@ margin_right = 13.0
 margin_bottom = -10.0
 
 [node name="stuntimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="player_changed" from="PlayerDetector" to="." method="_on_PlayerDetector_player_changed"]
 [connection signal="timeout" from="stuntimer" to="." method="_on_stuntimer_timeout"]

@@ -6,7 +6,7 @@
 script = ExtResource( 1 )
 title = "rose_home"
 type = "Level"
-background_color = Color( 1, 1, 1, 1 )
+background_color = Color( 0.0705882, 0.0705882, 0.0823529, 1 )
 flags = [  ]
 scene_path = "res://Levels/Scenes/RoseHome.tscn"
 cam_limit_L = -1000000
@@ -14,7 +14,7 @@ cam_limit_T = -1000000
 cam_limit_B = 1000000
 cam_limit_R = 1000000
 cam_zoom = Vector2( 0.8, 0.8 )
-dust_color = Color( 1, 1, 1, 1 )
+dust_color = Color( 0.768627, 0.768627, 0.768627, 1 )
 dustyness = 8
 camera_smoothing = false
 camera_smoothness = 0

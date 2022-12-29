@@ -1,0 +1,30 @@
+{
+	"events": [
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "theme-1671282892.cfg"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "As forças do fogo se concentram em sua foice.[br]Segure [b]X[/b] ao atacar, e essas forças serão libertadas."
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"encantamento_fogo",
+					"1"
+				],
+				"method_name": "add_item_by_title",
+				"target_node_path": "Inventory"
+			},
+			"event_id": "dialogic_042"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1671284699.json",
+		"name": "get_enchantment_fire"
+	}
+}

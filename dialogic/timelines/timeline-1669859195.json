@@ -81,11 +81,32 @@
 		{
 			"call_node": {
 				"arguments": [
-					"pocao de vida",
+					"health_pot",
 					"1"
 				],
 				"method_name": "add_item_by_title",
 				"target_node_path": "Inventory"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"gadenerr_flower",
+					"1"
+				],
+				"method_name": "remove_item_by_title",
+				"target_node_path": "Inventory"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"flor_entregue"
+				],
+				"method_name": "add_progress_flag",
+				"target_node_path": "Save"
 			},
 			"event_id": "dialogic_042"
 		},
