@@ -5,20 +5,10 @@
 			"set_theme": "theme-1662341798.cfg"
 		},
 		{
-			"call_node": {
-				"arguments": [
-					"res://Music/Audio/introzinha.ogg"
-				],
-				"method_name": "play_song",
-				"target_node_path": "AudioManager"
-			},
-			"event_id": "dialogic_042"
-		},
-		{
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Era uma vez uma garota\nEla vivia uma vida pacífica em uma pequena vila do grande deserto"
+			"text": "[speed=5]Essa e uma historia sobre uma garota chamada Mitchie\nQuando criança, a vila do deserto na qual ela vivia foi destruida por saqueadores\nFelizmente, ela foi salva. Um mago chamado Agmos a protegeu e a adotou\nJuntos, eles viveram, com Agmos lhe ensinando o basico da magia"
 		},
 		{
 			"emit_signal": "1",
@@ -98,15 +88,6 @@
 			"event_id": "dialogic_023",
 			"hide_dialogbox": false,
 			"wait_seconds": 1
-		},
-		{
-			"audio_bus": "Master",
-			"background-music": "play",
-			"event_id": "dialogic_031",
-			"event_name": "BackgroundMusic",
-			"fade_length": 1,
-			"file": "",
-			"volume": 0
 		},
 		{
 			"call_node": {

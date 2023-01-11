@@ -32,7 +32,7 @@ func _on_AttackHitbox_body_entered(body):
 			player.current.mana += 1
 		AudioManager.play_fx(hitsounds[0])
 		var in_dir = get_parent().get_parent().get_parent().get_node("Directions").get_input_direction()
-		body.apply_damage(damage, global_position)
+		body.apply_damage(damage, global_position, ['player_attack'])
 		body._knockback(150, Vector2(in_dir.x, in_dir.y - .5))
 	get_parent().get_parent().get_parent()._knockback(50, get_parent().get_parent().get_parent().get_node("Directions").get_input_direction() * -1)
 	

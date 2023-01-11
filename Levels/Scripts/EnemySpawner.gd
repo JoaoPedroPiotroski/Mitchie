@@ -12,18 +12,18 @@ func spawn() -> void:
 	
 	for gs in $GloopSpawns.get_children():
 		var inst = gloop_scene.instance()
-		get_parent().add_child(inst)
+		get_parent().call_deferred("add_child", inst)
 		inst.global_position = gs.global_position
 		var smk = particle_scene.instance()
-		get_parent().add_child(smk)
+		get_parent().call_deferred("add_child", smk)
 		smk.global_position = gs.global_position
 		smk.emitting = true
 	for es in $EyeSpawns.get_children():
 		var inst = eye_scene.instance()
-		get_parent().add_child(inst)
+		get_parent().call_deferred("add_child", inst)
 		inst.global_position = es.global_position
 		var smk = particle_scene.instance()
-		get_parent().add_child(smk)
+		get_parent().call_deferred("add_child", smk)
 		smk.global_position = es.global_position
 		smk.emitting = true
 	

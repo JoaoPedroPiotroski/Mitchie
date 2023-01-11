@@ -5,6 +5,7 @@ onready var mplayers = $Music.get_children()
 
 signal song_ended
 
+var loop_song = true
 var current_state = 'intro'
 
 func _ready():
@@ -34,7 +35,8 @@ func transition_music_to(new_song : String, transition_type = 'direct'):
 			mplayers[0].stream = load(new_song)
 			mplayers[0].playing = true
 			
-func play_song(song, speed_mult = 1):
+func play_song(song, speed_mult = 1, loop = true):
+	loop_song = loop
 	#var music_volume = db2linear(ProjectSettings.get_setting('audio/music_volume'))
 	$Tween.stop_all()
 	$Tween.remove_all()
@@ -60,17 +62,17 @@ func play_song(song, speed_mult = 1):
 func stop_music():
 	var music_volume = 1
 	var target_vol = 0
-	for player in mplayers:
-		$Tween.interpolate_method(
-				self,
-				'set_linear_volume',
-				music_volume,
-				target_vol,
-				0,
-				Tween.TRANS_LINEAR
-			)
-	$Tween.start()
-	yield($Tween, "tween_all_completed")
+#	for player in mplayers:
+#		$Tween.interpolate_method(
+#				self,
+#				'set_linear_volume',
+#				music_volume,
+#				target_vol,
+#				0,
+#				Tween.TRANS_LINEAR
+#			)
+#	$Tween.start()
+#	yield($Tween, "tween_all_completed")
 	for player in mplayers:
 		player.playing = false
 		player.stream = null
@@ -86,5 +88,8 @@ func on_fx_ended(audio):
 
 
 func _on_MusicPlayer_finished():
-	mplayers[0].playing = true
+	if loop_song:
+		mplayers[0].playing = true
+	else:
+		mplayers[0].playing = false
 	emit_signal('song_ended')

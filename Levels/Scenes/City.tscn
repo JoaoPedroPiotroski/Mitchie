@@ -175,16 +175,47 @@ texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 272, 96, 96, 64 )
 
-[node name="DialogTrigger" type="Area2D" parent="Gadenerr"]
+[node name="AntesChave" type="Area2D" parent="Gadenerr"]
 script = ExtResource( 14 )
-timeline = "g_m_depoisflores"
+timeline = "gadenerr_chitchat"
 requisites = [ "flor_entregue" ]
+deletabilities = [ "flor_entregue" ]
+item_deletabilities = [ "ruins_key" ]
 
-[node name="Sprite" type="Sprite" parent="Gadenerr/DialogTrigger"]
+[node name="Sprite" type="Sprite" parent="Gadenerr/AntesChave"]
 position = Vector2( 37, -13 )
 texture = ExtResource( 15 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Gadenerr/DialogTrigger"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gadenerr/AntesChave"]
+position = Vector2( 37.5, -10.5 )
+shape = SubResource( 3 )
+
+[node name="ReceberChave" type="Area2D" parent="Gadenerr"]
+script = ExtResource( 14 )
+timeline = "g_m_depoisflores"
+requisites = [ "flor_entregue" ]
+item_deletabilities = [ "ruins_key" ]
+
+[node name="Sprite" type="Sprite" parent="Gadenerr/ReceberChave"]
+position = Vector2( 37, -13 )
+texture = ExtResource( 15 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gadenerr/ReceberChave"]
+position = Vector2( 37.5, -10.5 )
+shape = SubResource( 3 )
+
+[node name="ChitChatDepoisChave" type="Area2D" parent="Gadenerr"]
+script = ExtResource( 14 )
+timeline = "g_m_chitchat2"
+requisites = [ "flor_entregue" ]
+item_requisites = [ "ruins_key" ]
+item_deletabilities = [ "ruins_key" ]
+
+[node name="Sprite" type="Sprite" parent="Gadenerr/ChitChatDepoisChave"]
+position = Vector2( 37, -13 )
+texture = ExtResource( 15 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gadenerr/ChitChatDepoisChave"]
 position = Vector2( 37.5, -10.5 )
 shape = SubResource( 3 )
 

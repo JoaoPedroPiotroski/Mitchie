@@ -20,7 +20,7 @@ func _ready():
 	origin = global_transform
 	set_physics_process(true)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if debug:
 		update()
 	if is_instance_valid(player):
@@ -30,7 +30,7 @@ func _physics_process(delta):
 
 func _draw():
 	return
-	draw_line(Vector2.ZERO, tgt_pos.position, Color.purple, 5)
+	#draw_line(Vector2.ZERO, tgt_pos.position, Color.purple, 5)
 	#draw_circle(Vector2.ZERO, 20, Color.red)
 
 

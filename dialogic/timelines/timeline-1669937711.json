@@ -22,41 +22,27 @@
 		},
 		{
 			"character": "character-1662318817.json",
-			"event_id": "dialogic_010",
-			"options": [
-
-			],
+			"event_id": "dialogic_001",
 			"portrait": "",
-			"question": "[speed=0.2]Entao Mitchie??[speed=2] Ela gostou???[speed=0.5] O que ela achou???[speed=1] Ela gostou???"
+			"text": "[speed=0.2]Entao Mitchie??[speed=2] Ela gostou???[speed=0.5] O que ela achou???[speed=1] Ela gostou??"
 		},
 		{
-			"choice": "Sim",
-			"condition": "",
-			"definition": "",
-			"event_id": "dialogic_011",
-			"value": ""
+			"character": "character-1652646885.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "[speed=0.2]Ela gostou....[speed=2] de receber flores de voce"
 		},
 		{
 			"character": "character-1662318817.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Que otimo!! Vou arrumar mais umas pra mandar pra ela"
+			"text": "Voce contou pra ela???"
 		},
 		{
-			"choice": "Ela pareceu feliz de receber flores de voce",
-			"condition": "",
-			"definition": "",
-			"event_id": "dialogic_011",
-			"value": ""
-		},
-		{
-			"character": "character-1662318817.json",
+			"character": "character-1652646885.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Voce contou pra ela???\n..........Acho que nao né?\nEla costuma ser bem esperta\nMas o que importa é que ela gostou nao é?\nVou fazer mais flores pra deixar ela mais feliz ainda!"
-		},
-		{
-			"event_id": "dialogic_013"
+			"text": "...Nao, mas ela nao e boba tambem"
 		},
 		{
 			"character": "character-1662318817.json",

@@ -17,7 +17,7 @@ func spawn_bullet():
 	b.start(global_position, player)
 	get_parent().add_child(b) 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	desired_position = angle_helper.tgt_pos.global_position
 	var desired_dir = global_position.direction_to(desired_position)
 	movement_direction = lerp(movement_direction, desired_dir, .1)

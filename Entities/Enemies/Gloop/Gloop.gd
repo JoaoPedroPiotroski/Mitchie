@@ -56,7 +56,7 @@ func does_player_hit(dealerpos):
 			return false
 		return true
 
-func apply_damage(damage, dealerpos = null):
+func apply_damage(damage, dealerpos = null, _args = []):
 	if dead:
 		return
 	if weakref(Global.player).get_ref():

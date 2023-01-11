@@ -1,20 +1,127 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Entities/PlayerDetector.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Entities/Enemies/Blob_Boss/Blob_Boss.png" type="Texture" id=2]
 [ext_resource path="res://Entities/Enemies/Hitbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Entities/PlayerDetector.gd" type="Script" id=4]
 [ext_resource path="res://Entities/Enemies/Blob_Boss/RuinsBoss.gd" type="Script" id=5]
-
-[sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 321, 10 )
-
-[sub_resource type="CircleShape2D" id=10]
-radius = 16.0
+[ext_resource path="res://ASeprite/dust_particles.png" type="Texture" id=6]
 
 [sub_resource type="CircleShape2D" id=11]
-radius = 15.0333
+radius = 16.0
+
+[sub_resource type="CapsuleShape2D" id=17]
+radius = 6.0
+height = 14.0
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 834, 260.5 )
+
+[sub_resource type="CapsuleShape2D" id=18]
+radius = 14.0
+height = 12.0
+
+[sub_resource type="CapsuleShape2D" id=19]
+radius = 3.0
+height = 70.0
+
+[sub_resource type="Animation" id=12]
+resource_name = "Chase"
+
+[sub_resource type="Animation" id=13]
+resource_name = "Die"
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "open_doors"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpawnSmoke:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpawnSmoke2:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpawnSmoke3:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "Stun"
+
+[sub_resource type="Animation" id=15]
+resource_name = "Walk"
+
+[sub_resource type="Animation" id=20]
+resource_name = "tongue"
+length = 2.0
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "activate_tongue"
+}, {
+"args": [  ],
+"method": "deactivate_tongue"
+} ]
+}
+
+[sub_resource type="RectangleShape2D" id=16]
+extents = Vector2( 1053.5, 26.75 )
+
+[sub_resource type="Curve" id=1]
+max_value = 2.0
+_data = [ Vector2( 0, 1.98182 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.090909 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.550926, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.811765, 1, 1, 1, 0 )
 
 [node name="RuinsBoss" type="KinematicBody2D"]
+collision_layer = 8
+collision_mask = 5
 script = ExtResource( 5 )
 health = 9
 gold_max = 300
@@ -25,11 +132,21 @@ texture = ExtResource( 2 )
 hframes = 3
 frame = 1
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -8, 2 )
+shape = SubResource( 11 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( 11, 12 )
+rotation = 1.5708
+shape = SubResource( 17 )
+
 [node name="PlayerDetector" parent="." instance=ExtResource( 1 )]
+visible = false
 position = Vector2( -5, 2 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="PlayerDetector"]
-position = Vector2( -5, 6 )
+position = Vector2( -317, -191.5 )
 shape = SubResource( 9 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 3 )]
@@ -39,13 +156,51 @@ damage = 1
 knockback_force = 300.0
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+visible = false
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( -6, 3 )
-shape = SubResource( 10 )
+position = Vector2( -8, 4 )
+rotation = 1.5708
+shape = SubResource( 18 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -6, 3 )
-shape = SubResource( 11 )
+[node name="TongueLeft" parent="." instance=ExtResource( 3 )]
+visible = false
+z_index = -1
+collision_layer = 8
+collision_mask = 4
+damage = 1
+knockback_force = 400.0
+
+[node name="ColorRect" type="ColorRect" parent="TongueLeft"]
+modulate = Color( 1, 0, 0, 1 )
+margin_left = -75.0
+margin_top = 2.0
+margin_bottom = 10.0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="TongueLeft"]
+position = Vector2( -37, 6 )
+rotation = 1.5708
+shape = SubResource( 19 )
+disabled = true
+
+[node name="TongueRight" parent="." instance=ExtResource( 3 )]
+visible = false
+z_index = -1
+collision_layer = 8
+collision_mask = 4
+damage = 1
+knockback_force = 400.0
+
+[node name="ColorRect" type="ColorRect" parent="TongueRight"]
+modulate = Color( 1, 0, 0, 1 )
+margin_top = 2.0
+margin_right = 75.0
+margin_bottom = 10.0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="TongueRight"]
+position = Vector2( 37, 6 )
+rotation = 1.5708
+shape = SubResource( 19 )
+disabled = true
 
 [node name="detectors" type="Node2D" parent="."]
 position = Vector2( 0, 14 )
@@ -82,8 +237,79 @@ margin_top = -27.0
 margin_right = 13.0
 margin_bottom = -10.0
 
-[node name="stuntimer" type="Timer" parent="."]
+[node name="StunTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Chase = SubResource( 12 )
+anims/Die = SubResource( 13 )
+anims/Stun = SubResource( 14 )
+anims/Walk = SubResource( 15 )
+anims/tongue = SubResource( 20 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="PlayerGroundDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerGroundDetector"]
+visible = false
+position = Vector2( 0, -10.25 )
+shape = SubResource( 16 )
+
+[node name="PlayerOnTopTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SpawnSmoke" type="CPUParticles2D" parent="."]
+position = Vector2( -16, 9 )
+emitting = false
+amount = 64
+one_shot = true
+explosiveness = 0.4
+texture = ExtResource( 6 )
+emission_shape = 1
+emission_sphere_radius = 8.0
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 47.24
+scale_amount_curve = SubResource( 1 )
+color_ramp = SubResource( 2 )
+
+[node name="SpawnSmoke2" type="CPUParticles2D" parent="."]
+position = Vector2( -6, -7 )
+emitting = false
+amount = 64
+one_shot = true
+explosiveness = 0.4
+texture = ExtResource( 6 )
+emission_shape = 1
+emission_sphere_radius = 8.0
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 47.24
+scale_amount_curve = SubResource( 1 )
+color_ramp = SubResource( 2 )
+
+[node name="SpawnSmoke3" type="CPUParticles2D" parent="."]
+position = Vector2( 5, 5 )
+emitting = false
+amount = 64
+one_shot = true
+explosiveness = 0.4
+texture = ExtResource( 6 )
+emission_shape = 1
+emission_sphere_radius = 8.0
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 47.24
+scale_amount_curve = SubResource( 1 )
+color_ramp = SubResource( 2 )
+
 [connection signal="player_changed" from="PlayerDetector" to="." method="_on_PlayerDetector_player_changed"]
-[connection signal="timeout" from="stuntimer" to="." method="_on_stuntimer_timeout"]
+[connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]
+[connection signal="body_entered" from="PlayerGroundDetector" to="PlayerGroundDetector" method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="PlayerGroundDetector" to="PlayerGroundDetector" method="_on_PlayerDetector_body_exited"]
+[connection signal="player_changed" from="PlayerGroundDetector" to="." method="_on_PlayerGroundDetector_player_changed"]
+[connection signal="timeout" from="PlayerOnTopTimer" to="." method="_on_PlayerOnTopTimer_timeout"]

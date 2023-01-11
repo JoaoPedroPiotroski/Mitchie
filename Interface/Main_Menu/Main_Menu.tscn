@@ -137,9 +137,6 @@ texture_focused = ExtResource( 5 )
 expand = true
 stretch_mode = 3
 script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="Title/ExitButton"]
 anchor_left = 0.5

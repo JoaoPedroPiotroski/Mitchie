@@ -9,7 +9,7 @@ var y_rising = true
 var radius : int = 2
 var max_radius : int = 10
 
-func update_debug(new_debug) -> void:
+func update_debug(_new_debug) -> void:
 	update()
 	update_debug_view = false
 

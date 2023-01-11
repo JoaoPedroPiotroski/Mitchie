@@ -14,6 +14,7 @@ var current = 0
 func _ready():
 	$Sprite.texture = load(pics[current])
 	AudioManager.stop_music()
+	AudioManager.play_song('res://Music/Audio/intro1.wav', .5, true)
 	var d = Dialogic.new()
 	d = d.start('intro')
 	add_child(d)

@@ -45,6 +45,7 @@ func set_selected_item(new_item) -> void:
 	var item_resource = Inventory.get_item(new_item)
 	item_detail.get_node("name").text = item_resource.display_title.capitalize() 
 	item_detail.get_node("desc").text = item_resource.description
+	item_detail.get_node("amt").text = String(item_resource.amount)
 	selected_item = new_item
 	
 func get_selected_item() -> String:

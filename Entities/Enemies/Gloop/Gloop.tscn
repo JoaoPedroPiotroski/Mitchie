@@ -230,6 +230,7 @@ gold_min = 16
 material = ExtResource( 7 )
 texture = ExtResource( 3 )
 hframes = 7
+frame = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 modulate = Color( 1, 0, 0, 1 )
@@ -304,15 +305,12 @@ anims/die = SubResource( 16 )
 [node name="Star" type="Sprite" parent="."]
 visible = false
 position = Vector2( -16, -6 )
-rotation = 6.28319
-z_index = -1
 texture = ExtResource( 5 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 visible = false
 position = Vector2( 0, 4 )
 z_index = -1
-emitting = false
 amount = 128
 lifetime = 0.5
 one_shot = true

@@ -235,7 +235,7 @@ func apply_gravity(force, delta):
 func apply_jump_impulse(force):
 	velocity.y = -force
 	
-func apply_damage(dmg, _dealer = null):
+func apply_damage(dmg, _dealer = null, _args=[]):
 	if !invulnerable:
 		current.health -= dmg
 		invulnerable = true

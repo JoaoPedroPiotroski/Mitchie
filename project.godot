@@ -202,7 +202,7 @@ config/icon="res://icon.png"
 
 [audio]
 
-music_volume=-10.4576
+music_volume=-9.897
 fx_volume=-5.19275
 
 [autoload]
@@ -392,4 +392,4 @@ quality/intended_usage/framebuffer_allocation.mobile=0
 2d/snapping/use_gpu_pixel_snap=true
 environment/default_clear_color=Color( 0.505882, 0.490196, 0.584314, 1 )
 environment/default_environment="res://default_env.tres"
-2d/options/lights=true
+2d/options/lights=false
