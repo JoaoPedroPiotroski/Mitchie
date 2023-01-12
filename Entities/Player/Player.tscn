@@ -938,6 +938,16 @@ margin_right = 29.0
 margin_bottom = 28.0
 mouse_filter = 2
 
+[node name="savewarn" type="Label" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = -64.0
+margin_top = -38.0
+margin_right = 64.0
+margin_bottom = -21.0
+text = "Jogo salvo"
+
+[node name="SaveTween" type="Tween" parent="savewarn"]
+
 [connection signal="tree_exiting" from="." to="." method="_on_Player_tree_exiting"]
 [connection signal="body_entered" from="LayerDetector1" to="." method="_on_LayerDetector1_body_entered"]
 [connection signal="body_exited" from="LayerDetector1" to="." method="_on_LayerDetector1_body_exited"]

@@ -1,21 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://Levels/Desert/Intro.gd" type="Script" id=1]
-[ext_resource path="res://ASeprite/intro1.png" type="Texture" id=2]
-[ext_resource path="res://ASeprite/intro/intro1.png" type="Texture" id=3]
 
 [node name="Intro" type="Node2D"]
 script = ExtResource( 1 )
 bg_color = Color( 0.145098, 0.145098, 0.152941, 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 315, 150 )
+position = Vector2( 320, 140 )
 scale = Vector2( 0.25, 0.25 )
 
-[node name="Intro1" type="Sprite" parent="Sprite"]
-position = Vector2( -3068, -324 )
-texture = ExtResource( 3 )
-
-[node name="Intro2" type="Sprite" parent="Sprite"]
-position = Vector2( -3228, 24 )
-texture = ExtResource( 2 )
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true

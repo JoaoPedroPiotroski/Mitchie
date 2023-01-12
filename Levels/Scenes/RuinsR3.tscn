@@ -196,6 +196,9 @@ item_deletabilities = [ "encantamento_fogo" ]
 position = Vector2( -0.5, 12 )
 shape = SubResource( 8 )
 
+[node name="door_hint" parent="DialogTrigger" instance=ExtResource( 10 )]
+position = Vector2( -1, -15 )
+
 [node name="EnemySpawner" type="Node2D" parent="."]
 position = Vector2( -239, -151 )
 script = ExtResource( 12 )

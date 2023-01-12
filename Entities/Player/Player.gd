@@ -163,6 +163,8 @@ func take_input(delta):
 			SceneManager.change_level(current_door.destination_level)
 		if weakref(current_savepoint).get_ref() and flags['on_ground']:
 			state_machine.current_state = "Saving" 
+			$savewarn/SaveTween.interpolate_property($savewarn, 'self_modulate', Color.white, Color(1,1,1,0), 1)
+			$savewarn/SaveTween.start()
 			Save.level = SceneManager.level.title
 			Save.entrance = current_savepoint.entrance
 			Save.store_save()

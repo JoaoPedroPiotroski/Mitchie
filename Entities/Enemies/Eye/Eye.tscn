@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Entities/Enemies/Eye/Eye.gd" type="Script" id=1]
 [ext_resource path="res://Entities/Enemies/Eye/Eye.png" type="Texture" id=2]
 [ext_resource path="res://Entities/Enemies/pixelexplodeshader.tres" type="Shader" id=3]
 [ext_resource path="res://Entities/Enemies/Eye/PlayerAngleHelper.gd" type="Script" id=4]
 [ext_resource path="res://Entities/PlayerDetector.gd" type="Script" id=5]
+[ext_resource path="res://Entities/Enemies/Eye/EyeShoot.wav" type="AudioStream" id=6]
 
 [sub_resource type="OpenSimplexNoise" id=25]
 seed = 150
@@ -35,7 +36,7 @@ shader = ExtResource( 3 )
 shader_param/progress = 0.0
 shader_param/strength = 2.0
 shader_param/invincible = false
-shader_param/time_remaining = 100.0
+shader_param/time_remaining = 0.0
 shader_param/noise_tex_normal = SubResource( 27 )
 shader_param/noise_tex = SubResource( 26 )
 
@@ -94,6 +95,20 @@ tracks/3/keys = {
 "args": [  ],
 "method": "return_to_idle"
 } ]
+}
+tracks/4/type = "audio"
+tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 6 )
+} ],
+"times": PoolRealArray( 0.35 )
 }
 
 [sub_resource type="Animation" id=1]
@@ -179,6 +194,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:material:shader_param/time_remaining")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.5, 0.0 ]
+}
 
 [node name="Eye" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -239,6 +266,10 @@ shape = SubResource( 5 )
 
 [node name="HitFlash" type="AnimationPlayer" parent="."]
 anims/flash = SubResource( 30 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+bus = "Effects"
 
 [connection signal="shoot" from="PlayerAngleHelper" to="." method="_on_PlayerAngleHelper_shoot"]
 [connection signal="timeout" from="PlayerAngleHelper/Timer" to="PlayerAngleHelper" method="_on_Timer_timeout"]

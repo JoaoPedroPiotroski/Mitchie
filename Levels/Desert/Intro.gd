@@ -26,3 +26,5 @@ func _ready():
 func _next_pic(_value):
 	current += 1
 	$Sprite.texture = load(pics[current])
+	if current > 1:
+		modulate = Color(0,0,0,0)
