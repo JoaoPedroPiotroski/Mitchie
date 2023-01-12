@@ -1,10 +1,43 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Entities/Enemies/Eye/Eye.gd" type="Script" id=1]
 [ext_resource path="res://Entities/Enemies/Eye/Eye.png" type="Texture" id=2]
-[ext_resource path="res://Entities/Enemies/BasicEnemyShader.tres" type="Material" id=3]
+[ext_resource path="res://Entities/Enemies/pixelexplodeshader.tres" type="Shader" id=3]
 [ext_resource path="res://Entities/Enemies/Eye/PlayerAngleHelper.gd" type="Script" id=4]
 [ext_resource path="res://Entities/PlayerDetector.gd" type="Script" id=5]
+
+[sub_resource type="OpenSimplexNoise" id=25]
+seed = 150
+period = 0.1
+
+[sub_resource type="NoiseTexture" id=26]
+resource_local_to_scene = true
+flags = 2
+width = 80
+height = 160
+noise = SubResource( 25 )
+
+[sub_resource type="OpenSimplexNoise" id=14]
+seed = 437
+period = 0.1
+
+[sub_resource type="NoiseTexture" id=27]
+resource_local_to_scene = true
+flags = 2
+width = 80
+height = 160
+as_normalmap = true
+noise = SubResource( 14 )
+
+[sub_resource type="ShaderMaterial" id=28]
+resource_local_to_scene = true
+shader = ExtResource( 3 )
+shader_param/progress = 0.0
+shader_param/strength = 2.0
+shader_param/invincible = false
+shader_param/time_remaining = 100.0
+shader_param/noise_tex_normal = SubResource( 27 )
+shader_param/noise_tex = SubResource( 26 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "Attack"
@@ -80,6 +113,35 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 2, 1 ]
 }
 
+[sub_resource type="Animation" id=29]
+resource_name = "die"
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:material:shader_param/progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
 [sub_resource type="Animation" id=3]
 resource_name = "cycle"
 length = 10.0
@@ -102,6 +164,22 @@ radius = 122.037
 
 [sub_resource type="CircleShape2D" id=5]
 
+[sub_resource type="Animation" id=30]
+resource_name = "flash"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/invincible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
 [node name="Eye" type="KinematicBody2D"]
 script = ExtResource( 1 )
 health = 2
@@ -110,7 +188,7 @@ gold_min = 5
 spawn_gold = true
 
 [node name="Sprite" type="Sprite" parent="."]
-material = ExtResource( 3 )
+material = SubResource( 28 )
 texture = ExtResource( 2 )
 hframes = 2
 vframes = 4
@@ -120,6 +198,7 @@ frame = 4
 autoplay = "Idle"
 anims/Attack = SubResource( 2 )
 anims/Idle = SubResource( 1 )
+anims/die = SubResource( 29 )
 
 [node name="PlayerAngleHelper" type="Node2D" parent="."]
 position = Vector2( -1.19209e-07, 1.85992e-09 )
@@ -157,6 +236,9 @@ autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 5 )
+
+[node name="HitFlash" type="AnimationPlayer" parent="."]
+anims/flash = SubResource( 30 )
 
 [connection signal="shoot" from="PlayerAngleHelper" to="." method="_on_PlayerAngleHelper_shoot"]
 [connection signal="timeout" from="PlayerAngleHelper/Timer" to="PlayerAngleHelper" method="_on_Timer_timeout"]

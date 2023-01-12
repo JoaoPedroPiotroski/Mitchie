@@ -9,25 +9,43 @@ export(Array, String) var item_deletabilities
 export(bool) var autoplay = false
 
 func _ready():
-	update_dialog_trigger()
+	add_to_group('requisite_needs')
+	update_needs()
 	
-func update_dialog_trigger():
+func disable_collisions() -> void:
+	visible = false
+	for child in get_children():
+		if child is CollisionShape2D:
+			child.set_deferred('disabled', true)
+
+func enable_collisions() -> void:
+	visible = true
+	for child in get_children():
+		if child is CollisionShape2D:
+			child.set_deferred('disabled', false)
+	
+func update_needs():
+	var problems = false
 	for r in requisites:
 		if !Save.progress_flags.has(r):
 			print('me deletei')
-			queue_free()
+			problems = true
 	for d in deletabilities:
 		if Save.progress_flags.has(d):			
 			print('me deletei' + timeline)
-			queue_free()
+			problems = true
 	for r in item_requisites:
 		if not Inventory.has_item(r):			
 			print('me deletei')
-			queue_free()
+			problems = true
 	for d in item_deletabilities:
 		if Inventory.has_item(d):
 			print('me deletei' + timeline)
-			queue_free()
+			problems = true
+	if problems:
+		disable_collisions()
+	else:
+		enable_collisions()
 	set_collision_layer_bit(0, false)
 	set_collision_layer_bit(4, true)
 	set_collision_mask_bit(0, false)

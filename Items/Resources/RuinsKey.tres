@@ -8,6 +8,6 @@ script = ExtResource( 1 )
 type = 1
 title = "ruins_key"
 display_title = "chave da ruina"
-description = "Entregue a você pela Gadenerr, abre a porta da ruína para a direita"
+description = "Entregue a voce pela Gadenerr, abre a porta da ruina a direita da cidade"
 icon = ExtResource( 2 )
 stackable = false

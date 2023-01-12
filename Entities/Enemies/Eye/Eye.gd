@@ -7,10 +7,12 @@ var acceleration = 40
 var player
 var max_speed = 50
 var attacking = false
-
+var dead = false
 onready var angle_helper = $PlayerAngleHelper
 
 func spawn_bullet():
+	if dead:
+		return
 	print('tiro')
 	var bullet = load("res://Entities/Enemies/Eye/Bullet.tscn")
 	var b = bullet.instance()
@@ -18,6 +20,8 @@ func spawn_bullet():
 	get_parent().add_child(b) 
 
 func _physics_process(_delta: float) -> void:
+	if dead:
+		return
 	desired_position = angle_helper.tgt_pos.global_position
 	var desired_dir = global_position.direction_to(desired_position)
 	movement_direction = lerp(movement_direction, desired_dir, .1)
@@ -42,3 +46,16 @@ func _on_PlayerAngleHelper_shoot(_player) -> void:
 func return_to_idle() -> void:
 	$AnimationPlayer.play("Idle")
 	attacking = false
+
+func _die():
+	if spawn_gold:
+		golden_shower()
+	$AnimationPlayer.play("die")
+	dead = true
+	#queue_free()
+
+func apply_damage(damage, _dealerpos = null, _args = []):
+	health -= damage
+	$HitFlash.play("flash")
+	update_health()
+

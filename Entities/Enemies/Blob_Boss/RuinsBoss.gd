@@ -24,10 +24,13 @@ var player_detect2 = false
 var turn_timer = 0
 var player_on_ground = false
 var eye_spawn_positions = []
+var crack_timer = 0.0
 var dead = false
 onready var tongue = $TongueLeft
 
 func _ready() -> void:
+	if Save.progress_flags.has('RuinsBossDefeated'):
+		queue_free()
 	eye_spawn_positions = get_parent().get_node("EyeSpawns").get_children()
 
 func wall_detector():
@@ -66,6 +69,7 @@ func does_player_hit(dealerpos):
 func apply_damage(damage, dealerpos = null, args = []):
 	if sleeping:
 		sleeping = false
+		$ZZZZ.emitting = false
 		AudioManager.play_song("res://Music/Audio/AncientBoss.wav", 1)
 		get_parent().get_node("LockedEntrance/CollisionShape2D").set_deferred('disabled', false) 
 		get_parent().get_node("LockedEntrance").modulate = Color.white
@@ -78,13 +82,16 @@ func apply_damage(damage, dealerpos = null, args = []):
 		if does_player_hit(dealerpos) and args.has('player_explosion'):
 			spawn_eye()
 			print('levei um hit explosivo :3')
+			$HitFlash.play("flash")
 			AudioManager.play_fx("res://Entities/Enemies/Gloop/hurt.sfxr")
 			health -= damage
+			crack_timer = 0.1
 			state = states.WALK
 			confusion_timer = 0.3
 			print('vida: ' + String(health))
 		else:
 			state = states.STUN
+			$AnimationPlayer.play("Stun")
 			$StunTimer.start(2.5)
 	if health <= 0 and !immortal:
 		$AnimationPlayer.play('Die')
@@ -118,16 +125,20 @@ func deactivate_tongue() -> void:
 	tongue_timer = 0
 	tongue.get_node("CollisionShape2D2").set_deferred('disabled', true)
 	tongue.visible = false
-	$AnimationPlayer.play("Chase")
+	#$AnimationPlayer.play("Chase")
 
 func _physics_process(delta):
+	$Star.visible = state == states.STUN
+	if crack_timer > 0:
+		$body.frame = 2
+	crack_timer -= delta
 	tongue_timer += delta
 	eye_spawn_positions.shuffle()
 	if $AnimationPlayer.current_animation == 'tongue':
 		return
 	if dead or sleeping:
 		return
-	$Sprite.flip_h = move_direction.x > 0
+	
 	#$PlayerDetectorExt/CollisionShape2D.set_deferred('disabled', !(player_detect2 or player_detect1))
 	#FUNÇOES DE TESTE
 	turn_timer -= delta
@@ -148,9 +159,12 @@ func _physics_process(delta):
 	velocity.y += gravity * delta
 	match(state):
 		states.WALK:
+			if move_direction.x < 0 and $AnimationPlayer.current_animation != 'walk_left':
+				$AnimationPlayer.play("walk_left")
+			elif move_direction.x > 0 and $AnimationPlayer.current_animation != 'walk_right':
+				$AnimationPlayer.play('walk_right')
 			#$Star.visible = false
 			if not player_on_ground:
-				$AnimationPlayer.play("Walk")
 				velocity.x = move_direction.x * walk_speed
 				if wall_detector():
 					move_direction *= -1
@@ -162,9 +176,13 @@ func _physics_process(delta):
 					move_direction.x = global_position.direction_to(player.global_position).x
 					velocity.x = 0
 					$Sprite.flip_h = move_direction.x > 0
+					if move_direction.x < 0 and $AnimationPlayer.current_animation != 'walk_left':
+						$AnimationPlayer.play("walk_left")
+					elif move_direction.x > 0 and $AnimationPlayer.current_animation != 'walk_right':
+						$AnimationPlayer.play('walk_right')
+					yield(get_tree().create_timer(0.01),"timeout")
 					$AnimationPlayer.play('tongue')
 					return
-				$AnimationPlayer.play("Chase")
 				if turn_timer < 0:
 					move_direction = Vector2(
 						global_position.direction_to(player.global_position).x,

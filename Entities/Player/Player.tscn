@@ -718,7 +718,6 @@ position = Vector2( 0, 1 )
 texture = ExtResource( 2 )
 hframes = 8
 vframes = 4
-frame = 21
 
 [node name="Sprite" type="Sprite" parent="."]
 visible = false
@@ -800,7 +799,7 @@ __meta__ = {
 [node name="VignetteTween" type="Tween" parent="MainCamera"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "Walk"
+autoplay = "Idle"
 anims/Ascent = SubResource( 15 )
 anims/Fall = SubResource( 12 )
 anims/Finish_Pull = SubResource( 24 )

@@ -28,36 +28,10 @@
 			"text": "[shake]m-Mitchie![/shake]\nEu estava olhando meu velho telescopio aqui.\nVendo o que acontece ao longe, como sempre...\nMas hoje eu vi[speed=10]...[speed=1] aquele bando de saqueadores.\nOs mesmos que destruiram sua vila. \nPelo visto eles andam rondando por ai. [pause=0.25]Deve ser uma questao de tempo para eles chegarem aqui!\nA gente tem que fazer algo!\nPega tua foice e vai la dar um jeito!"
 		},
 		{
-			"animation": "[Default]",
-			"animation_length": 0,
-			"change_mirror_portrait": false,
-			"change_z_index": false,
-			"character": "character-1652646885.json",
-			"event_id": "dialogic_002",
-			"mirror_portrait": false,
-			"portrait": "Default",
-			"portrait_definition": "",
-			"position": {
-				"0": false,
-				"1": true,
-				"2": false,
-				"3": false,
-				"4": false
-			},
-			"type": 0,
-			"z_index": 0
-		},
-		{
-			"character": "character-1652646885.json",
-			"event_id": "dialogic_001",
-			"portrait": "",
-			"text": "Como que voce espera que eu resolva [b]isso[/b]???"
-		},
-		{
 			"character": "character-1662327407.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "E eu sei la.\nVai falar com o pessoal da cidade.\nTalvez eles tenham alguma coisa que te ajude."
+			"text": "Converse com o pessoal da cidade.\nTalvez eles saibam de algo que possa te ajudar"
 		},
 		{
 			"call_node": {

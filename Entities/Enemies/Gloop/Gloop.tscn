@@ -230,7 +230,7 @@ gold_min = 16
 material = ExtResource( 7 )
 texture = ExtResource( 3 )
 hframes = 7
-frame = 4
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 modulate = Color( 1, 0, 0, 1 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Terrain/ExtendedTilemap.gd" type="Script" id=1]
 [ext_resource path="res://Terrain/TileSetResources/Desert.tres" type="TileSet" id=2]
@@ -16,6 +16,9 @@
 [ext_resource path="res://Objects/door_hint.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Interface/ExclamationMark.png" type="Texture" id=15]
 [ext_resource path="res://Backgrounds/CloudsShader.tres" type="Material" id=16]
+[ext_resource path="res://Levels/Ruins/RuinsTS.tres" type="TileSet" id=17]
+[ext_resource path="res://Interface/Z.png" type="Texture" id=18]
+[ext_resource path="res://Levels/Scripts/PularTutorial.gd" type="Script" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15.5, 25 )
@@ -133,3 +136,23 @@ destination_level = "City"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door2"]
 position = Vector2( 45, -200 )
 shape = SubResource( 3 )
+
+[node name="ExtendedTilemap" type="TileMap" parent="."]
+tile_set = ExtResource( 17 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 655344, 12, 0, 655345, 12, 0, 655346, 12, 0, 655347, 12, 0, 655348, 12, 0, 655349, 12, 0, 655350, 12, 0, 655351, 12, 0, 655352, 12, 0 )
+script = ExtResource( 1 )
+title = "RuinsTM"
+
+[node name="PularTutorial" type="Label" parent="."]
+margin_left = 329.0
+margin_top = 45.0
+margin_right = 393.0
+margin_bottom = 62.0
+text = "Pular"
+script = ExtResource( 19 )
+
+[node name="Sprite" type="Sprite" parent="PularTutorial"]
+position = Vector2( 29, 25 )
+texture = ExtResource( 18 )

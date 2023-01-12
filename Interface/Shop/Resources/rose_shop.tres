@@ -5,7 +5,6 @@
 [resource]
 script = ExtResource( 1 )
 items = {
-"Foice": 5,
 "health_pot": 50
 }
 shop_name = "Rose"

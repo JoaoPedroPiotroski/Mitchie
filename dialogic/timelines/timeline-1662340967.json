@@ -15,10 +15,46 @@
 			"event_id": "dialogic_040"
 		},
 		{
+			"call_node": {
+				"arguments": [
+					"res://Music/Audio/intro2.wav",
+					"0"
+				],
+				"method_name": "play_song",
+				"target_node_path": "AudioManager"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Até que um dia, a vila foi destruída por um bando de[color=red] saqueadores[/color].\n[shake rate=4 level=3]Ruína se espalhou por todo lado.[/shake]"
+			"text": "A magia pela qual Mitchie mais se interessou foi as tecnicas de Spellblade\nA magia que se mistura com uma arma branca, fortalecendo-a\nEla ainda nao consegue faze-lo de forma consistente, por enquanto,\nPorem, talvez isso mude em breve..."
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": false,
+			"wait_seconds": 1
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"1"
+				],
+				"method_name": "set_entrance",
+				"target_node_path": "SceneManager"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"agmos_house"
+				],
+				"method_name": "change_level",
+				"target_node_path": "SceneManager"
+			},
+			"event_id": "dialogic_042"
 		},
 		{
 			"emit_signal": "1",
@@ -83,31 +119,6 @@
 			"event_id": "dialogic_001",
 			"portrait": "",
 			"text": "MITCHIE!!"
-		},
-		{
-			"event_id": "dialogic_023",
-			"hide_dialogbox": false,
-			"wait_seconds": 1
-		},
-		{
-			"call_node": {
-				"arguments": [
-					"1"
-				],
-				"method_name": "set_entrance",
-				"target_node_path": "SceneManager"
-			},
-			"event_id": "dialogic_042"
-		},
-		{
-			"call_node": {
-				"arguments": [
-					"agmos_house"
-				],
-				"method_name": "change_level",
-				"target_node_path": "SceneManager"
-			},
-			"event_id": "dialogic_042"
 		}
 	],
 	"metadata": {

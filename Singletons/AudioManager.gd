@@ -36,6 +36,7 @@ func transition_music_to(new_song : String, transition_type = 'direct'):
 			mplayers[0].playing = true
 			
 func play_song(song, speed_mult = 1, loop = true):
+	speed_mult = float(speed_mult)
 	loop_song = loop
 	#var music_volume = db2linear(ProjectSettings.get_setting('audio/music_volume'))
 	$Tween.stop_all()
@@ -60,8 +61,8 @@ func play_song(song, speed_mult = 1, loop = true):
 	$Tween.start()
 
 func stop_music():
-	var music_volume = 1
-	var target_vol = 0
+	var _music_volume = 1
+	var _target_vol = 0
 #	for player in mplayers:
 #		$Tween.interpolate_method(
 #				self,

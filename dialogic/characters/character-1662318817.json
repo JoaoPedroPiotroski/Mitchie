@@ -8,14 +8,14 @@
 	"name": "Gadenerr",
 	"nickname": "",
 	"nickname_bool": false,
-	"offset_x": -50,
-	"offset_y": -125,
+	"offset_x": -65,
+	"offset_y": -115,
 	"portraits": [
 		{
 			"name": "Default",
-			"path": "res://Interface/Portraits/gadenerrhighres.png"
+			"path": "res://ASeprite/GadenerrPortrait.png"
 		}
 	],
-	"scale": 7,
+	"scale": 100,
 	"theme": ""
 }

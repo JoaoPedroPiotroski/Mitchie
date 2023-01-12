@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Terrain/ExtendedTilemap.gd" type="Script" id=1]
 [ext_resource path="res://Levels/Ruins/RuinsTS.tres" type="TileSet" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Entities/Player/Player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Objects/Rose/flower_pot.png" type="Texture" id=8]
 [ext_resource path="res://Levels/Scripts/FlowerPot.gd" type="Script" id=9]
+[ext_resource path="res://Objects/door_hint.tscn" type="PackedScene" id=10]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Desertineo.png 0"
@@ -120,6 +121,9 @@ destination_entrance = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
 shape = SubResource( 2 )
 
+[node name="door_hint" parent="Door" instance=ExtResource( 10 )]
+position = Vector2( 0, -31 )
+
 [node name="antesflor" type="Area2D" parent="."]
 position = Vector2( 65, -21 )
 script = ExtResource( 5 )
@@ -131,6 +135,9 @@ item_deletabilities = [ "gadenerr_flower" ]
 position = Vector2( 41, 31 )
 shape = SubResource( 3 )
 
+[node name="door_hint" parent="antesflor" instance=ExtResource( 10 )]
+position = Vector2( 40, 2 )
+
 [node name="depoisflor" type="Area2D" parent="."]
 position = Vector2( 65, -21 )
 script = ExtResource( 5 )
@@ -140,6 +147,9 @@ requisites = [ "flor_entregue" ]
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="depoisflor"]
 position = Vector2( 41, 31 )
 shape = SubResource( 3 )
+
+[node name="door_hint" parent="depoisflor" instance=ExtResource( 10 )]
+position = Vector2( 40, 2 )
 
 [node name="flor" type="Area2D" parent="."]
 position = Vector2( 65, -21 )
@@ -151,6 +161,9 @@ deletabilities = [ "flor_entregue" ]
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="flor"]
 position = Vector2( 41, 31 )
 shape = SubResource( 3 )
+
+[node name="door_hint" parent="flor" instance=ExtResource( 10 )]
+position = Vector2( 40, 2 )
 
 [node name="FlowerPot" type="Sprite" parent="."]
 position = Vector2( 79, 8 )

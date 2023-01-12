@@ -38,48 +38,9 @@
 			"text": "[speed=3]Mitchie! eu queria... te pedir uma coisinha...\n[speed=0.75].....................................\nEu tenho essas flores aqui, voce pode... entregar elas pra Rose por mim?\n[speed=0.5]...\nMas so se quiser\nSe nao quiser nao precisa"
 		},
 		{
-			"event_id": "dialogic_015",
-			"id": "anchor-1662331689",
-			"index": 0,
-			"name": "aaa"
-		},
-		{
 			"event_id": "dialogic_023",
 			"hide_dialogbox": false,
 			"wait_seconds": 0.2
-		},
-		{
-			"character": "",
-			"event_id": "dialogic_010",
-			"options": [
-
-			],
-			"portrait": "",
-			"question": ""
-		},
-		{
-			"choice": "Eu levo as flores pra Rose",
-			"condition": "",
-			"definition": "",
-			"event_id": "dialogic_011",
-			"value": ""
-		},
-		{
-			"anchor_id": "anchor-1634488067",
-			"event_id": "dialogic_016"
-		},
-		{
-			"event_id": "dialogic_013"
-		},
-		{
-			"anchor_id": "anchor-1662331689",
-			"event_id": "dialogic_016"
-		},
-		{
-			"event_id": "dialogic_015",
-			"id": "anchor-1634488067",
-			"index": 0,
-			"name": "bbb"
 		},
 		{
 			"character": "character-1662318817.json",
@@ -111,7 +72,7 @@
 			"character": "character-1652646885.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Ta bom, Gadenerr, ela [wave rate=8 level=5]nuunca[/wave] vai suspeitar"
+			"text": "Ta bom, Gadenerr, eu levo as flores pra ela.\nEla [wave rate=8 level=5]nuunca[/wave] vai suspeitar"
 		},
 		{
 			"call_node": {

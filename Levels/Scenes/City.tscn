@@ -190,6 +190,9 @@ texture = ExtResource( 15 )
 position = Vector2( 37.5, -10.5 )
 shape = SubResource( 3 )
 
+[node name="door_hint" parent="Gadenerr/AntesChave" instance=ExtResource( 6 )]
+position = Vector2( 37, -41 )
+
 [node name="ReceberChave" type="Area2D" parent="Gadenerr"]
 script = ExtResource( 14 )
 timeline = "g_m_depoisflores"
@@ -204,12 +207,14 @@ texture = ExtResource( 15 )
 position = Vector2( 37.5, -10.5 )
 shape = SubResource( 3 )
 
+[node name="door_hint" parent="Gadenerr/ReceberChave" instance=ExtResource( 6 )]
+position = Vector2( 37, -41 )
+
 [node name="ChitChatDepoisChave" type="Area2D" parent="Gadenerr"]
 script = ExtResource( 14 )
 timeline = "g_m_chitchat2"
 requisites = [ "flor_entregue" ]
 item_requisites = [ "ruins_key" ]
-item_deletabilities = [ "ruins_key" ]
 
 [node name="Sprite" type="Sprite" parent="Gadenerr/ChitChatDepoisChave"]
 position = Vector2( 37, -13 )
@@ -218,6 +223,9 @@ texture = ExtResource( 15 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gadenerr/ChitChatDepoisChave"]
 position = Vector2( 37.5, -10.5 )
 shape = SubResource( 3 )
+
+[node name="door_hint" parent="Gadenerr/ChitChatDepoisChave" instance=ExtResource( 6 )]
+position = Vector2( 37, -41 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( -98, -120 )

@@ -386,6 +386,7 @@ func _on_LayerDetector2_body_exited(body):
 		colliding_with_layer_2 = false
 		
 func _on_dialog_ended(_timeline):
+	get_tree().call_group('requisite_needs', 'update_needs')
 	moving = true
 	animation_player.play() 
 	state_machine.current_state = "Walk"
