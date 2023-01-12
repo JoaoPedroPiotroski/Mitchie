@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Levels/Ruins/RuinsTS.tres" type="TileSet" id=1]
 [ext_resource path="res://Objects/RuinsLockedDor/LockedDoor.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Entities/Player/Player.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Levels/Scripts/RuinsBossRoom.gd" type="Script" id=12]
 [ext_resource path="res://Levels/Scripts/Victory.gd" type="Script" id=13]
+[ext_resource path="res://Objects/RuinsLockedDor/LockedDoor.gd" type="Script" id=14]
 
 [sub_resource type="Shader" id=5]
 code = "shader_type canvas_item;
@@ -168,6 +169,7 @@ script = ExtResource( 6 )
 
 [node name="LockedExit" parent="." instance=ExtResource( 2 )]
 position = Vector2( 189, -16 )
+script = ExtResource( 14 )
 
 [node name="LockedEntrance" type="StaticBody2D" parent="."]
 modulate = Color( 0.368627, 0.368627, 0.368627, 1 )
