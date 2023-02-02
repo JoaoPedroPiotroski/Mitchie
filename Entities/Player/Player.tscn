@@ -718,13 +718,13 @@ position = Vector2( 0, 1 )
 texture = ExtResource( 2 )
 hframes = 8
 vframes = 4
+frame = 2
 
 [node name="Sprite" type="Sprite" parent="."]
 visible = false
 texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 modulate = Color( 0.14902, 1, 0, 1 )
 position = Vector2( 1, 6 )
 shape = SubResource( 3 )
@@ -765,7 +765,7 @@ process_mode = 0
 drag_margin_h_enabled = true
 smoothing_speed = 100.0
 drag_margin_top = 0.5
-editor_draw_drag_margin = true
+editor_draw_screen = false
 script = ExtResource( 9 )
 
 [node name="CameraTween" type="Tween" parent="MainCamera"]
@@ -886,6 +886,7 @@ collision_mask = 8
 script = ExtResource( 22 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ArmPivot/Scythe/ScytheBombExplosion/Hitbox"]
+visible = false
 shape = SubResource( 1 )
 disabled = true
 

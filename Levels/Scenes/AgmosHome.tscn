@@ -141,7 +141,7 @@ script = ExtResource( 3 )
 title = "RuinsTM"
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 30, 10 )
+position = Vector2( -29, 9 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( -2, -6 )
@@ -152,6 +152,7 @@ script = ExtResource( 8 )
 destination_level = "Home"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
+visible = false
 position = Vector2( 0, 11 )
 shape = SubResource( 4 )
 
@@ -172,6 +173,7 @@ deletabilities = [ "agmosintro" ]
 autoplay = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DialogTrigger"]
+visible = false
 position = Vector2( -37, -2 )
 shape = SubResource( 5 )
 
@@ -186,6 +188,7 @@ script = ExtResource( 9 )
 timeline = "agmos_chitchat"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DialogTrigger2"]
+visible = false
 position = Vector2( -7, 7 )
 shape = SubResource( 6 )
 

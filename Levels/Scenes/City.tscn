@@ -180,7 +180,7 @@ region_rect = Rect2( 272, 96, 96, 64 )
 [node name="AntesChave" type="Area2D" parent="Gadenerr"]
 script = ExtResource( 14 )
 timeline = "gadenerr_chitchat"
-requisites = [ "flor_entregue" ]
+requisites = [ "gadenerrtalk1" ]
 deletabilities = [ "flor_entregue" ]
 item_deletabilities = [ "ruins_key" ]
 

@@ -153,6 +153,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Label" type="Label" parent="Title"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 164.0
+margin_bottom = 43.0
+text = "Z: Selecionar
+Setas: Mover"
+
 [connection signal="mouse_entered" from="Title/PlayButton" to="Title/PlayButton" method="_on_PlayButton_mouse_entered"]
 [connection signal="pressed" from="Title/PlayButton" to="Title/PlayButton" method="_on_PlayButton_pressed"]
 [connection signal="mouse_entered" from="Title/OptionsButton" to="Title/OptionsButton" method="_on_OptionsButton_mouse_entered"]

@@ -199,12 +199,11 @@ run/main_scene="res://Interface/Main_Menu/Main_Menu.tscn"
 config/project_settings_override="user://mitchie_settings.godot"
 boot_splash/use_filter=false
 config/icon="res://icon.png"
-config/windows_native_icon="res://icon.ico"
 
 [audio]
 
-music_volume=-9.897
-fx_volume=-5.19275
+music_volume=-21.9382
+fx_volume=-19.1721
 
 [autoload]
 
@@ -235,7 +234,7 @@ version_control_plugin_name="GitAPI"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/godot_icon/plugin.cfg", "res://addons/ridiculous_coding/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/ridiculous_coding/plugin.cfg" )
 
 [gdnative]
 

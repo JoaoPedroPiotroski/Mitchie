@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Levels/Ruins/RuinsTS.tres" type="TileSet" id=1]
 [ext_resource path="res://Entities/Player/Player.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Levels/Desert/RuinsEntrance.gd" type="Script" id=10]
 [ext_resource path="res://Levels/Ruins/RuinsTL.gd" type="Script" id=11]
 [ext_resource path="res://Backgrounds/CloudsShader.tres" type="Material" id=12]
+[ext_resource path="res://Terrain/TileSetResources/Desert.tres" type="TileSet" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 133 )
@@ -103,3 +104,9 @@ motion_mirroring = Vector2( 1280, 0 )
 position = Vector2( 159, -263 )
 texture = ExtResource( 7 )
 centered = false
+
+[node name="TileMap3" type="TileMap" parent="."]
+tile_set = ExtResource( 13 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -10, 8, 0, -9, 8, 0, -8, 8, 0, -7, 8, 0 )

@@ -222,7 +222,6 @@ colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.219608, 1, 1, 1, 0 )
 [node name="Gloop" type="KinematicBody2D"]
 collision_layer = 8
 script = ExtResource( 1 )
-health = 3
 gold_max = 2
 gold_min = 16
 
